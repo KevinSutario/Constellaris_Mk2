@@ -1,15 +1,15 @@
 {
   "id": "C003",
-  "name": "Mei-Ling Chan",
+  "name": "Jasmine Wong",
   "age": 17,
   "personality": [
-    "curiously analytical",
-    "introverted but passionate",
-    "resistant to authority"
+    "calculating under pressure",
+    "emotionally guarded",
+    "quietly observant"
   ],
   "traits": [
-    "tends to sketch cityscapes from memory",
-    "loses interest quickly in monotonous tasks"
+    "avoids eye contact when lying",
+    "steps in only when necessary"
   ],
-  "role": "architect of ideas"
+  "role": "strategist"
 }

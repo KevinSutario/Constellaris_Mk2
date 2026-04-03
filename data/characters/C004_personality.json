@@ -1,15 +1,15 @@
 {
   "id": "C004",
-  "name": "Fei Wong",
+  "name": "Jasper Lai",
   "age": 17,
   "personality": [
-    "calculating under pressure",
-    "emotionally guarded",
-    "quietly ambitious"
+    "meticulously analytical",
+    "sardonic humor",
+    "internally restless"
   ],
   "traits": [
-    "avoids eye contact when lying",
-    "pretends to agree in arguments"
+    "prefers indirect confrontation",
+    "meticulously organizes notes"
   ],
-  "role": "strategist"
+  "role": "tactician"
 }

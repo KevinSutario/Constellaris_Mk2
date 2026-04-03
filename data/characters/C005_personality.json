@@ -1,15 +1,15 @@
 {
   "id": "C005",
-  "name": "Jasper Lau",
+  "name": "Leong Wai-Sum",
   "age": 17,
   "personality": [
-    "analytical but indecisive",
-    "loyal yet skeptical",
-    "emotionally detached"
+    "brooding introspection",
+    "strategically assertive",
+    "skeptically curious"
   ],
   "traits": [
-    "overthinks minor details",
-    "reads the room before acting"
+    "frequently questions authority",
+    "prefers to observe silently before acting"
   ],
-  "role": "skeptic"
+  "role": "strategist"
 }

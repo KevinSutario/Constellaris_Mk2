@@ -1,15 +1,15 @@
 {
   "id": "C001",
   "name": "Li Mei",
-  "age": 16,
+  "age": 17,
   "personality": [
-    "meticulously analytical",
-    "deeply empathetic",
-    "skeptically optimistic"
+    "intellectually curious but hesitant to act",
+    "strong-willed yet seeks approval",
+    "analytical in confronting problems"
   ],
   "traits": [
-    "deflects personal questions with humor",
-    "writes poetry to process emotions"
+    "paces when lost in thought",
+    "avoids eye contact when unsure"
   ],
-  "role": "social architect"
+  "role": "strategist"
 }
