@@ -1,11 +1,55 @@
 {
-  "hair": "shoulder-length, straight, dark brown",
-  "eyes": "dark brown, observant",
-  "face_shape": "oval",
-  "skin_tone": "fair with a hint of warmth",
-  "build": "slim",
-  "height": "5'4\"",
-  "clothing": "smart casual with a preference for neutral colors",
-  "gender": "female",
-  "signature_feature": "stylish rectangular glasses"
+  "face": {
+    "structure": "heart-shaped with a slightly pointed chin",
+    "eyes": {
+      "shape": "sharp almond shape with subtly upturned corners",
+      "color": "deep sapphire blue",
+      "details": [
+        "dark, thick lashes",
+        "fine network of luminescent veins",
+        "highlights around the irises for depth"
+      ],
+      "expression_effect": "a piercing and contemplative gaze"
+    },
+    "expression": "a blend of focus and latent curiosity",
+    "skin": {
+      "tone": "fair with cool undertones",
+      "undertone": "pearl-like translucence",
+      "texture": "smooth with a matte finish",
+      "rendering_notes": "light shading over high cheekbones to enhance depth"
+    }
+  },
+  "character": {
+    "hair": {
+      "color": "midnight black with hints of indigo",
+      "style": "straight, long layers reaching mid-back",
+      "flow": "slightly wind-swept with a natural parting to the right",
+      "details": [
+        "glossy sheen that catches light",
+        "soft, feathered ends"
+      ]
+    },
+    "aura": "an air of mystery and quiet confidence"
+  },
+  "outfit": {
+    "base": "modern tactical attire",
+    "design": "sleek black jumpsuit with subtle metallic embellishments",
+    "details": [
+      "reinforced padded shoulders for added strength",
+      "multiple concealed pockets",
+      "silver-zipper detailing that mirrors starlight"
+    ],
+    "fit": "snug yet flexible, allowing a wide range of motion"
+  },
+  "composition": {
+    "framing": "three-quarter view centered in frame",
+    "pose": "standing with weight on the right leg, left arm crossed over stomach",
+    "gesture": "right hand thoughtfully touching chin"
+  },
+  "background": {
+    "type": "abstract urban landscape",
+    "color_palette": "muted grays and blues with hints of neon highlights",
+    "details": "blurred city skyline suggesting bustling ambience",
+    "rules": "maintain focus on character without overly complex elements"
+  }
 }

@@ -1,11 +1,55 @@
 {
-  "hair": "short, straight and dark brown",
-  "eyes": "piercing hazel with a hint of skepticism",
-  "face_shape": "oval with sharp cheekbones",
-  "skin_tone": "light olive",
-  "build": "lean with a subtle athletic tone",
-  "height": "about 5'9\"",
-  "clothing": "neatly organized casual shirts and fitted jeans",
-  "gender": "male",
-  "signature_feature": "sharp rectangular glasses"
+  "face": {
+    "structure": "oval with a softly defined jawline, slightly prominent cheekbones",
+    "eyes": {
+      "shape": "sharp almond shape",
+      "color": "amber with flecks of gold",
+      "details": [
+        "contrasting dark upper lashes",
+        "delicate lower lashes",
+        "subtle white highlights near iris"
+      ],
+      "expression_effect": "intensely focused gaze that conveys deep thought"
+    },
+    "expression": "slightly furrowed brows suggesting concentration",
+    "skin": {
+      "tone": "warm beige",
+      "undertone": "golden",
+      "texture": "smooth with minimal visible pores",
+      "rendering_notes": "subtle gradient shading to create depth around the cheeks and nose"
+    }
+  },
+  "character": {
+    "hair": {
+      "color": "dark chestnut brown",
+      "style": "undercut with wavy longer top",
+      "flow": "waves falling casually to one side, with a slight sheen",
+      "details": [
+        "strands catch light in a natural, non-uniform manner",
+        "slightly tousled giving a carefree, stylish appearance"
+      ]
+    },
+    "aura": "a subdued yet undeniable brilliance, commanding presence without dominating the space"
+  },
+  "outfit": {
+    "base": "stylish monochrome suit",
+    "design": "sleek tailored suit with a modern cut",
+    "details": [
+      "geometric patterned tie",
+      "crisp, white dress shirt underneath",
+      "silver cufflinks with minimalistic design"
+    ],
+    "fit": "tailored close to the body, emphasizing a lean silhouette"
+  },
+  "composition": {
+    "framing": "medium close-up highlighting upper body and face",
+    "pose": "standing in a confident, relaxed posture with one hand in pocket",
+    "gesture": "other hand holding a notebook with a gently scribbled page exposed"
+  },
+  "background": {
+    "type": "urban rooftop at dusk",
+    "color_palette": "muted blues and purples with hints of orange",
+    "details": "dim city skyline and a few scattered stars becoming visible in the sky",
+    "rules": "ensure background is slightly out of focus to maintain emphasis on character"
+  }
 }

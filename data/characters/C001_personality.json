@@ -1,15 +1,15 @@
 {
   "id": "C001",
-  "name": "Li Mei",
-  "age": 17,
+  "name": "Lila Cheng",
+  "age": 16,
   "personality": [
-    "intellectually curious but hesitant to act",
-    "strong-willed yet seeks approval",
-    "analytical in confronting problems"
+    "analytical but impulsive",
+    "fiercely independent",
+    "secretly empathetic"
   ],
   "traits": [
-    "paces when lost in thought",
-    "avoids eye contact when unsure"
+    "meticulously plans escape routes",
+    "avoids using first names as a sign of distance"
   ],
-  "role": "strategist"
+  "role": "silent strategist"
 }

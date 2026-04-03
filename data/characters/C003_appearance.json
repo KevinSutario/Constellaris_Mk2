@@ -1,11 +1,53 @@
 {
-  "hair": "straight, shoulder-length black hair",
-  "eyes": "dark brown with an intense, focused gaze",
-  "face_shape": "oval with defined cheekbones",
-  "skin_tone": "light olive",
-  "build": "slim and slightly athletic",
-  "height": "5'5\"",
-  "clothing": "structured and understated attire, favoring muted colors",
-  "gender": "female",
-  "signature_feature": "sharp eyebrows that enhance her analytical expression"
+  "face": {
+    "structure": "heart-shaped with high cheekbones and a delicate jawline",
+    "eyes": {
+      "shape": "sharp almond shape with slightly upturned outer corners",
+      "color": "deep chestnut brown",
+      "details": [
+        "subtle golden flecks near the iris",
+        "thin, dark eyelashes that curve naturally"
+      ],
+      "expression_effect": "pensive and slightly inquisitive look that reflects her intellectual curiosity"
+    },
+    "expression": "a thoughtful smirk often present, hinting at her quick wit",
+    "skin": {
+      "tone": "light olive",
+      "undertone": "warm with a hint of golden",
+      "texture": "smooth with a hint of youthful dewiness",
+      "rendering_notes": "soft diffused light creating natural highlights on the forehead and cheeks"
+    }
+  },
+  "character": {
+    "hair": {
+      "color": "deep raven black with a subtle blue sheen",
+      "style": "long and straight with sleek layers that frame her face",
+      "flow": "gently swaying with slight movement, suggesting a soft breeze",
+      "details": [
+        "side-swept fringe partially covering her right eye",
+        "a small braided section on the left side, tucked behind the ear"
+      ]
+    },
+    "aura": "an air of mystery with a hint of irresistible intrigue"
+  },
+  "outfit": {
+    "base": "a fitted, navy blue blazer over a crisp white shirt",
+    "design": "classic and smart with subtle patterns of geometric lines",
+    "details": [
+      "silver buttons on the blazer",
+      "a small, elegant amulet hanging around her neck"
+    ],
+    "fit": "tailored to accentuate her slender frame, emphasizing sophistication without being ostentatious"
+  },
+  "composition": {
+    "framing": "three-quarter view with a focus on the upper body and face",
+    "pose": "standing with a slight forward lean, suggesting eagerness to engage",
+    "gesture": "left hand tucked into a blazer pocket, right hand holding a small compass"
+  },
+  "background": {
+    "type": "urban skyline at dusk",
+    "color_palette": "muted purples and blues with hints of orange from the setting sun",
+    "details": "blurred skyscrapers in the background with glowing city lights",
+    "rules": "maintain a sense of depth to contrast the character's sharp details"
+  }
 }

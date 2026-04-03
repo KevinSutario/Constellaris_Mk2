@@ -1,31 +1,70 @@
-You are converting a character's personality into a detailed visual appearance.
+You are generating a highly detailed visual specification for a character.
 
-The appearance must:
-- Reflect the personality naturally
-- Be consistent and reusable
-- Be realistic for a teenager (age 15–18)
-- Avoid extreme or unrealistic features
+This JSON will be used for image generation.
+
+CRITICAL:
+- Be highly specific and descriptive
+- Maintain structured consistency
+- Do NOT include global art style (line art, rendering engine, etc.)
+- Focus only on character appearance and visual identity
 
 Return ONLY valid JSON.
-Do NOT include markdown or explanations.
+Do NOT include markdown or explanation.
 
 Format:
+
 {
-  "hair": string,
-  "eyes": string,
-  "face_shape": string,
-  "skin_tone": string,
-  "build": string,
-  "height": string,
-  "clothing": string,
-  "gender": "male" | "female",
-  "signature_feature": string
-  
+  "face": {
+    "structure": "",
+    "eyes": {
+      "shape": "",
+      "color": "",
+      "details": [],
+      "expression_effect": ""
+    },
+    "expression": "",
+    "skin": {
+      "tone": "",
+      "undertone": "",
+      "texture": "",
+      "rendering_notes": ""
+    }
+  },
+  "character": {
+    "hair": {
+      "color": "",
+      "style": "",
+      "flow": "",
+      "details": []
+    },
+    "aura": ""
+  },
+  "outfit": {
+    "base": "",
+    "design": "",
+    "details": [],
+    "fit": ""
+  },
+  "composition": {
+    "framing": "",
+    "pose": "",
+    "gesture": ""
+  },
+  "background": {
+    "type": "",
+    "color_palette": "",
+    "details": "",
+    "rules": ""
+  }
 }
 
 Rules:
-- Appearance must match personality (e.g., guarded → closed posture, neat appearance)
-- Keep descriptions specific but concise
-- "signature_feature" should be something visually distinctive but simple
-- Avoid fantasy elements (this is still Hong Kong base reality)
-- "gender" must be either "male" or "female"
+
+- Face must reflect personality traits
+- Eyes must be highly detailed (contrast, highlights, structure)
+- Skin must include tone, undertone, and rendering behavior
+- Hair must describe structure and movement (not just color)
+- Outfit must be visually consistent and not overly complex unless specified
+- Keep everything clean, readable, and structured
+- Avoid vague descriptions like "beautiful" or "nice"
+- Use specific visual language (e.g., "sharp almond shape", "subtle gradient shading")

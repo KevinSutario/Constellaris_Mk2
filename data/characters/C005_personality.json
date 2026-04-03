@@ -1,15 +1,15 @@
 {
   "id": "C005",
-  "name": "Leong Wai-Sum",
-  "age": 17,
+  "name": "Jin Ho",
+  "age": 16,
   "personality": [
-    "brooding introspection",
-    "strategically assertive",
-    "skeptically curious"
+    "calculating under pressure",
+    "skeptically optimistic",
+    "emotionally guarded"
   ],
   "traits": [
-    "frequently questions authority",
-    "prefers to observe silently before acting"
+    "avoids eye contact when lying",
+    "compulsively checks his watch"
   ],
   "role": "strategist"
 }

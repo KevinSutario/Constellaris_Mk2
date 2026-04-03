@@ -1,11 +1,55 @@
 {
-  "hair": "short and slightly tousled black hair",
-  "eyes": "dark brown with a sharp, attentive gaze",
-  "face_shape": "oval with defined cheekbones",
-  "skin_tone": "medium with a golden undertone",
-  "build": "slim but slightly muscular",
-  "height": "average for age, around 5'7\"",
-  "clothing": "neat, functional, usually in dark tones, prefers a simple button-up or hoodie",
-  "gender": "male",
-  "signature_feature": "always wears a thin black wristband"
+  "face": {
+    "structure": "oval with slightly angular jawline, prominent cheekbones",
+    "eyes": {
+      "shape": "sharp almond shape",
+      "color": "intense dark brown",
+      "details": [
+        "slight upward tilt at the outer corners",
+        "thin but defined eyelashes",
+        "vivid white sclera creating contrast"
+      ],
+      "expression_effect": "piercing and introspective"
+    },
+    "expression": "thoughtfully reserved with a hint of skepticism",
+    "skin": {
+      "tone": "light olive",
+      "undertone": "warm yellow-gold",
+      "texture": "smooth with minimal blemishes",
+      "rendering_notes": "utilize soft gradient to subtly enhance the bone structure"
+    }
+  },
+  "character": {
+    "hair": {
+      "color": "midnight black",
+      "style": "sleekly side-parted with gentle waves",
+      "flow": "moderate length, reaching just below the ears with slight movement",
+      "details": [
+        "a single stray lock occasionally falls over the forehead",
+        "sheen reflecting under direct light"
+      ]
+    },
+    "aura": "a sense of calm strategic focus and reserved nature"
+  },
+  "outfit": {
+    "base": "modern, minimally styled urban attire",
+    "design": "tailored grey blazer over a crisp white shirt",
+    "details": [
+      "slim black tie",
+      "perfectly folded pocket square",
+      "silver wristwatch"
+    ],
+    "fit": "perfectly tailored to accentuate a lean, athletic build"
+  },
+  "composition": {
+    "framing": "mid-torso up, centered slightly to the right",
+    "pose": "standing with arms crossed across the chest",
+    "gesture": "gazing slightly to the side with an intense focus"
+  },
+  "background": {
+    "type": "abstract with subtle elements",
+    "color_palette": "cool greys and blues",
+    "details": "faint geometric patterns suggesting complexity",
+    "rules": "background should remain subdued to highlight the character's expression and attire"
+  }
 }

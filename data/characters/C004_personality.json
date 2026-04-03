@@ -1,15 +1,15 @@
 {
   "id": "C004",
-  "name": "Jasper Lai",
-  "age": 17,
+  "name": "Jasper Wong",
+  "age": 16,
   "personality": [
-    "meticulously analytical",
-    "sardonic humor",
-    "internally restless"
+    "meticulously observant",
+    "confidently reserved",
+    "guarded vulnerability"
   ],
   "traits": [
-    "prefers indirect confrontation",
-    "meticulously organizes notes"
+    "scribbles notes during conversations",
+    "hesitates before forming opinions"
   ],
   "role": "tactician"
 }

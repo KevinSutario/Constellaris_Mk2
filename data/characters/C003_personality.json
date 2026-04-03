@@ -1,15 +1,15 @@
 {
   "id": "C003",
-  "name": "Jasmine Wong",
-  "age": 17,
+  "name": "Li Mei",
+  "age": 16,
   "personality": [
-    "calculating under pressure",
-    "emotionally guarded",
-    "quietly observant"
+    "intellectually curious yet secretive",
+    "quick-witted in social settings",
+    "sensitive to criticism but driven"
   ],
   "traits": [
-    "avoids eye contact when lying",
-    "steps in only when necessary"
+    "frequently uses humor to deflect personal questions",
+    "compulsively checks the news for updates"
   ],
-  "role": "strategist"
+  "role": "navigator"
 }

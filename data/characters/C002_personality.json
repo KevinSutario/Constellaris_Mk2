@@ -1,15 +1,15 @@
 {
   "id": "C002",
-  "name": "Mei Wen",
+  "name": "Mei Wong",
   "age": 17,
   "personality": [
-    "meticulously strategic",
-    "emotionally detached",
-    "curiously introspective"
+    "calculating under pressure",
+    "emotionally guarded",
+    "quietly observant"
   ],
   "traits": [
-    "obsessively plans ahead",
-    "overanalyzes interpersonal dynamics"
+    "avoids eye contact when lying",
+    "steps in only when necessary"
   ],
   "role": "strategist"
 }

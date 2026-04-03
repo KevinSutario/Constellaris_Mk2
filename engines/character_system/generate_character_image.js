@@ -6,12 +6,21 @@ const client = new OpenAI({
   apiKey: config.OPENAI_API_KEY,
 });
 
-
 // load prompt
 function loadPrompt(path) {
   return fs.readFileSync(path, "utf-8");
 }
 
+// 🔧 flatten JSON into readable prompt (important for image models)
+function flattenJSON(obj) {
+  return JSON.stringify(obj, null, 2)
+    .replace(/[{}"]/g, "")
+    .replace(/:/g, "")
+    .replace(/,\n/g, ", ")
+    .replace(/\n/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
 
 // 🎯 generate image for ONE character
 export async function generateCharacterImage(id) {
@@ -30,22 +39,29 @@ export async function generateCharacterImage(id) {
     "prompts/character/character_global_art_style_prompt.txt"
   );
 
-  // 🧠 Build final prompt
+  // 🔥 Flatten for better image understanding
+  const appearanceText = flattenJSON(appearance);
+  const personalityText = flattenJSON(personality);
+
+  // 🧠 Build final prompt (structured, clean, controlled)
   const finalPrompt = `
 ${stylePrompt}
 
-Character:
-${JSON.stringify(personality, null, 2)}
+Character appearance:
+${appearanceText}
 
-Appearance:
-${JSON.stringify(appearance, null, 2)}
+Character personality context:
+${personalityText}
 
-Requirements:
-- Match the personality and appearance
+Strict Requirements:
+- Follow appearance EXACTLY as described
+- Do NOT override facial structure, eyes, or skin tone
+- Eyes must be sharp, high contrast, and detailed
+- Skin must match described tone and undertone
+- Maintain consistent anime/manhwa style
 - Character must be centered
-- No background
-- Transparent background
 - Single character only
+- No background or fully transparent background
 `;
 
   console.log(`Generating image for ${id}...`);
@@ -54,7 +70,7 @@ Requirements:
     model: "gpt-image-1",
     prompt: finalPrompt,
     size: "1024x1024",
-    background: "transparent"
+    background: "transparent",
   });
 
   const image_base64 = result.data[0].b64_json;
@@ -67,10 +83,9 @@ Requirements:
   console.log(`Saved ${id}_image.png`);
 }
 
-
 // 🔁 generate all
 export async function generateAllCharacterImages(count = 5) {
-  for (let i = 1; i <= count; i++) {
+  for (let i = 1; i <= 0; i++) {
     const id = `C${String(i).padStart(3, "0")}`;
     await generateCharacterImage(id);
   }
