@@ -1,15 +1,15 @@
 {
   "id": "C003",
-  "name": "Kai Wong",
-  "age": 16,
+  "name": "Mei-Ling Chan",
+  "age": 17,
   "personality": [
-    "cynically perceptive",
-    "charismatically elusive",
-    "internally conflicted"
+    "curiously analytical",
+    "introverted but passionate",
+    "resistant to authority"
   ],
   "traits": [
-    "frequently questions motives",
-    "nervously drums fingers"
+    "tends to sketch cityscapes from memory",
+    "loses interest quickly in monotonous tasks"
   ],
-  "role": "skeptic"
+  "role": "architect of ideas"
 }

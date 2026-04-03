@@ -1,10 +1,11 @@
 {
-  "hair": "dark, tousled",
-  "eyes": "sharp, deep brown",
+  "hair": "shoulder-length, straight black hair",
+  "eyes": "deep-set brown eyes with a thoughtful gaze",
   "face_shape": "oval",
-  "skin_tone": "light-medium",
-  "build": "slender",
+  "skin_tone": "light olive",
+  "build": "slim",
   "height": "average",
-  "clothing": "casual, slightly disheveled",
-  "signature_feature": "intense gaze"
+  "clothing": "casual yet meticulously organized attire, favoring practical jeans and simple t-shirts",
+  "gender": "female",
+  "signature_feature": "always carries a sketchbook with cityscapes"
 }

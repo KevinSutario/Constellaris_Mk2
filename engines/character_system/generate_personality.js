@@ -31,8 +31,16 @@ function safeParse(text) {
 
 
 // 🎯 ACTION: generate personality
-export async function generatePersonality() {
-  const prompt = loadPrompt("prompts/character/Personality_Prompt.txt");
+export async function generatePersonality(gender) {
+  const basePrompt = loadPrompt("prompts/character/Personality_Prompt.txt");
+
+  // 👇 inject gender into the prompt
+  const prompt = `
+${basePrompt}
+
+Character constraint:
+- Gender must be "${gender}"
+`;
 
   const response = await client.chat.completions.create({
     model: "gpt-4o",
@@ -66,17 +74,22 @@ function saveCharacter(personality, index) {
 
 
 // 🔁 ACTION: create multiple characters
-export async function createMultipleCharacters(count = 3) {
-  for (let i = 1; i <= count; i++) {
-    console.log(`\nGenerating character ${i}...`);
+export async function createMultipleCharacters() {
+  const genders = ["female", "female", "female", "male", "male"];
 
-    const character = await generatePersonality();
+  for (let i = 0; i < genders.length; i++) {
+    const index = i + 1;
+    const gender = genders[i];
+
+    console.log(`\nGenerating character ${index} (${gender})...`);
+
+    const character = await generatePersonality(gender);
 
     if (!character) {
       console.log("Skipping due to parse error...");
       continue;
     }
 
-    saveCharacter(character, i);
+    saveCharacter(character, index);
   }
 }

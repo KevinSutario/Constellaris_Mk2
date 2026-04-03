@@ -1,15 +1,15 @@
 {
   "id": "C002",
-  "name": "Xiao Hui",
+  "name": "Mei-lin Zhang",
   "age": 17,
   "personality": [
-    "analytical yet skeptical",
-    "internally driven",
-    "occasionally impulsive"
+    "calculating under pressure",
+    "emotionally guarded",
+    "quietly observant"
   ],
   "traits": [
-    "scribbles notes in a battered notebook",
-    "reluctant to delegate tasks"
+    "avoids eye contact when lying",
+    "steps in only when necessary"
   ],
   "role": "strategist"
 }

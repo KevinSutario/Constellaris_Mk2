@@ -18,7 +18,9 @@ Format:
   "build": string,
   "height": string,
   "clothing": string,
+  "gender": "male" | "female",
   "signature_feature": string
+  
 }
 
 Rules:
@@ -26,3 +28,4 @@ Rules:
 - Keep descriptions specific but concise
 - "signature_feature" should be something visually distinctive but simple
 - Avoid fantasy elements (this is still Hong Kong base reality)
+- "gender" must be either "male" or "female"

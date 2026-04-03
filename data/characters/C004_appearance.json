@@ -1,10 +1,11 @@
 {
-  "hair": "short, neat black hair",
-  "eyes": "sharp, dark brown eyes",
-  "face_shape": "oval",
-  "skin_tone": "light beige",
-  "build": "slim and slightly hunched",
-  "height": "average height for his age",
-  "clothing": "simple, well-fitted hoodie and jeans",
-  "signature_feature": "glasses with thin metal frames"
+  "hair": "short, neatly styled black",
+  "eyes": "dark brown, observant",
+  "face_shape": "oval with a sharp jawline",
+  "skin_tone": "fair with a slight tan",
+  "build": "slender but toned",
+  "height": "average height for age",
+  "clothing": "smart casual with a preference for dark colors",
+  "gender": "male",
+  "signature_feature": "always seen with a sleek wristwatch"
 }

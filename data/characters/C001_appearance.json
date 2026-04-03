@@ -1,10 +1,11 @@
 {
-  "hair": "short, straight, dark brown",
-  "eyes": "piercing dark brown",
-  "face_shape": "oval with a focused expression",
-  "skin_tone": "medium olive",
-  "build": "slender but athletic",
-  "height": "5'7\"",
-  "clothing": "neatly pressed shirts with rolled-up sleeves and fitted jeans",
-  "signature_feature": "wears a simple silver necklace"
+  "hair": "shoulder-length, straight, dark brown",
+  "eyes": "expressive, almond-shaped, light brown",
+  "face_shape": "oval",
+  "skin_tone": "warm medium beige",
+  "build": "slim",
+  "height": "average",
+  "clothing": "neatly organized, casual yet stylish, with a variety of blues and greens",
+  "gender": "female",
+  "signature_feature": "thin silver bracelet with a small charm"
 }

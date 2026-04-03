@@ -1,15 +1,15 @@
 {
   "id": "C001",
-  "name": "Li Jun",
+  "name": "Li Mei",
   "age": 16,
   "personality": [
-    "meticulously pragmatic",
-    "emotionally intense",
-    "keenly perceptive"
+    "meticulously analytical",
+    "deeply empathetic",
+    "skeptically optimistic"
   ],
   "traits": [
-    "fiddles with a necklace when nervous",
-    "leaves situations unresolved to ponder later"
+    "deflects personal questions with humor",
+    "writes poetry to process emotions"
   ],
-  "role": "strategist"
+  "role": "social architect"
 }

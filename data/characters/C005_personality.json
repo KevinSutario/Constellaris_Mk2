@@ -1,15 +1,15 @@
 {
   "id": "C005",
-  "name": "Ka-yan Wong",
+  "name": "Jasper Lau",
   "age": 17,
   "personality": [
-    "desires recognition but fears criticism",
-    "compassionate in private moments",
-    "analytical yet indecisive"
+    "analytical but indecisive",
+    "loyal yet skeptical",
+    "emotionally detached"
   ],
   "traits": [
-    "taps fingers when anxious",
-    "reads poetry to calm nerves"
+    "overthinks minor details",
+    "reads the room before acting"
   ],
-  "role": "mediator"
+  "role": "skeptic"
 }
