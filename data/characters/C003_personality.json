@@ -1,0 +1,15 @@
+{
+  "id": "C003",
+  "name": "Wei Ling",
+  "age": 17,
+  "personality": [
+    "impulsively creative",
+    "disarmingly blunt",
+    "internally conflicted"
+  ],
+  "traits": [
+    "laughs in the face of uncertainty",
+    "withdraws when feeling vulnerable"
+  ],
+  "role": "visionary"
+}

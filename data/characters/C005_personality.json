@@ -1,0 +1,15 @@
+{
+  "id": "C005",
+  "name": "Wei Ling",
+  "age": 17,
+  "personality": [
+    "witty with sarcasm",
+    "unsettled by silence",
+    "intensely loyal"
+  ],
+  "traits": [
+    "shuffles feet when uncertain",
+    "often defuses tension with humor"
+  ],
+  "role": "mediator"
+}

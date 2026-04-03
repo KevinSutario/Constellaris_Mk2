@@ -1,0 +1,15 @@
+{
+  "id": "C002",
+  "name": "Kai Wong",
+  "age": 16,
+  "personality": [
+    "impulsively creative",
+    "quietly observant",
+    "calculating under pressure"
+  ],
+  "traits": [
+    "often doodles when distracted",
+    "replays conversations in their mind"
+  ],
+  "role": "mediator"
+}

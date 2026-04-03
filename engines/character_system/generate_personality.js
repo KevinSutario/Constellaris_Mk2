@@ -49,20 +49,19 @@ export async function generatePersonality() {
 
 
 // 💾 ACTION: save one character
-function saveCharacter(character, index) {
+function saveCharacter(personality, index) {
   const id = `C${String(index).padStart(3, "0")}`;
 
-  const fullCharacter = {
+  const filename = `data/characters/${id}_personality.json`;
+
+  const fullData = {
     id,
-    ...character,
+    ...personality,
   };
 
-  fs.writeFileSync(
-    `data/characters/${id}.json`,
-    JSON.stringify(fullCharacter, null, 2)
-  );
+  fs.writeFileSync(filename, JSON.stringify(fullData, null, 2));
 
-  console.log(`Saved ${id}`);
+  console.log(`Saved ${id}_personality.json`);
 }
 
 
