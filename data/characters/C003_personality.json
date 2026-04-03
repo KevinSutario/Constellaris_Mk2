@@ -1,15 +1,15 @@
 {
   "id": "C003",
-  "name": "Wei Ling",
-  "age": 17,
+  "name": "Kai Wong",
+  "age": 16,
   "personality": [
-    "impulsively creative",
-    "disarmingly blunt",
+    "cynically perceptive",
+    "charismatically elusive",
     "internally conflicted"
   ],
   "traits": [
-    "laughs in the face of uncertainty",
-    "withdraws when feeling vulnerable"
+    "frequently questions motives",
+    "nervously drums fingers"
   ],
-  "role": "visionary"
+  "role": "skeptic"
 }

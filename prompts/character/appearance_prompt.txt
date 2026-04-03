@@ -1,0 +1,28 @@
+You are converting a character's personality into a detailed visual appearance.
+
+The appearance must:
+- Reflect the personality naturally
+- Be consistent and reusable
+- Be realistic for a teenager (age 15–18)
+- Avoid extreme or unrealistic features
+
+Return ONLY valid JSON.
+Do NOT include markdown or explanations.
+
+Format:
+{
+  "hair": string,
+  "eyes": string,
+  "face_shape": string,
+  "skin_tone": string,
+  "build": string,
+  "height": string,
+  "clothing": string,
+  "signature_feature": string
+}
+
+Rules:
+- Appearance must match personality (e.g., guarded → closed posture, neat appearance)
+- Keep descriptions specific but concise
+- "signature_feature" should be something visually distinctive but simple
+- Avoid fantasy elements (this is still Hong Kong base reality)

@@ -1,15 +1,15 @@
 {
   "id": "C002",
-  "name": "Kai Wong",
-  "age": 16,
+  "name": "Xiao Hui",
+  "age": 17,
   "personality": [
-    "impulsively creative",
-    "quietly observant",
-    "calculating under pressure"
+    "analytical yet skeptical",
+    "internally driven",
+    "occasionally impulsive"
   ],
   "traits": [
-    "often doodles when distracted",
-    "replays conversations in their mind"
+    "scribbles notes in a battered notebook",
+    "reluctant to delegate tasks"
   ],
-  "role": "mediator"
+  "role": "strategist"
 }

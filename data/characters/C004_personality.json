@@ -1,15 +1,15 @@
 {
   "id": "C004",
-  "name": "Li Mei",
-  "age": 17,
+  "name": "Jin Lok",
+  "age": 16,
   "personality": [
     "calculating under pressure",
-    "emotionally guarded",
+    "secretly insecure",
     "quietly observant"
   ],
   "traits": [
-    "avoids eye contact when lying",
-    "steps in only when necessary"
+    "overanalyzes risks",
+    "withdraws when feeling criticized"
   ],
   "role": "strategist"
 }
