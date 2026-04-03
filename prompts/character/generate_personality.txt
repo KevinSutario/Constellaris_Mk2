@@ -25,6 +25,8 @@ Format:
   let text = response.choices[0].message.content;
 
   text = cleanJSON(text);
+  
+  console.log("RAW AI OUTPUT:\n", text);
 
   return JSON.parse(text);
 }
