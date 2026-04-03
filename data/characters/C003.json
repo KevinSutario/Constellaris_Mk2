@@ -1,0 +1,15 @@
+{
+  "id": "C003",
+  "name": "Ming Zhao",
+  "age": 10,
+  "personality": [
+    "curious",
+    "brave",
+    "imaginative"
+  ],
+  "traits": [
+    "explores alone",
+    "seeks adventure"
+  ],
+  "role": "explorer"
+}

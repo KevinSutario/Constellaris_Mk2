@@ -1,0 +1,15 @@
+{
+  "id": "C004",
+  "name": "Ming",
+  "age": 11,
+  "personality": [
+    "curious",
+    "imaginative",
+    "empathetic"
+  ],
+  "traits": [
+    "explores alone",
+    "seeks new stories"
+  ],
+  "role": "explorer"
+}

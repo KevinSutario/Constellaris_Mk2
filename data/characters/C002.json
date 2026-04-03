@@ -1,0 +1,15 @@
+{
+  "id": "C002",
+  "name": "Mei Ling",
+  "age": 11,
+  "personality": [
+    "curious",
+    "empathetic",
+    "independent"
+  ],
+  "traits": [
+    "explores alone",
+    "makes friends easily"
+  ],
+  "role": "explorer"
+}

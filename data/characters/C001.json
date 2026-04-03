@@ -1,0 +1,15 @@
+{
+  "id": "C001",
+  "name": "Lian",
+  "age": 10,
+  "personality": [
+    "curious",
+    "brave",
+    "empathetic"
+  ],
+  "traits": [
+    "explores alone",
+    "makes friends easily"
+  ],
+  "role": "explorer"
+}

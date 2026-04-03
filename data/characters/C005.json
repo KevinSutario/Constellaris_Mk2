@@ -1,0 +1,15 @@
+{
+  "id": "C005",
+  "name": "Kai Wong",
+  "age": 10,
+  "personality": [
+    "curious",
+    "resourceful",
+    "kind-hearted"
+  ],
+  "traits": [
+    "explores alone",
+    "quick to make friends"
+  ],
+  "role": "explorer"
+}
