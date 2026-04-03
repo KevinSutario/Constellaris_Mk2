@@ -1,15 +1,15 @@
 {
   "id": "C001",
-  "name": "Lian",
-  "age": 10,
+  "name": "Yin Chen",
+  "age": 17,
   "personality": [
-    "curious",
-    "brave",
-    "empathetic"
+    "analytical but second-guesses decisions",
+    "cautiously optimistic around new people",
+    "sensitive yet stubborn"
   ],
   "traits": [
-    "explores alone",
-    "makes friends easily"
+    "doodles intensely when stressed",
+    "hesitates to share personal goals"
   ],
-  "role": "explorer"
+  "role": "mediator"
 }

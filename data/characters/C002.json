@@ -1,15 +1,15 @@
 {
   "id": "C002",
-  "name": "Mei Ling",
-  "age": 11,
+  "name": "Jasper Leung",
+  "age": 16,
   "personality": [
-    "curious",
-    "empathetic",
-    "independent"
+    "calculating under pressure",
+    "emotionally guarded",
+    "introverted yet assertive"
   ],
   "traits": [
-    "explores alone",
-    "makes friends easily"
+    "avoids eye contact when lying",
+    "steps in only when necessary"
   ],
-  "role": "explorer"
+  "role": "strategist"
 }

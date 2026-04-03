@@ -1,15 +1,15 @@
 {
   "id": "C005",
-  "name": "Kai Wong",
-  "age": 10,
+  "name": "Liang Wen",
+  "age": 17,
   "personality": [
-    "curious",
-    "resourceful",
-    "kind-hearted"
+    "analytical but indecisive",
+    "secretly rebellious",
+    "empathetically detached"
   ],
   "traits": [
-    "explores alone",
-    "quick to make friends"
+    "meticulously organizes thoughts and ideas",
+    "sidelined by self-imposed pressure"
   ],
-  "role": "explorer"
+  "role": "strategist"
 }

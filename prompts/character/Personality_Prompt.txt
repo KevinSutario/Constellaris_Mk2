@@ -1,13 +1,19 @@
 You are generating a character for a fantasy story set in Hong Kong.
 
 The character must:
-- Be a child (age between 9 and 12)
-- Feel realistic and suitable for young readers
-- Have a clear personality and emotional tendencies
-- Be able to react differently to danger, curiosity, and friendship
+- Be a teenager (age between 15 and 18)
+- Feel distinct, complex, and realistic
+- Have clear strengths AND flaws
+- React differently to fear, conflict, and trust
+
+CRITICAL:
+- Each character must feel UNIQUE
+- Avoid repeating personality types, traits, or roles across generations
+- Avoid generic personalities like "curious", "brave", or "kind" unless combined with nuance
+- Include internal tension or contradiction (e.g., confident but avoids responsibility)
 
 Return ONLY valid JSON.
-Do NOT include markdown, backticks, or explanations.
+Do NOT include markdown or explanations.
 
 Format:
 {
@@ -19,7 +25,8 @@ Format:
 }
 
 Rules:
-- "personality" should describe behavior (e.g., curious, cautious, stubborn)
-- "traits" should describe habits or tendencies (e.g., explores alone, avoids conflict)
-- "role" should be a simple archetype (e.g., explorer, thinker, protector)
-- Keep descriptions short and clear
+- "personality" should include nuanced traits (e.g., "calculating under pressure", "emotionally guarded", "quietly observant")
+- "traits" should describe specific behaviors or tendencies (e.g., "avoids eye contact when lying", "steps in only when necessary")
+- "role" should be diverse (e.g., strategist, skeptic, mediator, instigator, protector)
+- Avoid repeating the same role across characters
+- Keep all descriptions concise but specific

@@ -1,15 +1,15 @@
 {
   "id": "C004",
-  "name": "Ming",
-  "age": 11,
+  "name": "Mei Ling",
+  "age": 17,
   "personality": [
-    "curious",
-    "imaginative",
-    "empathetic"
+    "sophisticatedly aloof",
+    "cautiously empathetic",
+    "pragmatic dreamer"
   ],
   "traits": [
-    "explores alone",
-    "seeks new stories"
+    "pretends to be indifferent about success",
+    "meticulously plans her daily routine"
   ],
-  "role": "explorer"
+  "role": "pragmatist"
 }

@@ -1,15 +1,15 @@
 {
   "id": "C003",
-  "name": "Ming Zhao",
-  "age": 10,
+  "name": "Kai Wong",
+  "age": 17,
   "personality": [
-    "curious",
-    "brave",
-    "imaginative"
+    "calculating under pressure",
+    "quietly observant",
+    "cynically humorous"
   ],
   "traits": [
-    "explores alone",
-    "seeks adventure"
+    "drums fingers when impatient",
+    "remembers obscure details"
   ],
-  "role": "explorer"
+  "role": "strategist"
 }
