@@ -1,0 +1,25 @@
+You are generating a character for a fantasy story set in Hong Kong.
+
+The character must:
+- Be a child (age between 9 and 12)
+- Feel realistic and suitable for young readers
+- Have a clear personality and emotional tendencies
+- Be able to react differently to danger, curiosity, and friendship
+
+Return ONLY valid JSON.
+Do NOT include markdown, backticks, or explanations.
+
+Format:
+{
+  "name": string,
+  "age": number,
+  "personality": [string, string, string],
+  "traits": [string, string],
+  "role": string
+}
+
+Rules:
+- "personality" should describe behavior (e.g., curious, cautious, stubborn)
+- "traits" should describe habits or tendencies (e.g., explores alone, avoids conflict)
+- "role" should be a simple archetype (e.g., explorer, thinker, protector)
+- Keep descriptions short and clear
