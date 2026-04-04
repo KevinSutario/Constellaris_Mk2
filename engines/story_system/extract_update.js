@@ -45,26 +45,33 @@ function saveJSON(path, data) {
   fs.writeFileSync(path, JSON.stringify(data, null, 2))
 }
 
-function extractRelationships(scene, state) {
+function extractRelationships(scene, state, nameMap) {
   const updates = {}
 
-  const pairs = Object.keys(state.relationships)
+  const names = Object.keys(nameMap)
 
-  pairs.forEach(pair => {
-    const [a, b] = pair.split('_')
+  names.forEach(nameA => {
+    names.forEach(nameB => {
+      if (nameA === nameB) return
 
-    if (scene.includes(a) && scene.includes(b)) {
-      updates[pair] = {
-        metrics: {
-          trust: 0,
-          tension: 1,
-          dependency: 0,
-          fear: 0,
-          respect: 0
-        },
-        reason: "Interaction detected in scene"
+      if (scene.includes(nameA) && scene.includes(nameB)) {
+        const idA = nameMap[nameA]
+        const idB = nameMap[nameB]
+
+        if (!updates[idA]) updates[idA] = {}
+
+        updates[idA][idB] = {
+          metrics: {
+            trust: 0,
+            tension: 1,
+            dependency: 0,
+            fear: 0,
+            respect: 0
+          },
+          reason: `${nameA} interacts with ${nameB}`
+        }
       }
-    }
+    })
   })
 
   return updates
