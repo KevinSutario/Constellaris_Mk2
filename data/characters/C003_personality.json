@@ -1,15 +1,15 @@
 {
   "id": "C003",
-  "name": "Li Mei",
+  "name": "Mei-Lin Zhang",
   "age": 16,
   "personality": [
-    "intellectually curious yet secretive",
-    "quick-witted in social settings",
-    "sensitive to criticism but driven"
+    "analytical with a creative twist",
+    "detached but secretly yearns for connection",
+    "shrewd observer of social dynamics"
   ],
   "traits": [
-    "frequently uses humor to deflect personal questions",
-    "compulsively checks the news for updates"
+    "taps her fingers when deep in thought",
+    "avoids small talk but engages in deep conversations"
   ],
-  "role": "navigator"
+  "role": "connector"
 }

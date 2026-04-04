@@ -1,53 +1,54 @@
 {
   "face": {
-    "structure": "heart-shaped with high cheekbones and a delicate jawline",
+    "structure": "heart-shaped with a pointed chin and high cheekbones",
     "eyes": {
-      "shape": "sharp almond shape with slightly upturned outer corners",
-      "color": "deep chestnut brown",
+      "shape": "sharp almond shape",
+      "color": "stormy grey with a subtle hint of amber",
       "details": [
-        "subtle golden flecks near the iris",
-        "thin, dark eyelashes that curve naturally"
+        "slight upward tilt",
+        "dense, dark lashes",
+        "dappled contrast and soft gradient shading in the irises"
       ],
-      "expression_effect": "pensive and slightly inquisitive look that reflects her intellectual curiosity"
+      "expression_effect": "piercing and contemplative, conveys an air of mystery"
     },
-    "expression": "a thoughtful smirk often present, hinting at her quick wit",
+    "expression": "pensive with a subtle hint of a knowing smile",
     "skin": {
       "tone": "light olive",
-      "undertone": "warm with a hint of golden",
-      "texture": "smooth with a hint of youthful dewiness",
-      "rendering_notes": "soft diffused light creating natural highlights on the forehead and cheeks"
+      "undertone": "golden",
+      "texture": "smooth with a few freckles scattered across the nose",
+      "rendering_notes": "soft-focus rendering with slight highlights on the cheeks and nose"
     }
   },
   "character": {
     "hair": {
-      "color": "deep raven black with a subtle blue sheen",
-      "style": "long and straight with sleek layers that frame her face",
-      "flow": "gently swaying with slight movement, suggesting a soft breeze",
+      "color": "jet black with subtle blue undertones",
+      "style": "long and straight with blunt ends",
+      "flow": "flows gracefully down her back with exceptional smoothness",
       "details": [
-        "side-swept fringe partially covering her right eye",
-        "a small braided section on the left side, tucked behind the ear"
+        "pin-straight strands",
+        "a few loose tendrils framing the face"
       ]
     },
-    "aura": "an air of mystery with a hint of irresistible intrigue"
+    "aura": "an enigmatic presence that draws people in unconsciously"
   },
   "outfit": {
-    "base": "a fitted, navy blue blazer over a crisp white shirt",
-    "design": "classic and smart with subtle patterns of geometric lines",
+    "base": "a tailored, charcoal grey blazer",
+    "design": "minimalist with clean lines and a modern cut",
     "details": [
-      "silver buttons on the blazer",
-      "a small, elegant amulet hanging around her neck"
+      "silver buttons with intricate etching",
+      "a subtle plaid pattern visible only up close"
     ],
-    "fit": "tailored to accentuate her slender frame, emphasizing sophistication without being ostentatious"
+    "fit": "snug yet comfortable, emphasizing her lean frame"
   },
   "composition": {
-    "framing": "three-quarter view with a focus on the upper body and face",
-    "pose": "standing with a slight forward lean, suggesting eagerness to engage",
-    "gesture": "left hand tucked into a blazer pocket, right hand holding a small compass"
+    "framing": "medium shot centered, focused on upper body",
+    "pose": "standing with one hand resting lightly on her chin",
+    "gesture": "fingers lightly tapping as if pondering"
   },
   "background": {
-    "type": "urban skyline at dusk",
-    "color_palette": "muted purples and blues with hints of orange from the setting sun",
-    "details": "blurred skyscrapers in the background with glowing city lights",
-    "rules": "maintain a sense of depth to contrast the character's sharp details"
+    "type": "abstract with geometric overlays",
+    "color_palette": "muted shades of blue and grey with occasional bursts of deep red",
+    "details": "soft-focus city skyline as a backdrop, symbolizing urban complexity",
+    "rules": "maintain soft transitions between colors to echo her introspective nature"
   }
 }

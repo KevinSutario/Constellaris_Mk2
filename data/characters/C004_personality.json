@@ -1,15 +1,15 @@
 {
   "id": "C004",
-  "name": "Jasper Wong",
-  "age": 16,
+  "name": "Kai Leung",
+  "age": 17,
   "personality": [
-    "meticulously observant",
-    "confidently reserved",
-    "guarded vulnerability"
+    "calculating under pressure",
+    "emotionally guarded",
+    "distant but occasionally empathetic"
   ],
   "traits": [
-    "scribbles notes during conversations",
-    "hesitates before forming opinions"
+    "frequently overthinks small decisions",
+    "avoids eye contact when lying"
   ],
-  "role": "tactician"
+  "role": "strategist"
 }

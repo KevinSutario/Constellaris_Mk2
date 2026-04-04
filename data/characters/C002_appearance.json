@@ -1,55 +1,55 @@
 {
   "face": {
-    "structure": "heart-shaped with softly tapered chin, high cheekbones",
+    "structure": "oval with a well-defined jawline",
     "eyes": {
-      "shape": "sharp almond shape with elongated outer corners",
-      "color": "deep ultramarine blue with a hint of grey undertone",
+      "shape": "sharp almond shape",
+      "color": "pale, icy blue",
       "details": [
-        "fine radial iris patterns",
-        "slight upward tilt",
-        "subtle contrast between pupil and iris"
+        "high contrast between the iris and pupil",
+        "delicate white highlights near the eyelid",
+        "thin, dark eyelashes framing the eyes"
       ],
-      "expression_effect": "calculating and observant gaze"
+      "expression_effect": "analytic and perceptive, reflecting her strategic mind"
     },
-    "expression": "neutral with a hint of scrutiny, slightly raised left eyebrow",
+    "expression": "contemplative with a subtle hint of skepticism",
     "skin": {
-      "tone": "light olive with a natural matte finish",
-      "undertone": "warm yellow-green",
-      "texture": "smooth with minimal visible pores",
-      "rendering_notes": "soft gradient shading emphasizes cheekbones and chin"
+      "tone": "medium with cool undertones",
+      "undertone": "slightly olive",
+      "texture": "smooth with a hint of natural sheen",
+      "rendering_notes": "soft gradient transitions for a realistic portrayal"
     }
   },
   "character": {
     "hair": {
-      "color": "deep jet black with subtle mahogany highlights",
-      "style": "straight and sleek, reaching mid-back",
-      "flow": "windswept to the right, gently cascading down",
+      "color": "jet black",
+      "style": "straight, mid-length with layered ends",
+      "flow": "naturally sleek and subtly swaying to one side",
       "details": [
-        "delicate flyaways around the face",
-        "tucked behind the left ear"
+        "thin wisps occasionally falling over her forehead",
+        "neatly parted to the right"
       ]
     },
-    "aura": "a calm and collected presence, subtle intensity"
+    "aura": "calm precision, hinting at a deep intellect"
   },
   "outfit": {
-    "base": "modern asymmetrical tunic",
-    "design": "monochrome charcoal with highlighted seams",
+    "base": "modern school uniform",
+    "design": "crisp, white blouse with a black, pleated skirt",
     "details": [
-      "deep side slits",
-      "adjustable waist belt",
-      "minimalistic embroidery around the collar"
+      "a slim, red necktie",
+      "embroidered school emblem on the left chest",
+      "black patent leather shoes"
     ],
-    "fit": "tailored fit, allowing for ease of movement"
+    "fit": "tailored and slightly fitted to allow movement"
   },
   "composition": {
-    "framing": "waist-up view",
-    "pose": "slightly turned towards the left, weight shifted onto right foot",
-    "gesture": "right hand resting on left elbow, left hand gracefully open to one side"
+    "framing": "three-quarter view with focus on the face",
+    "pose": "seated casually with one arm resting on the knee",
+    "gesture": "holding a pencil thoughtfully near her lips"
   },
   "background": {
-    "type": "abstract",
-    "color_palette": "muted tones of blue and grey with subtle teal accents",
-    "details": "geometric overlay with soft blurring effect",
-    "rules": "maintain minimal contrast to enhance character focus"
+    "type": "minimalist indoor setting",
+    "color_palette": "soft grays and whites with a touch of red",
+    "details": "faint outlines of bookshelves, suggesting a library environment",
+    "rules": "avoid excessive detail to maintain focus on the character"
   }
 }

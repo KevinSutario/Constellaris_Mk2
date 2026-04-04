@@ -1,15 +1,15 @@
 {
   "id": "C001",
-  "name": "Lila Cheng",
-  "age": 16,
+  "name": "Mei Ling Chen",
+  "age": 17,
   "personality": [
-    "analytical but impulsive",
-    "fiercely independent",
-    "secretly empathetic"
+    "calculating under pressure",
+    "emotionally guarded",
+    "quietly ambitious"
   ],
   "traits": [
-    "meticulously plans escape routes",
-    "avoids using first names as a sign of distance"
+    "taps fingers when deep in thought",
+    "hesitant to share personal information"
   ],
-  "role": "silent strategist"
+  "role": "strategist"
 }

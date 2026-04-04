@@ -1,55 +1,53 @@
 {
   "face": {
-    "structure": "oval with slightly angular jawline, prominent cheekbones",
+    "structure": "sharp-featured with high cheekbones and a slightly pointed chin, projecting a sense of acute awareness",
     "eyes": {
-      "shape": "sharp almond shape",
-      "color": "intense dark brown",
+      "shape": "narrow almond-shaped with a slight upward tilt",
+      "color": "piercing dark brown with lighter golden flecks",
       "details": [
-        "slight upward tilt at the outer corners",
-        "thin but defined eyelashes",
-        "vivid white sclera creating contrast"
+        "high contrast with sharp highlights near the inner corners",
+        "thin, dark eyebrows angled to enhance a calculating gaze"
       ],
-      "expression_effect": "piercing and introspective"
+      "expression_effect": "attentive and discerning, often appraising"
     },
-    "expression": "thoughtfully reserved with a hint of skepticism",
+    "expression": "subtly guarded, with a hint of bemusement around the lips",
     "skin": {
-      "tone": "light olive",
-      "undertone": "warm yellow-gold",
-      "texture": "smooth with minimal blemishes",
-      "rendering_notes": "utilize soft gradient to subtly enhance the bone structure"
+      "tone": "medium with cool, olive undertones",
+      "undertone": "faint greenish-gold that adds depth and complexity",
+      "texture": "smooth with a hint of natural sheen, reflecting light minimally",
+      "rendering_notes": "emphasize a matte finish to highlight facial features effectively"
     }
   },
   "character": {
     "hair": {
-      "color": "midnight black",
-      "style": "sleekly side-parted with gentle waves",
-      "flow": "moderate length, reaching just below the ears with slight movement",
+      "color": "deep black with subtle dark blue highlights",
+      "style": "neatly styled with a side part and layered strands",
+      "flow": "straight and sleek, with strands occasionally drifting over the forehead",
       "details": [
-        "a single stray lock occasionally falls over the forehead",
-        "sheen reflecting under direct light"
+        "fringe slightly tousled for a casual look",
+        "lightly textured ends that soften the overall appearance"
       ]
     },
-    "aura": "a sense of calm strategic focus and reserved nature"
+    "aura": "a quiet confidence underscoring a sense of inner depth and complexity"
   },
   "outfit": {
-    "base": "modern, minimally styled urban attire",
-    "design": "tailored grey blazer over a crisp white shirt",
+    "base": "a sleek, modern jacket with minimalist design",
+    "design": "clean lines with subtle geometric patterns in dark blue tones",
     "details": [
-      "slim black tie",
-      "perfectly folded pocket square",
-      "silver wristwatch"
+      "silver zipper running asymmetrically across the chest",
+      "fitted cuffs with fine stitching"
     ],
-    "fit": "perfectly tailored to accentuate a lean, athletic build"
+    "fit": "tailored but comfortable, allowing free movement without excess material"
   },
   "composition": {
-    "framing": "mid-torso up, centered slightly to the right",
-    "pose": "standing with arms crossed across the chest",
-    "gesture": "gazing slightly to the side with an intense focus"
+    "framing": "medium shot focusing from the waist up to capture intensity",
+    "pose": "standing with one hand casually in a pocket, the other slightly raised as if poised to make a point",
+    "gesture": "tilted head, eyes locked forward, projecting engagement and subtle challenge"
   },
   "background": {
-    "type": "abstract with subtle elements",
-    "color_palette": "cool greys and blues",
-    "details": "faint geometric patterns suggesting complexity",
-    "rules": "background should remain subdued to highlight the character's expression and attire"
+    "type": "abstract cityscape",
+    "color_palette": "slate grey with hints of neon blues and yellows",
+    "details": "blurry lights suggesting a vibrant and bustling metropolis",
+    "rules": "avoid excessive detail to maintain the focus on the character while reinforcing the urban strategist theme"
   }
 }

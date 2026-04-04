@@ -1,55 +1,56 @@
 {
   "face": {
-    "structure": "heart-shaped with a slightly pointed chin",
+    "structure": "heart-shaped, with a gently pointed chin and high cheekbones",
     "eyes": {
-      "shape": "sharp almond shape with subtly upturned corners",
-      "color": "deep sapphire blue",
+      "shape": "sharp almond shape with a slightly upward tilt",
+      "color": "dark brown with flecks of gold",
       "details": [
-        "dark, thick lashes",
-        "fine network of luminescent veins",
-        "highlights around the irises for depth"
+        "thin black eyeliner accentuating the sharpness",
+        "subtle highlights reflecting light at the bottom edges",
+        "slightly asymmetrical"
       ],
-      "expression_effect": "a piercing and contemplative gaze"
+      "expression_effect": "piercing and observant"
     },
-    "expression": "a blend of focus and latent curiosity",
+    "expression": "thoughtful, with a hint of skepticism",
     "skin": {
-      "tone": "fair with cool undertones",
-      "undertone": "pearl-like translucence",
+      "tone": "light ivory",
+      "undertone": "warm yellow",
       "texture": "smooth with a matte finish",
-      "rendering_notes": "light shading over high cheekbones to enhance depth"
+      "rendering_notes": "subtle soft shading around the jawline and temples"
     }
   },
   "character": {
     "hair": {
-      "color": "midnight black with hints of indigo",
-      "style": "straight, long layers reaching mid-back",
-      "flow": "slightly wind-swept with a natural parting to the right",
+      "color": "jet black",
+      "style": "long and straight with softly layered ends",
+      "flow": "tucked neatly behind ears, with occasional loose strands",
       "details": [
-        "glossy sheen that catches light",
-        "soft, feathered ends"
+        "silky texture",
+        "light reflects in straight strands giving it a slight glossiness",
+        "subtle movement implying a gentle breeze"
       ]
     },
-    "aura": "an air of mystery and quiet confidence"
+    "aura": "a quiet intensity, with an undercurrent of strategic awareness"
   },
   "outfit": {
-    "base": "modern tactical attire",
-    "design": "sleek black jumpsuit with subtle metallic embellishments",
+    "base": "fitted dark blue mandarin-collar blouse",
+    "design": "minimalistic with a pattern of subtle diagonal pinstripes",
     "details": [
-      "reinforced padded shoulders for added strength",
-      "multiple concealed pockets",
-      "silver-zipper detailing that mirrors starlight"
+      "silver cufflinks shaped like chess pieces",
+      "three-quarter sleeves rolled up slightly",
+      "no visible accessories other than a simple silver chain bracelet"
     ],
-    "fit": "snug yet flexible, allowing a wide range of motion"
+    "fit": "tailored, close to the body"
   },
   "composition": {
-    "framing": "three-quarter view centered in frame",
-    "pose": "standing with weight on the right leg, left arm crossed over stomach",
-    "gesture": "right hand thoughtfully touching chin"
+    "framing": "mid-length, focusing on the upper torso",
+    "pose": "leaning slightly forward as if engaging in conversation",
+    "gesture": "right hand resting on chin, left hand holding a pen"
   },
   "background": {
-    "type": "abstract urban landscape",
-    "color_palette": "muted grays and blues with hints of neon highlights",
-    "details": "blurred city skyline suggesting bustling ambience",
-    "rules": "maintain focus on character without overly complex elements"
+    "type": "abstract with subtle textures",
+    "color_palette": "cool blues and grays with hints of silver",
+    "details": "faint geometric shapes to suggest a modern, strategic environment without clutter",
+    "rules": "background should not draw focus away from character"
   }
 }

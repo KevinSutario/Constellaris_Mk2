@@ -1,55 +1,55 @@
 {
   "face": {
-    "structure": "oval with a softly defined jawline, slightly prominent cheekbones",
+    "structure": "oval shape with high cheekbones and a distinct jawline",
     "eyes": {
       "shape": "sharp almond shape",
-      "color": "amber with flecks of gold",
+      "color": "light grey with specks of blue",
       "details": [
-        "contrasting dark upper lashes",
-        "delicate lower lashes",
-        "subtle white highlights near iris"
+        "subtle gradient shading from iris to pupil",
+        "thin dark outer line",
+        "tiny golden flecks around the pupils"
       ],
-      "expression_effect": "intensely focused gaze that conveys deep thought"
+      "expression_effect": "calculating and observant, as if constantly analyzing situations"
     },
-    "expression": "slightly furrowed brows suggesting concentration",
+    "expression": "neutral with a slight furrow in the brow area, hinting at deep thought",
     "skin": {
-      "tone": "warm beige",
-      "undertone": "golden",
-      "texture": "smooth with minimal visible pores",
-      "rendering_notes": "subtle gradient shading to create depth around the cheeks and nose"
+      "tone": "medium beige",
+      "undertone": "cool with slight olive hues",
+      "texture": "smooth with light freckles across the nose bridge",
+      "rendering_notes": "use soft gradients to emphasize cheekbone structure"
     }
   },
   "character": {
     "hair": {
-      "color": "dark chestnut brown",
-      "style": "undercut with wavy longer top",
-      "flow": "waves falling casually to one side, with a slight sheen",
+      "color": "charcoal black with subtle ash tones",
+      "style": "tousled, medium length layered cut tapering towards the neck",
+      "flow": "naturally wavy with a windswept look",
       "details": [
-        "strands catch light in a natural, non-uniform manner",
-        "slightly tousled giving a carefree, stylish appearance"
+        "a few strands occasionally falling over the forehead",
+        "slight shine giving a healthy appearance"
       ]
     },
-    "aura": "a subdued yet undeniable brilliance, commanding presence without dominating the space"
+    "aura": "a calm, composed presence with a hint of tension"
   },
   "outfit": {
-    "base": "stylish monochrome suit",
-    "design": "sleek tailored suit with a modern cut",
+    "base": "a fitted dark blue tactical jacket",
+    "design": "minimalist with subtle geometric patterns",
     "details": [
-      "geometric patterned tie",
-      "crisp, white dress shirt underneath",
-      "silver cufflinks with minimalistic design"
+      "silver zipper slightly open at the neck",
+      "various concealed pockets",
+      "shoulder pads for added structure"
     ],
-    "fit": "tailored close to the body, emphasizing a lean silhouette"
+    "fit": "tailored, emphasizing lean frame without restricting movement"
   },
   "composition": {
-    "framing": "medium close-up highlighting upper body and face",
-    "pose": "standing in a confident, relaxed posture with one hand in pocket",
-    "gesture": "other hand holding a notebook with a gently scribbled page exposed"
+    "framing": "centred with a slight upper body focus to capture facial expressions",
+    "pose": "standing with arms crossed, weight slightly shifted to one leg",
+    "gesture": "subtle head tilt to the right, suggesting contemplation"
   },
   "background": {
-    "type": "urban rooftop at dusk",
-    "color_palette": "muted blues and purples with hints of orange",
-    "details": "dim city skyline and a few scattered stars becoming visible in the sky",
-    "rules": "ensure background is slightly out of focus to maintain emphasis on character"
+    "type": "urban skyline at dusk",
+    "color_palette": "cool tones of grey and blue with hints of orange from setting sun",
+    "details": "soft focus city lights forming bokeh in the background",
+    "rules": "avoid sharp contrasts to keep focus on character"
   }
 }
