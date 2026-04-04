@@ -118,7 +118,8 @@ async function run() {
 
     const scene = await generateScene(prompt)
 
-    const result = validate(scene, state)
+    const characters = loadCharacters()
+    const result = validate(scene, state, characters)
 
     if (result.valid) {
       appendStory(logPath, scene, iteration, state.meta.phase)
