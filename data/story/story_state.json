@@ -9,7 +9,17 @@
     "last_events": [],
     "pages": []
   },
-  "characters": {},
+  "characters": {
+  "C001": {
+    "knowledge": {
+      "known_facts": [],
+      "beliefs": [],
+      "misconceptions": []
+    },
+    "conditions": [],
+    "location": ""
+  }
+},
   "relationships": {
   "C001": {
     "C002": {
