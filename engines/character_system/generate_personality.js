@@ -44,6 +44,7 @@ Character constraints:
 - The name must be realistic and consistent with the character background
 - The name must be unique among characters
 - Do NOT leave name empty
+- Name must be Korean Manhwa Style
 `;
 
 
