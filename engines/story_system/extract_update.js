@@ -50,6 +50,12 @@ function extractRelationships(scene, state, nameMap) {
 
   const names = Object.keys(nameMap)
 
+  const metrics = detectRelationshipChange(scene)
+
+  const hasSignal = Object.values(metrics).some(v => v !== 0)
+
+  if (!hasSignal) return updates
+
   names.forEach(nameA => {
     names.forEach(nameB => {
       if (nameA === nameB) return
@@ -61,14 +67,8 @@ function extractRelationships(scene, state, nameMap) {
         if (!updates[idA]) updates[idA] = {}
 
         updates[idA][idB] = {
-          metrics: {
-            trust: 0,
-            tension: 1,
-            dependency: 0,
-            fear: 0,
-            respect: 0
-          },
-          reason: `${nameA} interacts with ${nameB}`
+          metrics,
+          reason: `Detected interaction tone between ${nameA} and ${nameB}`
         }
       }
     })
