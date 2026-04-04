@@ -46,23 +46,35 @@ function appendStory(logPath, scene, iteration, phase) {
   const entry = `\n[Iteration ${iteration} | ${phase}]\n${scene}\n`
   fs.appendFileSync(logPath, entry)
 }
-
 function buildPrompt(state, scenario) {
   const isControlled = state.meta.current_iteration <= 10
+
+  const characters = loadCharacters()
+
+  const formattedCharacters = formatCharactersForPrompt(characters, state)
+  const formattedRelationships = formatRelationshipsForPrompt(state, characters)
 
   return `
 You are part of a controlled narrative system.
 
 PHASE: ${isControlled ? "CONTROLLED" : "FREE"}
 
-SCENARIO:
+---
+
+SCENARIO (ABSOLUTE TRUTH — DO NOT ADD TO IT):
 ${scenario}
 
+---
+
 CHARACTERS:
-${JSON.stringify(state.characters, null, 2)}
+${formattedCharacters}
+
+---
 
 RELATIONSHIPS:
-${JSON.stringify(state.relationships, null, 2)}
+${formattedRelationships}
+
+---
 
 RULES:
 
@@ -81,15 +93,44 @@ FORBIDDEN:
 - new events
 - explanations
 - resolutions
+- world expansion
 
 You are NOT the storyteller. You are a reactor.
+
+Focus on:
+- emotional reactions
+- subtle behavior
+- interpersonal tension
 ` : `
 FREE MODE:
-- Continue naturally while staying consistent
+
+- Continue the story naturally
+- Maintain character consistency
+- Use relationships and knowledge to guide behavior
 `}
 
+---
+
+IMPORTANT:
+
+Each character must behave according to:
+- their personality
+- their current emotional/physical condition
+- what THEY know (not what others know)
+
+Characters may:
+- misunderstand
+- hesitate
+- react differently to the same situation
+
+---
+
 Before writing:
-Check if you added anything not in the scenario. If yes, STOP.
+Check:
+- Did I add anything not in scenario? If yes, STOP.
+- Am I making characters act out of character? If yes, STOP.
+
+---
 
 Write the scene.
 `
@@ -98,6 +139,54 @@ Write the scene.
 async function generateScene(prompt) {
   // TODO: replace with your API call
   return "Scene placeholder"
+}
+function formatCharactersForPrompt(characters, state) {
+  let output = ""
+
+  Object.keys(characters).forEach(id => {
+    const base = characters[id].personality
+    const dynamic = state.characters[id] || {}
+
+    output += `
+Name: ${base.name}
+Role: ${base.role}
+Personality: ${base.personality.join(", ")}
+Traits: ${base.traits.join(", ")}
+
+Current State:
+- Conditions: ${(dynamic.conditions || []).map(c => `${c.type}:${c.value}`).join(", ") || "none"}
+- Knowledge:
+  - Known: ${(dynamic.knowledge?.known_facts || []).join(", ") || "none"}
+  - Beliefs: ${(dynamic.knowledge?.beliefs || []).join(", ") || "none"}
+  - Misconceptions: ${(dynamic.knowledge?.misconceptions || []).join(", ") || "none"}
+
+`
+  })
+
+  return output
+}
+function formatRelationshipsForPrompt(state, characters) {
+  let output = ""
+
+  Object.keys(state.relationships).forEach(fromID => {
+    const fromName = characters[fromID]?.personality?.name
+
+    Object.keys(state.relationships[fromID]).forEach(toID => {
+      const toName = characters[toID]?.personality?.name
+
+      const metrics = state.relationships[fromID][toID].metrics
+
+      output += `
+${fromName} → ${toName}:
+- Trust: ${metrics.trust}
+- Tension: ${metrics.tension}
+- Fear: ${metrics.fear}
+- Respect: ${metrics.respect}
+`
+    })
+  })
+
+  return output
 }
 
 async function run() {
