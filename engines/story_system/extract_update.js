@@ -123,6 +123,9 @@ function run(scene) {
   if (state.meta.phase === "controlled") {
     const relationshipUpdates = extractRelationships(scene, state, nameMap)
     applyRelationshipUpdates(state, relationshipUpdates)
+
+    const knowledgeUpdates = extractKnowledge(scene, nameMap)
+    applyKnowledgeUpdates(state, knowledgeUpdates)
   }
 
   saveJSON(statePath, state)
@@ -247,4 +250,26 @@ function extractKnowledge(scene, nameMap) {
 
   return updates
 }
+function applyKnowledgeUpdates(state, updates) {
+  Object.keys(updates).forEach(id => {
+    if (!state.characters[id]) {
+      state.characters[id] = {
+        knowledge: {
+          known_facts: [],
+          beliefs: [],
+          misconceptions: []
+        },
+        conditions: [],
+        location: ""
+      }
+    }
+
+    const charKnowledge = state.characters[id].knowledge
+
+    charKnowledge.known_facts.push(...updates[id].known_facts)
+    charKnowledge.beliefs.push(...updates[id].beliefs)
+    charKnowledge.misconceptions.push(...updates[id].misconceptions)
+  })
+}
+
 module.exports = { run }
