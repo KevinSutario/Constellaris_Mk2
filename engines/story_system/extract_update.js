@@ -78,19 +78,36 @@ function extractRelationships(scene, state, nameMap) {
 }
 
 function applyRelationshipUpdates(state, updates) {
-  Object.keys(updates).forEach(pair => {
-    if (!state.relationships[pair]) return
+  Object.keys(updates).forEach(fromID => {
+    if (!state.relationships[fromID]) {
+      state.relationships[fromID] = {}
+    }
 
-    const update = updates[pair]
+    Object.keys(updates[fromID]).forEach(toID => {
+      if (!state.relationships[fromID][toID]) {
+        state.relationships[fromID][toID] = {
+          metrics: {
+            trust: 0,
+            tension: 0,
+            dependency: 0,
+            fear: 0,
+            respect: 0
+          },
+          history: []
+        }
+      }
 
-    Object.keys(update.metrics).forEach(metric => {
-      state.relationships[pair].metrics[metric] += update.metrics[metric]
-    })
+      const update = updates[fromID][toID]
 
-    state.relationships[pair].history.push({
-      event: update.reason,
-      impact: update.metrics,
-      timestamp: Date.now()
+      Object.keys(update.metrics).forEach(metric => {
+        state.relationships[fromID][toID].metrics[metric] += update.metrics[metric]
+      })
+
+      state.relationships[fromID][toID].history.push({
+        event: update.reason,
+        impact: update.metrics,
+        timestamp: Date.now()
+      })
     })
   })
 }
