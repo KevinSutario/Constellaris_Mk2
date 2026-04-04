@@ -117,8 +117,11 @@ function run(scene) {
 
   const state = loadJSON(statePath)
 
+  const characters = loadCharacters()
+  const nameMap = buildNameMap(characters)
+
   if (state.meta.phase === "controlled") {
-    const relationshipUpdates = extractRelationships(scene, state)
+    const relationshipUpdates = extractRelationships(scene, state, nameMap)
     applyRelationshipUpdates(state, relationshipUpdates)
   }
 
