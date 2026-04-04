@@ -38,9 +38,14 @@ export async function generatePersonality(gender) {
   const prompt = `
 ${basePrompt}
 
-Character constraint:
+Character constraints:
 - Gender must be "${gender}"
+- You MUST include a "name" field
+- The name must be realistic and consistent with the character background
+- The name must be unique among characters
+- Do NOT leave name empty
 `;
+
 
   const response = await client.chat.completions.create({
     model: "gpt-4o",
