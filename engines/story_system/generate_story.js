@@ -261,6 +261,11 @@ FINAL CHECK BEFORE OUTPUT:
 - Did I use ONLY the provided characters? If not, STOP.
 
 ---
+OUTPUT LENGTH REQUIREMENT:
+
+- Write between 500 to 700 words
+- Do NOT write too short or too long
+- Maintain continuous narrative flow
 
 Write the scene.
 `
