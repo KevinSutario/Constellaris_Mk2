@@ -126,10 +126,15 @@ function run(scene) {
 
     const knowledgeUpdates = extractKnowledge(scene, nameMap)
     applyKnowledgeUpdates(state, knowledgeUpdates)
+
+    const conditionUpdates = extractConditions(scene, nameMap)
+    applyConditionUpdates(state, conditionUpdates)
   }
 
   saveJSON(statePath, state)
 }
+
+
 const RELATION_KEYWORDS = {
   tension: [
     "glare",
@@ -189,6 +194,81 @@ const KNOWLEDGE_KEYWORDS = {
     "misunderstood"
   ]
 }
+
+const CONDITION_KEYWORDS = {
+  physical: {
+    injured: ["injured", "hurt", "wounded", "bleeding"],
+    healed: ["healed", "recovered", "no longer hurt"],
+    exhausted: ["tired", "exhausted", "fatigued"]
+  },
+  emotional: {
+    tense: ["tense", "on edge", "stiff"],
+    calm: ["calm", "relaxed", "steady"],
+    fearful: ["afraid", "scared", "fearful", "nervous"]
+  },
+  mental: {
+    focused: ["focused", "sharp", "clear-headed"],
+    unstable: ["unstable", "panicking", "losing control"],
+    overwhelmed: ["overwhelmed", "shaken"]
+  }
+}
+
+function extractConditions(scene, nameMap) {
+  const updates = {}
+
+  const sceneLower = scene.toLowerCase()
+
+  Object.keys(nameMap).forEach(name => {
+    if (!scene.includes(name)) return
+
+    const id = nameMap[name]
+
+    Object.keys(CONDITION_KEYWORDS).forEach(type => {
+      Object.keys(CONDITION_KEYWORDS[type]).forEach(condition => {
+        CONDITION_KEYWORDS[type][condition].forEach(keyword => {
+          if (sceneLower.includes(keyword)) {
+            if (!updates[id]) updates[id] = []
+
+            updates[id].push({
+              type,
+              value: condition
+            })
+          }
+        })
+      })
+    })
+  })
+
+  return updates
+}
+
+function applyConditionUpdates(state, updates) {
+  Object.keys(updates).forEach(id => {
+    if (!state.characters[id]) {
+      state.characters[id] = {
+        knowledge: {
+          known_facts: [],
+          beliefs: [],
+          misconceptions: []
+        },
+        conditions: [],
+        location: ""
+      }
+    }
+
+    updates[id].forEach(newCondition => {
+      const existing = state.characters[id].conditions || []
+
+      // remove same type
+      const filtered = existing.filter(c => c.type !== newCondition.type)
+
+      filtered.push(newCondition)
+
+      state.characters[id].conditions = filtered
+    })
+  })
+}
+
 function detectRelationshipChange(scene) {
   const sceneLower = scene.toLowerCase()
 
