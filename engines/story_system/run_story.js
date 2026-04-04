@@ -12,6 +12,11 @@ async function main() {
 
     console.log("\nUpdating state...\n");
 
+    if (!scene) {
+        console.log("No valid scene generated. Skipping state update.\n");
+    return;
+    }
+    
     extractUpdate(scene);
 
     console.log("Done.\n");

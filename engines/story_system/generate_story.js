@@ -1,7 +1,21 @@
-const { updateMemory } = require('./update_memory')
+import fs from "fs"
+import path from "path"
+import { validate } from "./validator.js"
+import { updateMemory } from "./update_memory.js"
 
+const BASE_PATH = "C:/Users/sutar/Documents/Constellaris_Mk2"
 
-const path = require('path')
+function loadJSON(pathStr) {
+  return JSON.parse(fs.readFileSync(pathStr, 'utf-8'))
+}
+
+function loadText(pathStr) {
+  return fs.readFileSync(pathStr, 'utf-8')
+}
+
+function saveJSON(pathStr, data) {
+  fs.writeFileSync(pathStr, JSON.stringify(data, null, 2))
+}
 
 function loadCharacters() {
   const charDir = `${BASE_PATH}/data/characters`
@@ -24,21 +38,9 @@ function loadCharacters() {
   return characters
 }
 
-const fs = require('fs')
-const { validate } = require('./validator')
-
-const BASE_PATH = "C:/Users/sutar/Documents/Constellaris_Mk2"
-
-function loadJSON(path) {
-  return JSON.parse(fs.readFileSync(path, 'utf-8'))
-}
-
-function loadText(path) {
-  return fs.readFileSync(path, 'utf-8')
-}
-
-function saveJSON(path, data) {
-  fs.writeFileSync(path, JSON.stringify(data, null, 2))
+function loadMemory() {
+  const memoryPath = `${BASE_PATH}/data/story/story_memory.json`
+  return JSON.parse(fs.readFileSync(memoryPath, 'utf-8'))
 }
 
 function getScenarioPath(iteration) {
@@ -49,11 +51,59 @@ function appendStory(logPath, scene, iteration, phase) {
   const entry = `\n[Iteration ${iteration} | ${phase}]\n${scene}\n`
   fs.appendFileSync(logPath, entry)
 }
+
+function formatCharactersForPrompt(characters, state) {
+  let output = ""
+
+  Object.keys(characters).forEach(id => {
+    const base = characters[id].personality
+    const dynamic = state.characters?.[id] || {}
+
+    output += `
+Name: ${base.name}
+Role: ${base.role}
+Personality: ${base.personality.join(", ")}
+Traits: ${base.traits.join(", ")}
+
+Current State:
+- Conditions: ${(dynamic.conditions || []).map(c => `${c.type}:${c.value}`).join(", ") || "none"}
+- Knowledge:
+  - Known: ${(dynamic.knowledge?.known_facts || []).join(", ") || "none"}
+  - Beliefs: ${(dynamic.knowledge?.beliefs || []).join(", ") || "none"}
+  - Misconceptions: ${(dynamic.knowledge?.misconceptions || []).join(", ") || "none"}
+`
+  })
+
+  return output
+}
+
+function formatRelationshipsForPrompt(state, characters) {
+  let output = ""
+
+  Object.keys(state.relationships || {}).forEach(fromID => {
+    const fromName = characters[fromID]?.personality?.name
+
+    Object.keys(state.relationships[fromID]).forEach(toID => {
+      const toName = characters[toID]?.personality?.name
+      const metrics = state.relationships[fromID][toID].metrics
+
+      output += `
+${fromName} → ${toName}:
+- Trust: ${metrics.trust}
+- Tension: ${metrics.tension}
+- Fear: ${metrics.fear}
+- Respect: ${metrics.respect}
+`
+    })
+  })
+
+  return output
+}
+
 function buildPrompt(state, scenario) {
   const isControlled = state.meta.current_iteration <= 10
-  
   const tension = state.meta.tension_level || 0
-  
+
   const characters = loadCharacters()
   const memory = loadMemory()
 
@@ -154,6 +204,7 @@ HIGH TENSION:
 - Characters may act against each other
 - Emotional intensity should be visible
 `}
+
 ---
 
 IMPORTANT:
@@ -162,11 +213,6 @@ Each character must behave according to:
 - their personality
 - their current emotional/physical condition
 - what THEY know (not what others know)
-
-Characters may:
-- misunderstand
-- hesitate
-- react differently to the same situation
 
 ---
 
@@ -181,79 +227,15 @@ Write the scene.
 `
 }
 
-function loadMemory() {
-  const path = `${BASE_PATH}/data/story/story_memory.json`
-  return JSON.parse(fs.readFileSync(path, 'utf-8'))
-}
-function formatMemory(memory) {
-  return `
-Story Summary:
-${memory.summary || "None"}
-
-Key Events:
-${(memory.key_events || []).join("\n") || "None"}
-
-Character Arcs:
-${Object.entries(memory.character_arcs || {})
-  .map(([id, arc]) => `${id}: ${arc}`)
-  .join("\n") || "None"}
-`
-}
-
+// 🔧 TEMP MOCK (replace later with OpenAI)
 async function generateScene(prompt) {
-  // TODO: replace with your API call
-  return "Scene placeholder"
-}
-function formatCharactersForPrompt(characters, state) {
-  let output = ""
+  console.log("\n--- PROMPT PREVIEW ---\n")
+  console.log(prompt.slice(0, 500))
 
-  Object.keys(characters).forEach(id => {
-    const base = characters[id].personality
-    const dynamic = state.characters[id] || {}
-
-    output += `
-Name: ${base.name}
-Role: ${base.role}
-Personality: ${base.personality.join(", ")}
-Traits: ${base.traits.join(", ")}
-
-Current State:
-- Conditions: ${(dynamic.conditions || []).map(c => `${c.type}:${c.value}`).join(", ") || "none"}
-- Knowledge:
-  - Known: ${(dynamic.knowledge?.known_facts || []).join(", ") || "none"}
-  - Beliefs: ${(dynamic.knowledge?.beliefs || []).join(", ") || "none"}
-  - Misconceptions: ${(dynamic.knowledge?.misconceptions || []).join(", ") || "none"}
-
-`
-  })
-
-  return output
-}
-function formatRelationshipsForPrompt(state, characters) {
-  let output = ""
-
-  Object.keys(state.relationships).forEach(fromID => {
-    const fromName = characters[fromID]?.personality?.name
-
-    Object.keys(state.relationships[fromID]).forEach(toID => {
-      const toName = characters[toID]?.personality?.name
-
-      const metrics = state.relationships[fromID][toID].metrics
-
-      output += `
-${fromName} → ${toName}:
-- Trust: ${metrics.trust}
-- Tension: ${metrics.tension}
-- Fear: ${metrics.fear}
-- Respect: ${metrics.respect}
-`
-    })
-  })
-
-  return output
+  return "Test scene: characters react subtly."
 }
 
-async function run() {
+export async function run() {
   const statePath = `${BASE_PATH}/data/story/story_state.json`
   const logPath = `${BASE_PATH}/data/story/story_log.txt`
 
@@ -276,7 +258,7 @@ async function run() {
 
     if (result.valid) {
       appendStory(logPath, scene, iteration, state.meta.phase)
-      
+
       updateMemory(scene)
 
       state.meta.current_iteration += 1
@@ -296,5 +278,3 @@ async function run() {
 
   throw new Error("Failed after retries")
 }
-
-module.exports = { run }

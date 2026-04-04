@@ -1,4 +1,10 @@
-function validate(scene, state, characters) {
+function getCharacterNames(characters) {
+  return Object.values(characters)
+    .map(c => c.personality?.name)
+    .filter(Boolean)
+}
+
+export function validate(scene, state, characters) {
   const violations = []
 
   const knownNames = getCharacterNames(characters)
@@ -30,13 +36,3 @@ function validate(scene, state, characters) {
     violations
   }
 }
-
-module.exports = { validate }
-
-function getCharacterNames(characters) {
-  return Object.values(characters)
-    .map(c => c.personality?.name)
-    .filter(Boolean)
-}
-
-module.exports = { validate }
