@@ -127,5 +127,64 @@ function run(scene) {
 
   saveJSON(statePath, state)
 }
+const RELATION_KEYWORDS = {
+  tension: [
+    "glare",
+    "cold",
+    "sharp tone",
+    "snapped",
+    "irritated",
+    "annoyed",
+    "tense",
+    "suspicious",
+    "narrowed eyes"
+  ],
+  trust: [
+    "reassured",
+    "nodded",
+    "trusted",
+    "calm voice",
+    "softly",
+    "agreed",
+    "cooperated"
+  ],
+  fear: [
+    "afraid",
+    "fear",
+    "hesitated",
+    "stepped back",
+    "trembled",
+    "uneasy",
+    "nervous"
+  ],
+  respect: [
+    "acknowledged",
+    "admired",
+    "impressed",
+    "recognized",
+    "respected"
+  ]
+}
+function detectRelationshipChange(scene) {
+  const sceneLower = scene.toLowerCase()
+
+  const result = {
+    trust: 0,
+    tension: 0,
+    dependency: 0,
+    fear: 0,
+    respect: 0
+  }
+
+  Object.keys(RELATION_KEYWORDS).forEach(metric => {
+    RELATION_KEYWORDS[metric].forEach(keyword => {
+      if (sceneLower.includes(keyword)) {
+        result[metric] += 1
+      }
+    })
+  })
+
+  return result
+}
 
 module.exports = { run }
