@@ -165,6 +165,27 @@ const RELATION_KEYWORDS = {
     "respected"
   ]
 }
+
+const KNOWLEDGE_KEYWORDS = {
+  known: [
+    "realized",
+    "understood",
+    "noticed",
+    "recognized",
+    "confirmed"
+  ],
+  belief: [
+    "thought",
+    "assumed",
+    "believed",
+    "suspected"
+  ],
+  misconception: [
+    "mistook",
+    "wrongly",
+    "misunderstood"
+  ]
+}
 function detectRelationshipChange(scene) {
   const sceneLower = scene.toLowerCase()
 
@@ -187,4 +208,43 @@ function detectRelationshipChange(scene) {
   return result
 }
 
+function extractKnowledge(scene, nameMap) {
+  const updates = {}
+
+  const sceneLower = scene.toLowerCase()
+
+  Object.keys(nameMap).forEach(name => {
+    const id = nameMap[name]
+
+    if (!scene.includes(name)) return
+
+    if (!updates[id]) {
+      updates[id] = {
+        known_facts: [],
+        beliefs: [],
+        misconceptions: []
+      }
+    }
+
+    KNOWLEDGE_KEYWORDS.known.forEach(word => {
+      if (sceneLower.includes(word)) {
+        updates[id].known_facts.push(`Detected: ${word}`)
+      }
+    })
+
+    KNOWLEDGE_KEYWORDS.belief.forEach(word => {
+      if (sceneLower.includes(word)) {
+        updates[id].beliefs.push(`Detected: ${word}`)
+      }
+    })
+
+    KNOWLEDGE_KEYWORDS.misconception.forEach(word => {
+      if (sceneLower.includes(word)) {
+        updates[id].misconceptions.push(`Detected: ${word}`)
+      }
+    })
+  })
+
+  return updates
+}
 module.exports = { run }
