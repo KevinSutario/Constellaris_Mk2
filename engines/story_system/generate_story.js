@@ -1,3 +1,6 @@
+const { updateMemory } = require('./update_memory')
+
+
 const path = require('path')
 
 function loadCharacters() {
@@ -50,14 +53,33 @@ function buildPrompt(state, scenario) {
   const isControlled = state.meta.current_iteration <= 10
 
   const characters = loadCharacters()
+  const memory = loadMemory()
 
   const formattedCharacters = formatCharactersForPrompt(characters, state)
   const formattedRelationships = formatRelationshipsForPrompt(state, characters)
+
+  const formattedMemory = `
+Story Summary:
+${memory.summary || "None"}
+
+Key Events:
+${(memory.key_events || []).join("\n") || "None"}
+
+Character Arcs:
+${Object.entries(memory.character_arcs || {})
+  .map(([id, arc]) => `${id}: ${arc}`)
+  .join("\n") || "None"}
+`
 
   return `
 You are part of a controlled narrative system.
 
 PHASE: ${isControlled ? "CONTROLLED" : "FREE"}
+
+---
+
+STORY MEMORY:
+${formattedMemory}
 
 ---
 
@@ -135,6 +157,7 @@ Check:
 Write the scene.
 `
 }
+
 function loadMemory() {
   const path = `${BASE_PATH}/data/story/story_memory.json`
   return JSON.parse(fs.readFileSync(path, 'utf-8'))
@@ -230,6 +253,8 @@ async function run() {
 
     if (result.valid) {
       appendStory(logPath, scene, iteration, state.meta.phase)
+      
+      updateMemory(scene)
 
       state.meta.current_iteration += 1
 
