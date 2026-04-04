@@ -1,0 +1,24 @@
+{
+  "meta": {
+    "current_floor": 1,
+    "current_iteration": 1,
+    "phase": "controlled"
+  },
+  "story": {
+    "summary": "",
+    "last_events": [],
+    "pages": []
+  },
+  "characters": {},
+  "relationships": {},
+  "world": {
+    "floors": {}
+  },
+  "quests": {
+    "active": null,
+    "history": []
+  },
+  "constellations": {
+    "messages": []
+  }
+}
