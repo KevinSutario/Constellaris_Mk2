@@ -1,3 +1,38 @@
+const path = require('path')
+
+function loadCharacters() {
+  const charDir = `${BASE_PATH}/data/characters`
+  const files = fs.readdirSync(charDir)
+
+  const characters = {}
+
+  files.forEach(file => {
+    const fullPath = path.join(charDir, file)
+
+    if (file.endsWith('_personality.json')) {
+      const data = JSON.parse(fs.readFileSync(fullPath, 'utf-8'))
+      const id = data.id
+
+      if (!characters[id]) characters[id] = {}
+      characters[id].personality = data
+    }
+  })
+
+  return characters
+}
+
+function buildNameMap(characters) {
+  const map = {}
+
+  Object.values(characters).forEach(c => {
+    if (c.personality?.name && c.personality?.id) {
+      map[c.personality.name] = c.personality.id
+    }
+  })
+
+  return map
+}
+
 const fs = require('fs')
 
 const BASE_PATH = "C:/Users/sutar/Documents/Constellaris_Mk2"
