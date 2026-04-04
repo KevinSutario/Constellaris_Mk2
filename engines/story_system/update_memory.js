@@ -15,16 +15,20 @@ function updateMemory(scene) {
 
   const memory = loadJSON(memoryPath)
 
-  // SIMPLE SAFE UPDATE (no hallucination risk)
-  memory.key_events.push(scene.slice(0, 100))
+  // Extract short event (first meaningful chunk)
+  const shortEvent = scene.split(".")[0].slice(0, 120)
 
-  // keep only last 20 events
-  if (memory.key_events.length > 20) {
+  memory.key_events.push(shortEvent)
+
+  // Keep only last 15 events (prevents overload)
+  if (memory.key_events.length > 15) {
     memory.key_events.shift()
   }
 
-  // update summary (very basic for now)
-  memory.summary = memory.key_events.join(" ")
+  // Build clean summary (bullet style instead of long paragraph)
+  memory.summary = memory.key_events
+    .map((e, i) => `(${i + 1}) ${e}`)
+    .join("\n")
 
   saveJSON(memoryPath, memory)
 }
