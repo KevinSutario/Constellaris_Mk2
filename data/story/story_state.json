@@ -10,7 +10,20 @@
     "pages": []
   },
   "characters": {},
-  "relationships": {},
+  "relationships": {
+  "C001": {
+    "C002": {
+      "metrics": {
+        "trust": 0,
+        "tension": 0,
+        "dependency": 0,
+        "fear": 0,
+        "respect": 0
+      },
+      "history": []
+    }
+  }
+},
   "world": {
     "floors": {}
   },
