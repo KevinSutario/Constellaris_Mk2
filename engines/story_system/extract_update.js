@@ -112,7 +112,7 @@ function applyRelationshipUpdates(state, updates) {
   })
 }
 
-function run(scene) {
+export function run(scene) {
   const statePath = `${BASE_PATH}/data/story/story_state.json`
 
   const state = loadJSON(statePath)
@@ -134,7 +134,6 @@ function run(scene) {
 
   saveJSON(statePath, state)
 }
-
 
 const RELATION_KEYWORDS = {
   tension: [

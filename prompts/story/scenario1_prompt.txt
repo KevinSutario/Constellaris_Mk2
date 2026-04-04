@@ -1,0 +1,49 @@
+SCENARIO:
+- The story takes place in modern-day Seoul
+- Follow EXACTLY 5 main characters living separate lives
+- Each character goes through part of their normal daily routine
+- Their lives do NOT intersect yet
+- No unusual or supernatural events occur
+
+CONSTRAINTS:
+- No fantasy elements
+- No mention of towers or anything unnatural
+- No characters meet each other yet
+- No major events or disruptions
+- Do NOT skip time abruptly
+- Do NOT summarize (everything must be shown through scenes)
+
+CHARACTER REQUIREMENTS:
+- All 5 characters MUST appear in this chapter
+- Each character must:
+  - perform at least one clear action
+  - have at least one internal thought or emotional reaction
+  - have at least one small interaction (dialogue or social moment)
+
+- Characters must feel DISTINCT through:
+  - behavior
+  - dialogue tone
+  - decisions
+  - reactions to small situations
+
+FLOW:
+- The narrative must feel continuous and seamless
+- No sections, labels, or visible structure
+- Transitions between characters must feel natural and unannounced
+- Scenes should blend like a film
+
+FOCUS:
+- Grounded daily life (school, work, commuting, environment)
+- Subtle emotional tension beneath normal routines
+- Small frustrations, dissatisfaction, or quiet unease
+- Environmental immersion (sounds, movement, surroundings)
+
+TONE:
+- Calm but slightly heavy
+- Something feels "off" emotionally, but nothing is visibly wrong
+- Each character should feel like something is missing in their life
+
+ENDING:
+- End with a subtle shift in atmosphere
+- A quiet sense of unease or tension should linger
+- DO NOT introduce any fantasy or explanation
