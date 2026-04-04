@@ -1,7 +1,7 @@
-function validate(scene, state) {
+function validate(scene, state, characters) {
   const violations = []
 
-  const knownNames = Object.values(state.characters).map(c => c.name)
+  const knownNames = getCharacterNames(characters)
 
   const words = scene.split(/\s+/)
 
@@ -29,6 +29,14 @@ function validate(scene, state) {
     valid: violations.length === 0,
     violations
   }
+}
+
+module.exports = { validate }
+
+function getCharacterNames(characters) {
+  return Object.values(characters)
+    .map(c => c.personality?.name)
+    .filter(Boolean)
 }
 
 module.exports = { validate }
