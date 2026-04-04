@@ -1,55 +1,54 @@
 {
   "face": {
-    "structure": "oval shape with high cheekbones and a distinct jawline",
+    "structure": "angular with a slightly pointed chin, high cheekbones that suggest vigilance and attention to detail",
     "eyes": {
-      "shape": "sharp almond shape",
-      "color": "light grey with specks of blue",
+      "shape": "sharp almond shape with a subtle upward tilt",
+      "color": "deep umber with flecks of gold",
       "details": [
-        "subtle gradient shading from iris to pupil",
-        "thin dark outer line",
-        "tiny golden flecks around the pupils"
+        "prominent dark lashes",
+        "luminescent highlights near the pupil",
+        "faint crease near the inner corners"
       ],
-      "expression_effect": "calculating and observant, as if constantly analyzing situations"
+      "expression_effect": "constantly analyzing with an intentful gaze"
     },
-    "expression": "neutral with a slight furrow in the brow area, hinting at deep thought",
+    "expression": "stoic with a hint of introspection",
     "skin": {
-      "tone": "medium beige",
-      "undertone": "cool with slight olive hues",
-      "texture": "smooth with light freckles across the nose bridge",
-      "rendering_notes": "use soft gradients to emphasize cheekbone structure"
+      "tone": "light olive",
+      "undertone": "cool blue",
+      "texture": "smooth with a slight matte finish",
+      "rendering_notes": "maintains consistent tone with soft shadowing around the jawline"
     }
   },
   "character": {
     "hair": {
-      "color": "charcoal black with subtle ash tones",
-      "style": "tousled, medium length layered cut tapering towards the neck",
-      "flow": "naturally wavy with a windswept look",
+      "color": "jet black",
+      "style": "neatly parted to the side, slicked back with subtle volume",
+      "flow": "sleek and straight with a slight flow at the ends",
       "details": [
-        "a few strands occasionally falling over the forehead",
-        "slight shine giving a healthy appearance"
+        "a faint sheen reflecting light evenly",
+        "precisely trimmed sideburns"
       ]
     },
-    "aura": "a calm, composed presence with a hint of tension"
+    "aura": "cerebral and composed, exuding a calm authority"
   },
   "outfit": {
-    "base": "a fitted dark blue tactical jacket",
-    "design": "minimalist with subtle geometric patterns",
+    "base": "minimalistic fitted suit",
+    "design": "dark charcoal with thin pinstripes",
     "details": [
-      "silver zipper slightly open at the neck",
-      "various concealed pockets",
-      "shoulder pads for added structure"
+      "hidden zip pockets",
+      "tailored cuffs"
     ],
-    "fit": "tailored, emphasizing lean frame without restricting movement"
+    "fit": "slim tailored fit, emphasizing discipline and precision"
   },
   "composition": {
-    "framing": "centred with a slight upper body focus to capture facial expressions",
-    "pose": "standing with arms crossed, weight slightly shifted to one leg",
-    "gesture": "subtle head tilt to the right, suggesting contemplation"
+    "framing": "mid-shot focused on the upper body and face",
+    "pose": "standing straight with hands clasped gently in front",
+    "gesture": "leaning slightly forward as if listening intently"
   },
   "background": {
-    "type": "urban skyline at dusk",
-    "color_palette": "cool tones of grey and blue with hints of orange from setting sun",
-    "details": "soft focus city lights forming bokeh in the background",
-    "rules": "avoid sharp contrasts to keep focus on character"
+    "type": "abstract suggestive of a strategic mind",
+    "color_palette": "gradients of soft blues and greys",
+    "details": "intersecting lines forming complex geometric patterns",
+    "rules": "no strong elements to detract from the character"
   }
 }

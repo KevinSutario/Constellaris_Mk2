@@ -2,6 +2,12 @@ import fs from "fs"
 import path from "path"
 import { validate } from "./validator.js"
 import { updateMemory } from "./update_memory.js"
+import OpenAI from "openai"
+import { config } from "../../config/env.js"
+
+const client = new OpenAI({
+  apiKey: config.OPENAI_API_KEY,
+})
 
 const BASE_PATH = "C:/Users/sutar/Documents/Constellaris_Mk2"
 
@@ -140,8 +146,37 @@ ${scenario}
 
 ---
 
-CHARACTERS:
-${formattedCharacters}
+CHARACTER IDENTITY (STRICT — DO NOT VIOLATE):
+
+You are given EXACTLY 5 characters.
+
+These are the ONLY characters that exist in this story.
+
+You are STRICTLY FORBIDDEN from:
+- creating new characters
+- inventing new names
+- introducing unnamed people
+
+If you mention any person, they MUST be one of the following:
+
+${Object.entries(characters).map(([id, c]) => `
+${id}: ${c.personality.name}
+Role: ${c.personality.role}
+Personality: ${c.personality.personality.join(", ")}
+Traits: ${c.personality.traits.join(", ")}
+`).join("\n")}
+
+---
+
+CRITICAL RULE:
+
+- You MUST use ONLY these names
+- You MUST NOT generate names like "Mei", "Kai", "Zhang", etc.
+- If you need to refer to someone, use:
+  - their name
+  - or pronouns (he/she)
+
+Violation of this rule = INVALID OUTPUT
 
 ---
 
@@ -220,6 +255,10 @@ Before writing:
 Check:
 - Did I add anything not in scenario? If yes, STOP.
 - Am I making characters act out of character? If yes, STOP.
+FINAL CHECK BEFORE OUTPUT:
+
+- Did I introduce any new name not listed above? If yes, STOP.
+- Did I use ONLY the provided characters? If not, STOP.
 
 ---
 
@@ -227,12 +266,31 @@ Write the scene.
 `
 }
 
-// 🔧 TEMP MOCK (replace later with OpenAI)
 async function generateScene(prompt) {
-  console.log("\n--- PROMPT PREVIEW ---\n")
-  console.log(prompt.slice(0, 500))
+  try {
+    const response = await client.chat.completions.create({
+      model: "gpt-4o",
+      messages: [
+        {
+          role: "system",
+          content: "You write high-quality narrative scenes. Do not explain. Only output the scene."
+        },
+        {
+          role: "user",
+          content: prompt
+        }
+      ],
+      temperature: 0.7
+    })
 
-  return "Test scene: characters react subtly."
+    const text = response.choices[0].message.content.trim()
+
+    return text
+
+  } catch (err) {
+    console.error("OpenAI error:", err)
+    return null
+  }
 }
 
 export async function run() {

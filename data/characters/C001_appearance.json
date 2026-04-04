@@ -1,56 +1,55 @@
 {
   "face": {
-    "structure": "heart-shaped, with a gently pointed chin and high cheekbones",
+    "structure": "oval-shaped, high cheekbones, slightly angular jawline",
     "eyes": {
-      "shape": "sharp almond shape with a slightly upward tilt",
-      "color": "dark brown with flecks of gold",
+      "shape": "sharp almond shape with a subtle upward tilt",
+      "color": "dark brown",
       "details": [
-        "thin black eyeliner accentuating the sharpness",
-        "subtle highlights reflecting light at the bottom edges",
-        "slightly asymmetrical"
+        "defined lower lash line",
+        "soft highlight on the iris",
+        "sharp contrast between iris and sclera"
       ],
-      "expression_effect": "piercing and observant"
+      "expression_effect": "contemplative and assessing"
     },
-    "expression": "thoughtful, with a hint of skepticism",
+    "expression": "subtly inquisitive, slight brow raise",
     "skin": {
-      "tone": "light ivory",
-      "undertone": "warm yellow",
-      "texture": "smooth with a matte finish",
-      "rendering_notes": "subtle soft shading around the jawline and temples"
+      "tone": "light beige",
+      "undertone": "cool with slight olive hues",
+      "texture": "smooth with slight natural sheen",
+      "rendering_notes": "soft, diffused lighting to accentuate cheekbones"
     }
   },
   "character": {
     "hair": {
-      "color": "jet black",
-      "style": "long and straight with softly layered ends",
-      "flow": "tucked neatly behind ears, with occasional loose strands",
+      "color": "midnight black",
+      "style": "layered with side-swept bangs",
+      "flow": "loosely flowing with slight movement, hint of natural wave at the ends",
       "details": [
-        "silky texture",
-        "light reflects in straight strands giving it a slight glossiness",
-        "subtle movement implying a gentle breeze"
+        "slight gloss over the surface",
+        "fine strands with natural volume"
       ]
     },
-    "aura": "a quiet intensity, with an undercurrent of strategic awareness"
+    "aura": "mysterious yet approachable, a balance between calm and curiosity"
   },
   "outfit": {
-    "base": "fitted dark blue mandarin-collar blouse",
-    "design": "minimalistic with a pattern of subtle diagonal pinstripes",
+    "base": "tailored school uniform",
+    "design": "dark navy blazer over crisp white shirt",
     "details": [
-      "silver cufflinks shaped like chess pieces",
-      "three-quarter sleeves rolled up slightly",
-      "no visible accessories other than a simple silver chain bracelet"
+      "gold-embroidered emblem on chest pocket",
+      "silver buttons",
+      "pleated plaid skirt in muted tones"
     ],
-    "fit": "tailored, close to the body"
+    "fit": "snug yet comfortable, emphasizing slender figure"
   },
   "composition": {
-    "framing": "mid-length, focusing on the upper torso",
-    "pose": "leaning slightly forward as if engaging in conversation",
-    "gesture": "right hand resting on chin, left hand holding a pen"
+    "framing": "medium shot focusing from the chest up",
+    "pose": "head slightly tilted to the right",
+    "gesture": "arms gently crossed, hands resting on elbows"
   },
   "background": {
-    "type": "abstract with subtle textures",
-    "color_palette": "cool blues and grays with hints of silver",
-    "details": "faint geometric shapes to suggest a modern, strategic environment without clutter",
-    "rules": "background should not draw focus away from character"
+    "type": "indoor, academic setting",
+    "color_palette": "earthy tones, predominantly soft ivory and warm beige",
+    "details": "blurred bookcases and a hint of natural light from a window",
+    "rules": "background elements should remain soft-edged to maintain focus on the character"
   }
 }

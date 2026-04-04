@@ -1,15 +1,15 @@
 {
   "id": "C005",
-  "name": "Kai Zhang",
+  "name": "Joon-Suh Oh",
   "age": 17,
   "personality": [
-    "resilient under adversity",
-    "secretively ambitious",
-    "defensively sarcastic"
+    "controlled charisma",
+    "emotionally conflicted",
+    "strategically unpredictable"
   ],
   "traits": [
-    "always has a backup plan",
-    "tends to overanalyze situations"
+    "tendency to detach in stressful situations",
+    "uses humor as a shield"
   ],
-  "role": "strategist"
+  "role": "debater"
 }

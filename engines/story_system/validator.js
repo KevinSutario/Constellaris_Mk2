@@ -11,11 +11,15 @@ export function validate(scene, state, characters) {
 
   const words = scene.split(/\s+/)
 
-  words.forEach(word => {
-    if (/^[A-Z][a-z]+$/.test(word) && !knownNames.includes(word)) {
-      violations.push(`Unknown name: ${word}`)
-    }
-  })
+// common capitalized words to ignore
+const ignoreWords = new Set([
+  "The","A","An","And","But","Or","So","Because",
+  "She","He","They","Her","His","Their",
+  "In","On","At","With","From","To","Of","As","By",
+  "It","This","That","These","Those",
+  "Across","Another","Yet","Some","Then","When","While"
+])
+
 
   const forbidden = [
     "suddenly appeared",

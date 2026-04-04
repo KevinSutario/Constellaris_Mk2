@@ -1,54 +1,53 @@
 {
   "face": {
-    "structure": "heart-shaped with a pointed chin and high cheekbones",
+    "structure": "Oval-shaped with a slight pointed chin, emphasizing a balanced and symmetrical quality.",
     "eyes": {
-      "shape": "sharp almond shape",
-      "color": "stormy grey with a subtle hint of amber",
+      "shape": "Sharp almond shape with a slight upward tilt",
+      "color": "Hazy grey with specks of blue",
       "details": [
-        "slight upward tilt",
-        "dense, dark lashes",
-        "dappled contrast and soft gradient shading in the irises"
+        "Pronounced darker rim around the iris",
+        "Light reflects creating a starburst effect from the pupils"
       ],
-      "expression_effect": "piercing and contemplative, conveys an air of mystery"
+      "expression_effect": "Deeply analytic with a hint of curiosity"
     },
-    "expression": "pensive with a subtle hint of a knowing smile",
+    "expression": "Contemplative with a slight upward turn at the corners of the lips",
     "skin": {
-      "tone": "light olive",
-      "undertone": "golden",
-      "texture": "smooth with a few freckles scattered across the nose",
-      "rendering_notes": "soft-focus rendering with slight highlights on the cheeks and nose"
+      "tone": "Light caramel",
+      "undertone": "Warm with hints of olive",
+      "texture": "Smooth with a subtle glow",
+      "rendering_notes": "Soft, diffused lighting enhances natural skin warmth"
     }
   },
   "character": {
     "hair": {
-      "color": "jet black with subtle blue undertones",
-      "style": "long and straight with blunt ends",
-      "flow": "flows gracefully down her back with exceptional smoothness",
+      "color": "Deep chestnut brown",
+      "style": "Sleek and straight with a center part",
+      "flow": "Gently cascading to the shoulders with a natural shine",
       "details": [
-        "pin-straight strands",
-        "a few loose tendrils framing the face"
+        "Layers subtly framing the face",
+        "A few stray strands to convey movement"
       ]
     },
-    "aura": "an enigmatic presence that draws people in unconsciously"
+    "aura": "Thoughtful and composed with an undercurrent of sharp intelligence"
   },
   "outfit": {
-    "base": "a tailored, charcoal grey blazer",
-    "design": "minimalist with clean lines and a modern cut",
+    "base": "Tailored school uniform blazer",
+    "design": "Classic navy with silver piping and a subtle pinstripe pattern",
     "details": [
-      "silver buttons with intricate etching",
-      "a subtle plaid pattern visible only up close"
+      "Monogrammed school crest on the left chest pocket",
+      "Crisp white shirt peeking under the blazer"
     ],
-    "fit": "snug yet comfortable, emphasizing her lean frame"
+    "fit": "Precisely fitted, emphasizing a neat and put-together appearance"
   },
   "composition": {
-    "framing": "medium shot centered, focused on upper body",
-    "pose": "standing with one hand resting lightly on her chin",
-    "gesture": "fingers lightly tapping as if pondering"
+    "framing": "Centered at mid-torso, allowing a clear view of the face and upper outfit",
+    "pose": "Standing with a slight lean forward, suggesting engagement",
+    "gesture": "Left hand raised with index finger tapping chin as if pondering"
   },
   "background": {
-    "type": "abstract with geometric overlays",
-    "color_palette": "muted shades of blue and grey with occasional bursts of deep red",
-    "details": "soft-focus city skyline as a backdrop, symbolizing urban complexity",
-    "rules": "maintain soft transitions between colors to echo her introspective nature"
+    "type": "Subtle abstract academic setting",
+    "color_palette": "Muted greys and blues with light hints of green",
+    "details": "Unfocused library backdrop with bookshelves blurred into soft shapes",
+    "rules": "Avoid strong contrasts, keep focus on character"
   }
 }

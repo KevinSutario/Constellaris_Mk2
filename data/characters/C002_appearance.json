@@ -1,55 +1,53 @@
 {
   "face": {
-    "structure": "oval with a well-defined jawline",
+    "structure": "oval shape with a slightly pointed chin, high cheekbones, and a smooth forehead, conveying both intelligence and maturity",
     "eyes": {
-      "shape": "sharp almond shape",
-      "color": "pale, icy blue",
+      "shape": "sharp almond shape with slightly upturned outer corners",
+      "color": "deep onyx black with subtle blue undertones",
       "details": [
-        "high contrast between the iris and pupil",
-        "delicate white highlights near the eyelid",
-        "thin, dark eyelashes framing the eyes"
+        "thin, dark eyebrows with a subtle arch adding to her analytical nature",
+        "delicate long lashes that emphasize the eye shape"
       ],
-      "expression_effect": "analytic and perceptive, reflecting her strategic mind"
+      "expression_effect": "give a penetrating, methodical gaze, hinting at a constant assessment of surroundings"
     },
-    "expression": "contemplative with a subtle hint of skepticism",
+    "expression": "slight, enigmatic smile that suggests confidence and a hint of mystery",
     "skin": {
-      "tone": "medium with cool undertones",
-      "undertone": "slightly olive",
-      "texture": "smooth with a hint of natural sheen",
-      "rendering_notes": "soft gradient transitions for a realistic portrayal"
+      "tone": "light olive",
+      "undertone": "cool",
+      "texture": "smooth with a matte finish",
+      "rendering_notes": "soft, seamless transitions with subtle highlights on the cheekbones"
     }
   },
   "character": {
     "hair": {
-      "color": "jet black",
-      "style": "straight, mid-length with layered ends",
-      "flow": "naturally sleek and subtly swaying to one side",
+      "color": "deep chestnut brown",
+      "style": "long and straight with subtle layers framing the face",
+      "flow": "naturally sleek, flowing past the shoulders with a slight inward curve at the ends",
       "details": [
-        "thin wisps occasionally falling over her forehead",
-        "neatly parted to the right"
+        "a thin fringe that lightly grazes the eyebrows",
+        "occasional strands reflecting a darker shade in shadow"
       ]
     },
-    "aura": "calm precision, hinting at a deep intellect"
+    "aura": "commanding yet approachable presence, exuding confidence and competence"
   },
   "outfit": {
-    "base": "modern school uniform",
-    "design": "crisp, white blouse with a black, pleated skirt",
+    "base": "tailored double-breasted blazer",
+    "design": "charcoal grey with subtle pinstripes",
     "details": [
-      "a slim, red necktie",
-      "embroidered school emblem on the left chest",
-      "black patent leather shoes"
+      "silver stitching on the cuffs and lapels",
+      "two sets of brass buttons that add a touch of authority"
     ],
-    "fit": "tailored and slightly fitted to allow movement"
+    "fit": "fitted silhouette, structured shoulders, accentuating a professional demeanor"
   },
   "composition": {
-    "framing": "three-quarter view with focus on the face",
-    "pose": "seated casually with one arm resting on the knee",
-    "gesture": "holding a pencil thoughtfully near her lips"
+    "framing": "medium shot, centered with emphasis on the upper body",
+    "pose": "standing with arms slightly crossed at the waist",
+    "gesture": "left hand lightly grasping the opposite elbow, adding to a calculative and poised appearance"
   },
   "background": {
-    "type": "minimalist indoor setting",
-    "color_palette": "soft grays and whites with a touch of red",
-    "details": "faint outlines of bookshelves, suggesting a library environment",
-    "rules": "avoid excessive detail to maintain focus on the character"
+    "type": "office interior",
+    "color_palette": "neutral tones with hints of warm wood and cool metal",
+    "details": "modern minimalist decor with a view of city skyscrapers through a large window",
+    "rules": "maintain a professional and non-distracting setting that complements Jang Sun-Mi's tactical expertise"
   }
 }

@@ -1,15 +1,15 @@
 {
   "id": "C002",
-  "name": "Li Mei Chan",
-  "age": 16,
+  "name": "Jang Sun-Mi",
+  "age": 17,
   "personality": [
-    "academically driven yet emotionally reserved",
-    "skeptical about authority but respects tradition",
-    "charismatic in small groups but anxious in crowds"
+    "analytical thinker",
+    "emotionally restrained",
+    "independent yet cooperative"
   ],
   "traits": [
-    "constantly lists pros and cons before making a decision",
-    "writes an anonymous advice column for her peers"
+    "seldom asks for help but offers it freely",
+    "hesitates to make eye contact when embarrassed"
   ],
-  "role": "strategist"
+  "role": "tactician"
 }

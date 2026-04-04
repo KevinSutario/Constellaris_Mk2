@@ -1,53 +1,54 @@
 {
   "face": {
-    "structure": "sharp-featured with high cheekbones and a slightly pointed chin, projecting a sense of acute awareness",
+    "structure": "well-defined, angular jawline with high cheekbones providing a sculpted look",
     "eyes": {
-      "shape": "narrow almond-shaped with a slight upward tilt",
-      "color": "piercing dark brown with lighter golden flecks",
+      "shape": "sharp almond shape with slightly upturned outer corners",
+      "color": "dark chestnut brown with a gradient toward black around the iris",
       "details": [
-        "high contrast with sharp highlights near the inner corners",
-        "thin, dark eyebrows angled to enhance a calculating gaze"
+        "subtle dark ring around the iris",
+        "sparkling highlight near the pupil",
+        "light shadowing on the lower eyelid"
       ],
-      "expression_effect": "attentive and discerning, often appraising"
+      "expression_effect": "penetrating and thoughtful gaze"
     },
-    "expression": "subtly guarded, with a hint of bemusement around the lips",
+    "expression": "confident with a subtle hint of introspection, occasionally breaking into a half smile",
     "skin": {
-      "tone": "medium with cool, olive undertones",
-      "undertone": "faint greenish-gold that adds depth and complexity",
-      "texture": "smooth with a hint of natural sheen, reflecting light minimally",
-      "rendering_notes": "emphasize a matte finish to highlight facial features effectively"
+      "tone": "light olive",
+      "undertone": "cool with a slight grayish hue",
+      "texture": "smooth with minor blemishes typical of teenage skin",
+      "rendering_notes": "soft matte finish with gentle shading on the cheeks and jaw"
     }
   },
   "character": {
     "hair": {
-      "color": "deep black with subtle dark blue highlights",
-      "style": "neatly styled with a side part and layered strands",
-      "flow": "straight and sleek, with strands occasionally drifting over the forehead",
+      "color": "charcoal black with subtle blue highlights",
+      "style": "short on the sides with a longer, layered top",
+      "flow": "straight with a slight tousled effect, sweeping slightly to one side",
       "details": [
-        "fringe slightly tousled for a casual look",
-        "lightly textured ends that soften the overall appearance"
+        "slight wispy fringe falling over the forehead",
+        "occasional thicker strands adding volume"
       ]
     },
-    "aura": "a quiet confidence underscoring a sense of inner depth and complexity"
+    "aura": "subdued confidence with an enigmatic charm"
   },
   "outfit": {
-    "base": "a sleek, modern jacket with minimalist design",
-    "design": "clean lines with subtle geometric patterns in dark blue tones",
+    "base": "tailored blazer",
+    "design": "navy blue with thin pinstripes and a single silver button closure",
     "details": [
-      "silver zipper running asymmetrically across the chest",
-      "fitted cuffs with fine stitching"
+      "crisp white shirt underneath without a tie",
+      "a small lapel pin featuring a minimalist abstract design"
     ],
-    "fit": "tailored but comfortable, allowing free movement without excess material"
+    "fit": "snug around the shoulders, slightly loose at the waist"
   },
   "composition": {
-    "framing": "medium shot focusing from the waist up to capture intensity",
-    "pose": "standing with one hand casually in a pocket, the other slightly raised as if poised to make a point",
-    "gesture": "tilted head, eyes locked forward, projecting engagement and subtle challenge"
+    "framing": "medium close-up focusing from just below the shoulders to above the head",
+    "pose": "slightly leaned back with arms crossed casually in front",
+    "gesture": "head slightly tilted with raised eyebrows, conveying attentive interest"
   },
   "background": {
-    "type": "abstract cityscape",
-    "color_palette": "slate grey with hints of neon blues and yellows",
-    "details": "blurry lights suggesting a vibrant and bustling metropolis",
-    "rules": "avoid excessive detail to maintain the focus on the character while reinforcing the urban strategist theme"
+    "type": "subtle interior setting",
+    "color_palette": "muted earth tones with soft lighting",
+    "details": "blurred bookshelves filled with books in the background",
+    "rules": "keep distractions minimal to maintain focus on the character's expressions"
   }
 }
