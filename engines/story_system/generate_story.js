@@ -135,6 +135,24 @@ Check:
 Write the scene.
 `
 }
+function loadMemory() {
+  const path = `${BASE_PATH}/data/story/story_memory.json`
+  return JSON.parse(fs.readFileSync(path, 'utf-8'))
+}
+function formatMemory(memory) {
+  return `
+Story Summary:
+${memory.summary || "None"}
+
+Key Events:
+${(memory.key_events || []).join("\n") || "None"}
+
+Character Arcs:
+${Object.entries(memory.character_arcs || {})
+  .map(([id, arc]) => `${id}: ${arc}`)
+  .join("\n") || "None"}
+`
+}
 
 async function generateScene(prompt) {
   // TODO: replace with your API call
