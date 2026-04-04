@@ -123,6 +123,7 @@ function run(scene) {
   if (state.meta.phase === "controlled") {
     const relationshipUpdates = extractRelationships(scene, state, nameMap)
     applyRelationshipUpdates(state, relationshipUpdates)
+    updateGlobalTension(state, relationshipUpdates)
 
     const knowledgeUpdates = extractKnowledge(scene, nameMap)
     applyKnowledgeUpdates(state, knowledgeUpdates)
@@ -211,6 +212,21 @@ const CONDITION_KEYWORDS = {
     unstable: ["unstable", "panicking", "losing control"],
     overwhelmed: ["overwhelmed", "shaken"]
   }
+}
+
+function updateGlobalTension(state, relationshipUpdates) {
+  let tensionIncrease = 0
+
+  Object.values(relationshipUpdates).forEach(targets => {
+    Object.values(targets).forEach(update => {
+      tensionIncrease += update.metrics.tension || 0
+    })
+  })
+
+  state.meta.tension_level += tensionIncrease
+
+  // clamp between 0–10
+  if (state.meta.tension_level > 10) state.meta.tension_level = 10
 }
 
 function extractConditions(scene, nameMap) {

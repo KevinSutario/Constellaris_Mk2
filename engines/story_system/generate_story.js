@@ -51,7 +51,9 @@ function appendStory(logPath, scene, iteration, phase) {
 }
 function buildPrompt(state, scenario) {
   const isControlled = state.meta.current_iteration <= 10
-
+  
+  const tension = state.meta.tension_level || 0
+  
   const characters = loadCharacters()
   const memory = loadMemory()
 
@@ -131,6 +133,27 @@ FREE MODE:
 - Use relationships and knowledge to guide behavior
 `}
 
+TENSION LEVEL: ${tension}
+
+Behavior Guideline:
+
+${tension <= 2 ? `
+LOW TENSION:
+- Keep reactions subtle
+- Avoid direct confrontation
+- Focus on hesitation, observation, internal thoughts
+` : tension <= 5 ? `
+MEDIUM TENSION:
+- Allow mild disagreements
+- Slightly sharper dialogue
+- Some characters may challenge others
+` : `
+HIGH TENSION:
+- Strong personality clashes allowed
+- Direct confrontation
+- Characters may act against each other
+- Emotional intensity should be visible
+`}
 ---
 
 IMPORTANT:
