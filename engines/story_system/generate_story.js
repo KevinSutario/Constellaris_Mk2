@@ -1,3 +1,26 @@
+const path = require('path')
+
+function loadCharacters() {
+  const charDir = `${BASE_PATH}/data/characters`
+  const files = fs.readdirSync(charDir)
+
+  const characters = {}
+
+  files.forEach(file => {
+    const fullPath = path.join(charDir, file)
+
+    if (file.endsWith('_personality.json')) {
+      const data = JSON.parse(fs.readFileSync(fullPath, 'utf-8'))
+      const id = data.id
+
+      if (!characters[id]) characters[id] = {}
+      characters[id].personality = data
+    }
+  })
+
+  return characters
+}
+
 const fs = require('fs')
 const { validate } = require('./validator')
 
