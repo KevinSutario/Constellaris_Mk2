@@ -7,7 +7,9 @@
   "characters": {
     "C001": {
       "knowledge": {
-        "known_facts": [],
+        "known_facts": [
+          "Detected: noticed"
+        ],
         "beliefs": [
           "Detected: thought",
           "Detected: thought"
@@ -28,7 +30,9 @@
     },
     "C002": {
       "knowledge": {
-        "known_facts": [],
+        "known_facts": [
+          "Detected: noticed"
+        ],
         "beliefs": [
           "Detected: thought",
           "Detected: thought"
@@ -49,7 +53,9 @@
     },
     "C003": {
       "knowledge": {
-        "known_facts": [],
+        "known_facts": [
+          "Detected: noticed"
+        ],
         "beliefs": [
           "Detected: thought",
           "Detected: thought"
@@ -70,7 +76,9 @@
     },
     "C004": {
       "knowledge": {
-        "known_facts": [],
+        "known_facts": [
+          "Detected: noticed"
+        ],
         "beliefs": [
           "Detected: thought",
           "Detected: thought"
@@ -91,7 +99,9 @@
     },
     "C005": {
       "knowledge": {
-        "known_facts": [],
+        "known_facts": [
+          "Detected: noticed"
+        ],
         "beliefs": [
           "Detected: thought",
           "Detected: thought"
@@ -115,89 +125,89 @@
     "C001": {
       "C002": {
         "metrics": {
-          "trust": 3,
+          "trust": 0,
           "tension": 0,
           "dependency": 0,
-          "fear": 0,
+          "fear": 1,
           "respect": 0
         },
         "history": [
           {
             "event": "Interaction between Ji-Hyeon Woo and Jang Sun-Mi",
             "impact": {
-              "trust": 3,
+              "trust": 0,
               "tension": 0,
               "dependency": 0,
-              "fear": 0,
+              "fear": 1,
               "respect": 0
             },
-            "timestamp": 1775315493652
+            "timestamp": 1775373924394
           }
         ]
       },
       "C003": {
         "metrics": {
-          "trust": 3,
+          "trust": 0,
           "tension": 0,
           "dependency": 0,
-          "fear": 0,
+          "fear": 1,
           "respect": 0
         },
         "history": [
           {
             "event": "Interaction between Ji-Hyeon Woo and Ji-Won Kang",
             "impact": {
-              "trust": 3,
+              "trust": 0,
               "tension": 0,
               "dependency": 0,
-              "fear": 0,
+              "fear": 1,
               "respect": 0
             },
-            "timestamp": 1775315493652
+            "timestamp": 1775373924394
           }
         ]
       },
       "C004": {
         "metrics": {
-          "trust": 3,
+          "trust": 0,
           "tension": 0,
           "dependency": 0,
-          "fear": 0,
+          "fear": 1,
           "respect": 0
         },
         "history": [
           {
             "event": "Interaction between Ji-Hyeon Woo and Hyung Joon-Mo",
             "impact": {
-              "trust": 3,
+              "trust": 0,
               "tension": 0,
               "dependency": 0,
-              "fear": 0,
+              "fear": 1,
               "respect": 0
             },
-            "timestamp": 1775315493652
+            "timestamp": 1775373924394
           }
         ]
       },
       "C005": {
         "metrics": {
-          "trust": 3,
+          "trust": 0,
           "tension": 0,
           "dependency": 0,
-          "fear": 0,
+          "fear": 1,
           "respect": 0
         },
         "history": [
           {
             "event": "Interaction between Ji-Hyeon Woo and Joon-Suh Oh",
             "impact": {
-              "trust": 3,
+              "trust": 0,
               "tension": 0,
               "dependency": 0,
-              "fear": 0,
+              "fear": 1,
               "respect": 0
             },
-            "timestamp": 1775315493652
+            "timestamp": 1775373924394
           }
         ]
       }
@@ -205,89 +215,89 @@
     "C002": {
       "C001": {
         "metrics": {
-          "trust": 3,
+          "trust": 0,
           "tension": 0,
           "dependency": 0,
-          "fear": 0,
+          "fear": 1,
           "respect": 0
         },
         "history": [
           {
             "event": "Interaction between Jang Sun-Mi and Ji-Hyeon Woo",
             "impact": {
-              "trust": 3,
+              "trust": 0,
               "tension": 0,
               "dependency": 0,
-              "fear": 0,
+              "fear": 1,
               "respect": 0
             },
-            "timestamp": 1775315493652
+            "timestamp": 1775373924394
           }
         ]
       },
       "C003": {
         "metrics": {
-          "trust": 3,
+          "trust": 0,
           "tension": 0,
           "dependency": 0,
-          "fear": 0,
+          "fear": 1,
           "respect": 0
         },
         "history": [
           {
             "event": "Interaction between Jang Sun-Mi and Ji-Won Kang",
             "impact": {
-              "trust": 3,
+              "trust": 0,
               "tension": 0,
               "dependency": 0,
-              "fear": 0,
+              "fear": 1,
               "respect": 0
             },
-            "timestamp": 1775315493652
+            "timestamp": 1775373924394
           }
         ]
       },
       "C004": {
         "metrics": {
-          "trust": 3,
+          "trust": 0,
           "tension": 0,
           "dependency": 0,
-          "fear": 0,
+          "fear": 1,
           "respect": 0
         },
         "history": [
           {
             "event": "Interaction between Jang Sun-Mi and Hyung Joon-Mo",
             "impact": {
-              "trust": 3,
+              "trust": 0,
               "tension": 0,
               "dependency": 0,
-              "fear": 0,
+              "fear": 1,
               "respect": 0
             },
-            "timestamp": 1775315493652
+            "timestamp": 1775373924394
           }
         ]
       },
       "C005": {
         "metrics": {
-          "trust": 3,
+          "trust": 0,
           "tension": 0,
           "dependency": 0,
-          "fear": 0,
+          "fear": 1,
           "respect": 0
         },
         "history": [
           {
             "event": "Interaction between Jang Sun-Mi and Joon-Suh Oh",
             "impact": {
-              "trust": 3,
+              "trust": 0,
               "tension": 0,
               "dependency": 0,
-              "fear": 0,
+              "fear": 1,
               "respect": 0
             },
-            "timestamp": 1775315493652
+            "timestamp": 1775373924394
           }
         ]
       }
@@ -295,89 +305,89 @@
     "C003": {
       "C001": {
         "metrics": {
-          "trust": 3,
+          "trust": 0,
           "tension": 0,
           "dependency": 0,
-          "fear": 0,
+          "fear": 1,
           "respect": 0
         },
         "history": [
           {
             "event": "Interaction between Ji-Won Kang and Ji-Hyeon Woo",
             "impact": {
-              "trust": 3,
+              "trust": 0,
               "tension": 0,
               "dependency": 0,
-              "fear": 0,
+              "fear": 1,
               "respect": 0
             },
-            "timestamp": 1775315493652
+            "timestamp": 1775373924394
           }
         ]
       },
       "C002": {
         "metrics": {
-          "trust": 3,
+          "trust": 0,
           "tension": 0,
           "dependency": 0,
-          "fear": 0,
+          "fear": 1,
           "respect": 0
         },
         "history": [
           {
             "event": "Interaction between Ji-Won Kang and Jang Sun-Mi",
             "impact": {
-              "trust": 3,
+              "trust": 0,
               "tension": 0,
               "dependency": 0,
-              "fear": 0,
+              "fear": 1,
               "respect": 0
             },
-            "timestamp": 1775315493652
+            "timestamp": 1775373924394
           }
         ]
       },
       "C004": {
         "metrics": {
-          "trust": 3,
+          "trust": 0,
           "tension": 0,
           "dependency": 0,
-          "fear": 0,
+          "fear": 1,
           "respect": 0
         },
         "history": [
           {
             "event": "Interaction between Ji-Won Kang and Hyung Joon-Mo",
             "impact": {
-              "trust": 3,
+              "trust": 0,
               "tension": 0,
               "dependency": 0,
-              "fear": 0,
+              "fear": 1,
               "respect": 0
             },
-            "timestamp": 1775315493652
+            "timestamp": 1775373924394
           }
         ]
       },
       "C005": {
         "metrics": {
-          "trust": 3,
+          "trust": 0,
           "tension": 0,
           "dependency": 0,
-          "fear": 0,
+          "fear": 1,
           "respect": 0
         },
         "history": [
           {
             "event": "Interaction between Ji-Won Kang and Joon-Suh Oh",
             "impact": {
-              "trust": 3,
+              "trust": 0,
               "tension": 0,
               "dependency": 0,
-              "fear": 0,
+              "fear": 1,
               "respect": 0
             },
-            "timestamp": 1775315493652
+            "timestamp": 1775373924394
           }
         ]
       }
@@ -385,89 +395,89 @@
     "C004": {
       "C001": {
         "metrics": {
-          "trust": 3,
+          "trust": 0,
           "tension": 0,
           "dependency": 0,
-          "fear": 0,
+          "fear": 1,
           "respect": 0
         },
         "history": [
           {
             "event": "Interaction between Hyung Joon-Mo and Ji-Hyeon Woo",
             "impact": {
-              "trust": 3,
+              "trust": 0,
               "tension": 0,
               "dependency": 0,
-              "fear": 0,
+              "fear": 1,
               "respect": 0
             },
-            "timestamp": 1775315493652
+            "timestamp": 1775373924394
           }
         ]
       },
       "C002": {
         "metrics": {
-          "trust": 3,
+          "trust": 0,
           "tension": 0,
           "dependency": 0,
-          "fear": 0,
+          "fear": 1,
           "respect": 0
         },
         "history": [
           {
             "event": "Interaction between Hyung Joon-Mo and Jang Sun-Mi",
             "impact": {
-              "trust": 3,
+              "trust": 0,
               "tension": 0,
               "dependency": 0,
-              "fear": 0,
+              "fear": 1,
               "respect": 0
             },
-            "timestamp": 1775315493652
+            "timestamp": 1775373924394
           }
         ]
       },
       "C003": {
         "metrics": {
-          "trust": 3,
+          "trust": 0,
           "tension": 0,
           "dependency": 0,
-          "fear": 0,
+          "fear": 1,
           "respect": 0
         },
         "history": [
           {
             "event": "Interaction between Hyung Joon-Mo and Ji-Won Kang",
             "impact": {
-              "trust": 3,
+              "trust": 0,
               "tension": 0,
               "dependency": 0,
-              "fear": 0,
+              "fear": 1,
               "respect": 0
             },
-            "timestamp": 1775315493652
+            "timestamp": 1775373924394
           }
         ]
       },
       "C005": {
         "metrics": {
-          "trust": 3,
+          "trust": 0,
           "tension": 0,
           "dependency": 0,
-          "fear": 0,
+          "fear": 1,
           "respect": 0
         },
         "history": [
           {
             "event": "Interaction between Hyung Joon-Mo and Joon-Suh Oh",
             "impact": {
-              "trust": 3,
+              "trust": 0,
               "tension": 0,
               "dependency": 0,
-              "fear": 0,
+              "fear": 1,
               "respect": 0
             },
-            "timestamp": 1775315493652
+            "timestamp": 1775373924394
           }
         ]
       }
@@ -475,89 +485,89 @@
     "C005": {
       "C001": {
         "metrics": {
-          "trust": 3,
+          "trust": 0,
           "tension": 0,
           "dependency": 0,
-          "fear": 0,
+          "fear": 1,
           "respect": 0
         },
         "history": [
           {
             "event": "Interaction between Joon-Suh Oh and Ji-Hyeon Woo",
             "impact": {
-              "trust": 3,
+              "trust": 0,
               "tension": 0,
               "dependency": 0,
-              "fear": 0,
+              "fear": 1,
               "respect": 0
             },
-            "timestamp": 1775315493652
+            "timestamp": 1775373924394
           }
         ]
       },
       "C002": {
         "metrics": {
-          "trust": 3,
+          "trust": 0,
           "tension": 0,
           "dependency": 0,
-          "fear": 0,
+          "fear": 1,
           "respect": 0
         },
         "history": [
           {
             "event": "Interaction between Joon-Suh Oh and Jang Sun-Mi",
             "impact": {
-              "trust": 3,
+              "trust": 0,
               "tension": 0,
               "dependency": 0,
-              "fear": 0,
+              "fear": 1,
               "respect": 0
             },
-            "timestamp": 1775315493652
+            "timestamp": 1775373924394
           }
         ]
       },
       "C003": {
         "metrics": {
-          "trust": 3,
+          "trust": 0,
           "tension": 0,
           "dependency": 0,
-          "fear": 0,
+          "fear": 1,
           "respect": 0
         },
         "history": [
           {
             "event": "Interaction between Joon-Suh Oh and Ji-Won Kang",
             "impact": {
-              "trust": 3,
+              "trust": 0,
               "tension": 0,
               "dependency": 0,
-              "fear": 0,
+              "fear": 1,
               "respect": 0
             },
-            "timestamp": 1775315493652
+            "timestamp": 1775373924394
           }
         ]
       },
       "C004": {
         "metrics": {
-          "trust": 3,
+          "trust": 0,
           "tension": 0,
           "dependency": 0,
-          "fear": 0,
+          "fear": 1,
           "respect": 0
         },
         "history": [
           {
             "event": "Interaction between Joon-Suh Oh and Hyung Joon-Mo",
             "impact": {
-              "trust": 3,
+              "trust": 0,
               "tension": 0,
               "dependency": 0,
-              "fear": 0,
+              "fear": 1,
               "respect": 0
             },
-            "timestamp": 1775315493652
+            "timestamp": 1775373924394
           }
         ]
       }
