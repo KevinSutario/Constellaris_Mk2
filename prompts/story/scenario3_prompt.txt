@@ -1,0 +1,47 @@
+SCENARIO:
+
+- A person enters one of the towers and becomes global news
+
+EVENTS TO INCLUDE:
+
+- Media coverage spreading rapidly (TV broadcasts, phone alerts, online discussions)
+- Public attention intensifies as people follow the event in real time
+
+PROGRESSION:
+
+- The person entering the tower is initially treated as curiosity or bravery
+- Then it is confirmed that the person has died inside the tower
+
+FOR EACH OF THE 5 MAIN CHARACTERS:
+
+- Show how they first learn about this event (TV, phone, conversation, etc.)
+- Show their immediate and personal reaction:
+  fear, dismissal, curiosity, indifference, skepticism
+- Include at least one natural conversation with others about it
+- Show differing opinions and perspectives
+
+CONSTRAINTS:
+
+- The 5 main characters MUST remain the same characters already established
+- DO NOT create new main characters
+- The person who entered the tower must remain anonymous or distant (not a new character focus)
+- No direct interaction with the tower occurs
+- No supernatural explanation is revealed
+
+WORLD STATE:
+
+- Society becomes more alert and divided in opinion
+- Some people become fearful, others dismiss it or rationalize it
+- Daily life continues, but attention toward the towers increases significantly
+
+TONE:
+
+- Growing unease
+- Subtle fear begins to emerge
+- Emotional contrast between different characters
+
+IMPORTANT:
+
+- Focus on reactions, dialogue, and thoughts
+- Do NOT introduce new major events beyond this incident
+- Do NOT resolve anything

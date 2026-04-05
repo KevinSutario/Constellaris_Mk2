@@ -1,0 +1,45 @@
+SCENARIO:
+
+- The towers suddenly appear across the world
+- As the towers emerge, the ground shakes noticeably
+- Each tower is approximately 1.5 km tall, towering over the surrounding city
+
+EVENTS TO INCLUDE:
+
+- The moment people first notice the towers
+- The ground shaking during their appearance (felt physically by characters)
+- News spreading rapidly through phones, TV, and social media
+- Public confusion, curiosity, and speculation
+
+FOR EACH OF THE 5 MAIN CHARACTERS:
+
+- Show where they are when the ground begins to shake
+- Show their immediate physical and emotional reaction to the shaking
+- Show how they first see or hear about the towers
+- Include at least one natural interaction or conversation with others about it
+
+CONSTRAINTS:
+
+- The 5 main characters MUST remain the same characters already established
+- DO NOT create new main characters
+- Side/background people may exist but must not become new focal characters
+- No supernatural explanation is revealed
+- No danger or combat occurs
+- The towers are only observed, not interacted with
+
+WORLD STATE:
+
+- Life continues, but is briefly disrupted by the shaking
+- After the shaking stops, daily routines resume with heightened attention on the towers
+
+TONE:
+
+- Initial surprise from the ground shaking
+- Followed by curiosity and unease
+- The situation feels strange and significant, but not yet dangerous
+
+IMPORTANT:
+
+- Focus only on reactions, dialogue, and thoughts
+- Do NOT introduce new events beyond the tower appearance and shaking
+- Do NOT resolve anything
