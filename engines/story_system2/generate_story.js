@@ -4,10 +4,25 @@ import { validate } from "./validator.js"
 import { updateMemory } from "./update_memory.js"
 import OpenAI from "openai"
 import { config } from "../../config/env.js"
+import { GoogleGenerativeAI } from "@google/generative-ai"
 
-const client = new OpenAI({
-  apiKey: config.OPENAI_API_KEY,
+const genAI = new GoogleGenerativeAI(config.GEMINI_API_KEY)
+
+const model = genAI.getGenerativeModel({
+  model: "gemini-2.5-flash"
 })
+async function generateScene(prompt) {
+  try {
+    const result = await model.generateContent(prompt)
+    const response = await result.response
+    const text = response.text()
+
+    return text.trim()
+  } catch (err) {
+    console.error("Gemini error:", err)
+    return null
+  }
+}
 
 const BASE_PATH = "C:/Users/sutar/Documents/Constellaris_Mk2"
 
@@ -271,32 +286,7 @@ Write the scene.
 `
 }
 
-async function generateScene(prompt) {
-  try {
-    const response = await client.chat.completions.create({
-      model: "gpt-4o",
-      messages: [
-        {
-          role: "system",
-          content: "You write high-quality narrative scenes. Do not explain. Only output the scene."
-        },
-        {
-          role: "user",
-          content: prompt
-        }
-      ],
-      temperature: 0.7
-    })
 
-    const text = response.choices[0].message.content.trim()
-
-    return text
-
-  } catch (err) {
-    console.error("OpenAI error:", err)
-    return null
-  }
-}
 
 export async function run() {
   const statePath = `${BASE_PATH}/data/story/story_state.json`
