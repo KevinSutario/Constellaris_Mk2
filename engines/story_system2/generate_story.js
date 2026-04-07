@@ -2,7 +2,6 @@ import fs from "fs"
 import path from "path"
 import { validate } from "./validator.js"
 import { updateMemory } from "./update_memory.js"
-import OpenAI from "openai"
 import { config } from "../../config/env.js"
 import { GoogleGenerativeAI } from "@google/generative-ai"
 
@@ -11,6 +10,7 @@ const genAI = new GoogleGenerativeAI(config.GEMINI_API_KEY)
 const model = genAI.getGenerativeModel({
   model: "gemini-2.5-flash"
 })
+
 async function generateScene(prompt) {
   try {
     const result = await model.generateContent(prompt)
@@ -286,8 +286,6 @@ Write the scene.
 `
 }
 
-
-
 export async function run() {
   const statePath = `${BASE_PATH}/data/story/story_state.json`
   const logPath = `${BASE_PATH}/data/story/story_log.txt`
@@ -299,6 +297,8 @@ export async function run() {
 
   const scenario = loadText(scenarioPath)
 
+  const characters = loadCharacters()
+
   let attempt = 0
 
   while (attempt < 3) {
@@ -306,21 +306,28 @@ export async function run() {
 
     const scene = await generateScene(prompt)
 
-    const characters = loadCharacters()
+    if (!scene) {
+      attempt++
+      console.log("Retry: generateScene returned null")
+      continue
+    }
+
     const result = validate(scene, state, characters)
 
     if (result.valid) {
-      appendStory(logPath, scene, iteration, state.meta.phase)
-
-      updateMemory(scene)
-
+      // Update state BEFORE writing memory so they stay in sync
       state.meta.current_iteration += 1
 
       if (state.meta.current_iteration > 10) {
         state.meta.phase = "free"
       }
 
+      // Save state first
       saveJSON(statePath, state)
+
+      // Then append log and update memory
+      appendStory(logPath, scene, iteration, state.meta.phase)
+      updateMemory(scene, characters)
 
       return scene
     }
