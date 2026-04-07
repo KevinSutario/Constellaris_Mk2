@@ -7,21 +7,6 @@ import OpenAI from "openai"
 
 const openai = new OpenAI({ apiKey: config.OPENAI_API_KEY })
 
-async function generateScene(prompt) {
-  try {
-    const response = await openai.chat.completions.create({
-      model: "gpt-4o",
-      messages: [{ role: "user", content: prompt }],
-      max_tokens: 1500
-    })
-
-    return response.choices[0].message.content.trim()
-  } catch (err) {
-    console.error("OpenAI error:", err)
-    return null
-  }
-}
-
 const BASE_PATH = "C:/Users/sutar/Documents/Constellaris_Mk2"
 
 function loadJSON(pathStr) {
@@ -39,16 +24,13 @@ function saveJSON(pathStr, data) {
 function loadCharacters() {
   const charDir = `${BASE_PATH}/data/characters`
   const files = fs.readdirSync(charDir)
-
   const characters = {}
 
   files.forEach(file => {
     const fullPath = path.join(charDir, file)
-
     if (file.endsWith('_personality.json')) {
       const data = JSON.parse(fs.readFileSync(fullPath, 'utf-8'))
       const id = data.id
-
       if (!characters[id]) characters[id] = {}
       characters[id].personality = data
     }
@@ -71,15 +53,63 @@ function appendStory(logPath, scene, iteration, phase) {
   fs.appendFileSync(logPath, entry)
 }
 
-function formatCharactersForPrompt(characters, state) {
+// ─── Token maps ────────────────────────────────────────────────────────────────
+// Builds two maps:
+//   nameToToken: { "Park Jisoo": "CHARACTER_001", ... }
+//   tokenToName: { "CHARACTER_001": "Park Jisoo", ... }
+// Character IDs are already "C001", "C002" etc — we use the same numbering.
+
+function buildTokenMaps(characters) {
+  const nameToToken = {}
+  const tokenToName = {}
+
+  Object.keys(characters).forEach(id => {
+    const name = characters[id].personality?.name
+    if (!name) return
+
+    // Convert "C001" → "CHARACTER_001", "C002" → "CHARACTER_002", etc.
+    const num = id.replace(/\D/g, "").padStart(3, "0")
+    const token = `CHARACTER_${num}`
+
+    nameToToken[name] = token
+    tokenToName[token] = name
+  })
+
+  return { nameToToken, tokenToName }
+}
+
+// Replace all real names in a string with their tokens.
+// Sorts by length descending so "Park Jisoo" is replaced before "Jisoo".
+function applyTokens(text, nameToToken) {
+  let result = text
+  const sortedNames = Object.keys(nameToToken).sort((a, b) => b.length - a.length)
+  sortedNames.forEach(name => {
+    result = result.replaceAll(name, nameToToken[name])
+  })
+  return result
+}
+
+// Replace all tokens in AI output back to real names.
+function restoreNames(text, tokenToName) {
+  let result = text
+  Object.keys(tokenToName).forEach(token => {
+    result = result.replaceAll(token, tokenToName[token])
+  })
+  return result
+}
+
+// ─── Prompt builders ───────────────────────────────────────────────────────────
+
+function formatCharactersForPrompt(characters, state, nameToToken) {
   let output = ""
 
   Object.keys(characters).forEach(id => {
     const base = characters[id].personality
     const dynamic = state.characters?.[id] || {}
+    const token = nameToToken[base.name]
 
     output += `
-Name: ${base.name}
+Token: ${token}
 Role: ${base.role}
 Personality: ${base.personality.join(", ")}
 Traits: ${base.traits.join(", ")}
@@ -96,18 +126,20 @@ Current State:
   return output
 }
 
-function formatRelationshipsForPrompt(state, characters) {
+function formatRelationshipsForPrompt(state, characters, nameToToken) {
   let output = ""
 
   Object.keys(state.relationships || {}).forEach(fromID => {
     const fromName = characters[fromID]?.personality?.name
+    const fromToken = nameToToken[fromName] || fromName
 
     Object.keys(state.relationships[fromID]).forEach(toID => {
       const toName = characters[toID]?.personality?.name
+      const toToken = nameToToken[toName] || toName
       const metrics = state.relationships[fromID][toID].metrics
 
       output += `
-${fromName} → ${toName}:
+${fromToken} → ${toToken}:
 - Trust: ${metrics.trust}
 - Tension: ${metrics.tension}
 - Fear: ${metrics.fear}
@@ -119,28 +151,44 @@ ${fromName} → ${toName}:
   return output
 }
 
-function buildPrompt(state, scenario) {
+function buildSystemPrompt(characters, nameToToken) {
+  const tokenList = Object.keys(nameToToken)
+    .map(name => `- ${nameToToken[name]}`)
+    .join("\n")
+
+  return `You are a narrative engine for a controlled story system.
+
+You will write scenes using character tokens instead of real names.
+The ONLY valid character tokens are:
+${tokenList}
+
+Rules:
+- Use ONLY these tokens to refer to characters. Never use real names.
+- Do not invent new tokens or names of any kind.
+- Tokens are case-sensitive. Always write them in ALL_CAPS exactly as shown.
+- You may use pronouns (he/she/they) after establishing the token.
+
+The tokens will be replaced with real names after you output the scene.`
+}
+
+function buildPrompt(state, scenario, characters, nameToToken) {
   const isControlled = state.meta.current_iteration <= 10
   const tension = state.meta.tension_level || 0
 
-  const characters = loadCharacters()
   const memory = loadMemory()
 
-  const formattedCharacters = formatCharactersForPrompt(characters, state)
-  const formattedRelationships = formatRelationshipsForPrompt(state, characters)
+  // Tokenise memory and scenario so no real names leak into the prompt
+  const tokenisedScenario = applyTokens(scenario, nameToToken)
+  const tokenisedSummary = applyTokens(memory.summary || "None", nameToToken)
+  const tokenisedEvents = (memory.key_events || [])
+    .map(e => applyTokens(e, nameToToken))
+    .join("\n") || "None"
+  const tokenisedArcs = Object.entries(memory.character_arcs || {})
+    .map(([id, arc]) => `${id}: ${applyTokens(arc, nameToToken)}`)
+    .join("\n") || "None"
 
-  const formattedMemory = `
-Story Summary:
-${memory.summary || "None"}
-
-Key Events:
-${(memory.key_events || []).join("\n") || "None"}
-
-Character Arcs:
-${Object.entries(memory.character_arcs || {})
-  .map(([id, arc]) => `${id}: ${arc}`)
-  .join("\n") || "None"}
-`
+  const formattedCharacters = formatCharactersForPrompt(characters, state, nameToToken)
+  const formattedRelationships = formatRelationshipsForPrompt(state, characters, nameToToken)
 
   return `
 You are part of a controlled narrative system.
@@ -150,46 +198,24 @@ PHASE: ${isControlled ? "CONTROLLED" : "FREE"}
 ---
 
 STORY MEMORY:
-${formattedMemory}
+Story Summary:
+${tokenisedSummary}
+
+Key Events:
+${tokenisedEvents}
+
+Character Arcs:
+${tokenisedArcs}
 
 ---
 
 SCENARIO (ABSOLUTE TRUTH — DO NOT ADD TO IT):
-${scenario}
+${tokenisedScenario}
 
 ---
 
-CHARACTER IDENTITY (STRICT — DO NOT VIOLATE):
-
-You are given EXACTLY 5 characters.
-
-These are the ONLY characters that exist in this story.
-
-You are STRICTLY FORBIDDEN from:
-- creating new characters
-- inventing new names
-- introducing unnamed people
-
-If you mention any person, they MUST be one of the following:
-
-${Object.entries(characters).map(([id, c]) => `
-${id}: ${c.personality.name}
-Role: ${c.personality.role}
-Personality: ${c.personality.personality.join(", ")}
-Traits: ${c.personality.traits.join(", ")}
-`).join("\n")}
-
----
-
-CRITICAL RULE:
-
-- You MUST use ONLY these names
-- You MUST NOT generate names like "Mei", "Kai", "Zhang", etc.
-- If you need to refer to someone, use:
-  - their name
-  - or pronouns (he/she)
-
-Violation of this rule = INVALID OUTPUT
+CHARACTERS:
+${formattedCharacters}
 
 ---
 
@@ -264,25 +290,37 @@ Each character must behave according to:
 
 ---
 
-Before writing:
-Check:
-- Did I add anything not in scenario? If yes, STOP.
-- Am I making characters act out of character? If yes, STOP.
-FINAL CHECK BEFORE OUTPUT:
-
-- Did I introduce any new name not listed above? If yes, STOP.
-- Did I use ONLY the provided characters? If not, STOP.
-
----
 OUTPUT LENGTH REQUIREMENT:
 
 - Write between 500 to 700 words
 - Do NOT write too short or too long
 - Maintain continuous narrative flow
 
-Write the scene.
+Write the scene using CHARACTER tokens only.
 `
 }
+
+// ─── Generation ────────────────────────────────────────────────────────────────
+
+async function generateScene(systemPrompt, userPrompt) {
+  try {
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o",
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: userPrompt }
+      ],
+      max_tokens: 7500
+    })
+
+    return response.choices[0].message.content.trim()
+  } catch (err) {
+    console.error("OpenAI error:", err)
+    return null
+  }
+}
+
+// ─── Main ──────────────────────────────────────────────────────────────────────
 
 export async function run() {
   const statePath = `${BASE_PATH}/data/story/story_state.json`
@@ -292,38 +330,40 @@ export async function run() {
 
   const iteration = state.meta.current_iteration
   const scenarioPath = getScenarioPath(iteration)
-
   const scenario = loadText(scenarioPath)
 
   const characters = loadCharacters()
+  const { nameToToken, tokenToName } = buildTokenMaps(characters)
+
+  const systemPrompt = buildSystemPrompt(characters, nameToToken)
 
   let attempt = 0
 
   while (attempt < 3) {
-    const prompt = buildPrompt(state, scenario)
+    const userPrompt = buildPrompt(state, scenario, characters, nameToToken)
 
-    const scene = await generateScene(prompt)
+    // AI writes scene with tokens
+    const rawScene = await generateScene(systemPrompt, userPrompt)
 
-    if (!scene) {
+    if (!rawScene) {
       attempt++
       console.log("Retry: generateScene returned null")
       continue
     }
 
-    const result = validate(scene, state, characters)
+    // Validate the tokenised output — check for unknown tokens / forbidden phrases
+    const result = validate(rawScene, tokenToName)
 
     if (result.valid) {
-      // Update state BEFORE writing memory so they stay in sync
-      state.meta.current_iteration += 1
+      // Restore real names before saving / displaying
+      const scene = restoreNames(rawScene, tokenToName)
 
+      state.meta.current_iteration += 1
       if (state.meta.current_iteration > 10) {
         state.meta.phase = "free"
       }
 
-      // Save state first
       saveJSON(statePath, state)
-
-      // Then append log and update memory
       appendStory(logPath, scene, iteration, state.meta.phase)
       updateMemory(scene, characters)
 

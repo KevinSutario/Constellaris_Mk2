@@ -1,13 +1,10 @@
-function getCharacterNames(characters) {
-  return Object.values(characters)
-    .map(c => c.personality?.name)
-    .filter(Boolean)
-}
+// tokenToName: { "CHARACTER_001": "Park Jisoo", ... }
+// We only need this to know which tokens are valid.
 
-export function validate(scene, state, characters) {
+export function validate(rawScene, tokenToName) {
   const violations = []
 
-  const knownNames = getCharacterNames(characters)
+  const validTokens = new Set(Object.keys(tokenToName))
 
   // Check for forbidden phrases
   const forbidden = [
@@ -19,38 +16,27 @@ export function validate(scene, state, characters) {
   ]
 
   forbidden.forEach(f => {
-    if (scene.toLowerCase().includes(f)) {
+    if (rawScene.toLowerCase().includes(f)) {
       violations.push(`Forbidden phrase: "${f}"`)
     }
   })
 
-  // Check for unknown names — extract capitalised words and test against known names
-  // We look for capitalized words that are likely proper names (2+ letters, not at sentence start noise)
-  const candidateNames = new Set()
-  const namePattern = /\b([A-Z][a-z]{1,})\b/g
-  let match
+  // Find any CHARACTER_XXX-style tokens the AI used and check they are all valid.
+  // This catches the AI inventing tokens like CHARACTER_006 when only 5 exist.
+  const usedTokens = rawScene.match(/CHARACTER_\d+/g) || []
+  const uniqueUsed = new Set(usedTokens)
 
-  while ((match = namePattern.exec(scene)) !== null) {
-    candidateNames.add(match[1])
-  }
+  uniqueUsed.forEach(token => {
+    if (!validTokens.has(token)) {
+      violations.push(`Unknown token used: "${token}" — not in character list`)
+    }
+  })
 
-  // Common English words that start with a capital but are not names
-  const ignoreWords = new Set([
-    "The", "A", "An", "In", "On", "At", "To", "Of", "And", "But", "Or",
-    "For", "So", "Yet", "Nor", "He", "She", "It", "They", "We", "You",
-    "His", "Her", "Its", "Their", "Our", "Your", "My", "This", "That",
-    "These", "Those", "There", "Here", "When", "Where", "Why", "How",
-    "What", "Who", "Which", "With", "From", "Into", "Over", "Under",
-    "After", "Before", "Between", "During", "Through", "Without",
-    "Suddenly", "Out", "Then", "Now", "Still", "Just", "Only", "Even",
-    "No", "Not", "If", "As", "By", "Up", "Down", "Around", "About",
-    "Controlled", "Free", "Low", "High", "Medium", "None", "True", "False",
-    "Iteration", "Phase", "Scene", "Story", "Chapter"
-  ])
-
-  candidateNames.forEach(name => {
-    if (!ignoreWords.has(name) && !knownNames.includes(name)) {
-      violations.push(`Unknown name detected: "${name}" — not in character list`)
+  // Check the AI didn't leak any real names back into the output.
+  // We check tokenToName values (the real names) against the raw scene.
+  Object.values(tokenToName).forEach(name => {
+    if (rawScene.includes(name)) {
+      violations.push(`Real name leaked into output: "${name}" — should be a token`)
     }
   })
 

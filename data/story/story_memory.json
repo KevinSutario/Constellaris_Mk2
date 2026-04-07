@@ -1,5 +1,15 @@
 {
-  "summary": "",
-  "key_events": [],
-  "character_arcs": {}
+  "summary": "(1) On a crisp autumn morning, Ji-Hyeon Woo leaned against the cold window of the subway train, eyes landing on the array of\n(2) On a crisp autumn morning, the train screeched slightly as it slowed to a stop, and Ji-Hyeon Woo remained leaning agains\n(3) On a crisp autumn morning, the hush of dawn was broken by the insistent chime of a phone notification",
+  "key_events": [
+    "On a crisp autumn morning, Ji-Hyeon Woo leaned against the cold window of the subway train, eyes landing on the array of",
+    "On a crisp autumn morning, the train screeched slightly as it slowed to a stop, and Ji-Hyeon Woo remained leaning agains",
+    "On a crisp autumn morning, the hush of dawn was broken by the insistent chime of a phone notification"
+  ],
+  "character_arcs": {
+    "C001": "Across town, Ji-Hyeon Woo leaned against the cold window of the subway train, transfixed by the tele",
+    "C002": "Jang Sun-Mi looked away from the steam curling from her mug as she read the intriguing headline: \"Pe",
+    "C003": "Meanwhile, at her labyrinthine desk cluttered with neatly arrayed papers and pencils, Ji-Won Kang's",
+    "C004": "In yet another part of town, Hyung Joon-Mo stood in the hallway, scrolling through her feed.",
+    "C005": "Joon-Suh Oh, the debater, entered the room with a palpable energy, the news buzzing around his thoug"
+  }
 }
