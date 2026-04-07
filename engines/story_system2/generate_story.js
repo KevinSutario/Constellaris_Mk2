@@ -3,23 +3,21 @@ import path from "path"
 import { validate } from "./validator.js"
 import { updateMemory } from "./update_memory.js"
 import { config } from "../../config/env.js"
-import { GoogleGenerativeAI } from "@google/generative-ai"
+import OpenAI from "openai"
 
-const genAI = new GoogleGenerativeAI(config.GEMINI_API_KEY)
-
-const model = genAI.getGenerativeModel({
-  model: "gemini-2.5-flash"
-})
+const openai = new OpenAI({ apiKey: config.OPENAI_API_KEY })
 
 async function generateScene(prompt) {
   try {
-    const result = await model.generateContent(prompt)
-    const response = await result.response
-    const text = response.text()
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o",
+      messages: [{ role: "user", content: prompt }],
+      max_tokens: 1500
+    })
 
-    return text.trim()
+    return response.choices[0].message.content.trim()
   } catch (err) {
-    console.error("Gemini error:", err)
+    console.error("OpenAI error:", err)
     return null
   }
 }
