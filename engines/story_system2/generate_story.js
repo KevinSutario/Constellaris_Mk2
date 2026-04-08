@@ -2,6 +2,7 @@ import fs from "fs"
 import path from "path"
 import { validate } from "./validator.js"
 import { updateMemory } from "./update_memory.js"
+import { parseSlides } from "./parse_slides.js"
 import { config } from "../../config/env.js"
 import OpenAI from "openai"
 
@@ -310,7 +311,7 @@ async function generateScene(systemPrompt, userPrompt) {
         { role: "system", content: systemPrompt },
         { role: "user", content: userPrompt }
       ],
-      max_tokens: 7500
+      max_tokens: 1500
     })
 
     return response.choices[0].message.content.trim()
@@ -366,6 +367,7 @@ export async function run() {
       saveJSON(statePath, state)
       appendStory(logPath, scene, iteration, state.meta.phase)
       updateMemory(scene, characters)
+      await parseSlides(scene, characters)
 
       return scene
     }
