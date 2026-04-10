@@ -1,5 +1,3 @@
-//converts scene text → slides JSON
-
 import OpenAI from "openai"
 import fs from "fs"
 import { config } from "../../config/env.js"
