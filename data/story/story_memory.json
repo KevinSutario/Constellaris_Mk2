@@ -1,15 +1,13 @@
 {
-  "summary": "(1) The morning sun filtered through half-open blinds, casting striped shadows across the room where Ji-Hyeon Woo sat at the\n(2) The morning unfolded gently until a sudden jolt shattered the tranquility\n(3) The day seemed ordinary until the television in Ji-Hyeon Woo's living room flickered to life, interrupting their morning",
+  "summary": "(1) Rain tapped steadily against the window of the third-floor office where Ji-Hyeon Woo sat, lost momentarily in the rhythm",
   "key_events": [
-    "The morning sun filtered through half-open blinds, casting striped shadows across the room where Ji-Hyeon Woo sat at the",
-    "The morning unfolded gently until a sudden jolt shattered the tranquility",
-    "The day seemed ordinary until the television in Ji-Hyeon Woo's living room flickered to life, interrupting their morning"
+    "Rain tapped steadily against the window of the third-floor office where Ji-Hyeon Woo sat, lost momentarily in the rhythm"
   ],
   "character_arcs": {
-    "C001": "The day seemed ordinary until the television in Ji-Hyeon Woo's living room flickered to life, interr",
-    "C002": "In another part of town, Jang Sun-Mi heard the news from an unexpected source—the radio in their clu",
-    "C003": "\"Have you seen this?\" a colleague nudged Ji-Won Kang's arm, showing them a phone screen with alerts",
-    "C004": "In the solitude of their modest apartment, Hyung Joon-Mo was folding laundry when a notification pin",
-    "C005": "Joon-Suh Oh, whose charisma usually shone in the lively environment of the café they frequented, fou"
+    "C001": "Rain tapped steadily against the window of the third-floor office where Ji-Hyeon Woo sat, lost momen",
+    "C002": "Meanwhile, across town in a bustling café, Jang Sun-Mi finished writing a concise list of tasks in t",
+    "C003": "In a quiet corner of a library, Ji-Won Kang traced their finger along the spine of a book, letting a",
+    "C004": "Hyung Joon-Mo stood by the subway platform, surrounded by the hum of life moving past them.",
+    "C005": "Lastly, Joon-Suh Oh paced back and forth in their apartment, a slight frown etched across their brow"
   }
 }
