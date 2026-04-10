@@ -31,7 +31,7 @@ app.get("/api/characters", (req, res) => {
       const data = JSON.parse(readFileSync(fullPath, "utf-8"))
       const id = data.id  // e.g. "C001"
 
-      const imagePath = path.join(IMAGES_DIR, `${id}_image.png`).replace(/\/g, "/")
+      const imagePath = path.join(IMAGES_DIR, `${id}_image.png`).split(path.sep).join('/')
 
       result[id] = {
         name:      data.name,
