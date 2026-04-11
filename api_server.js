@@ -37,7 +37,7 @@ app.get("/api/characters", (req, res) => {
         name:      data.name,
         role:      data.role,
         imagePath: existsSync(path.join(IMAGES_DIR, `${id}_image.png`))
-          ? `file:///${imagePath}`
+          ? `http://localhost:3001/images/${id}_image.png`
           : ""
       }
     })
@@ -210,10 +210,45 @@ Return ONLY this JSON:
   }
 })
 
+// ─── STATIC FILES ─────────────────────────────────────────────────────────────
+// Serves the visual novel HTML and the story_slides.json through the server
+// so Chrome doesn't block local file access
+import { createReadStream } from "fs"
+import { extname } from "path"
+
+const PROJECT_ROOT = "C:/Users/sutar/Documents/Constellaris_Mk2"
+
+// Serve story_slides.json
+app.get("/slides", (req, res) => {
+  const slidesPath = `${PROJECT_ROOT}/data/story/story_slides.json`
+  res.setHeader("Content-Type", "application/json")
+  createReadStream(slidesPath)
+    .on("error", () => res.status(404).json({ error: "story_slides.json not found — run run_story.js first" }))
+    .pipe(res)
+})
+
+// Serve character images
+app.get("/images/:filename", (req, res) => {
+  const imgPath = `${PROJECT_ROOT}/outputs/images/${req.params.filename}`
+  const ext = extname(req.params.filename).toLowerCase()
+  const mime = ext === ".png" ? "image/png" : ext === ".jpg" ? "image/jpeg" : "image/png"
+  res.setHeader("Content-Type", mime)
+  createReadStream(imgPath)
+    .on("error", () => res.status(404).send("Image not found"))
+    .pipe(res)
+})
+
+// Serve the HTML reader itself
+app.get("/", (req, res) => {
+  createReadStream(`${PROJECT_ROOT}/outputs/visual_novel_trial.html`)
+    .on("error", () => res.status(404).send("visual_novel_trial.html not found"))
+    .pipe(res)
+})
+
 const PORT = 3001
 app.listen(PORT, () => {
   console.log(`\n✔ Constellaris API server running at http://localhost:${PORT}\n`)
-  console.log("  Routes:")
+  console.log("  Open the reader at: http://localhost:3001")
   console.log("  POST /api/define  — word definitions")
   console.log("  POST /api/quiz    — generate quiz from story")
   console.log("  POST /api/grade   — grade short/paragraph answers\n")
