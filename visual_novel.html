@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Constellaris — Story Reader</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #08080f;
+  --panel: rgba(6,6,12,0.94);
+  --text: #e8dfc8;
+  --text-dim: #6a6258;
+  --accent: #c8903a;
+  --accent-glow: rgba(200,144,58,0.15);
+  --border: rgba(255,255,255,0.07);
+  --glass: rgba(255,255,255,0.03);
+  --char-dim: rgba(0,0,0,0.58);
+
+  --c001: #5a8eff;
+  --c002: #ff5a5a;
+  --c003: #5aff8a;
+  --c004: #ffd85a;
+  --c005: #c05aff;
+}
+
+html, body { width:100%; height:100%; overflow:hidden; background:var(--bg); color:var(--text); font-family:'Crimson Pro',Georgia,serif; }
+
+/* ════════════════════════ SCENE ════════════════════════ */
+#scene {
+  position:relative; width:100%; height:100%;
+  display:flex; align-items:flex-end; justify-content:center;
+  cursor:pointer;
+}
+
+#bg {
+  position:absolute; inset:0;
+  background: radial-gradient(ellipse at 30% 60%, #0d0d20 0%, #08080f 70%);
+  transition: background 1s ease;
+}
+
+/* grain overlay */
+#bg::after {
+  content:''; position:absolute; inset:0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none; opacity:0.6;
+}
+
+/* ════════════════════════ CHARACTERS ════════════════════════ */
+#chars {
+  position:absolute; inset:0;
+  display:flex; align-items:flex-end;
+  pointer-events:none;
+}
+
+.char-wrap {
+  position:absolute; bottom:120px;
+  width:340px; height:85%;
+  display:flex; align-items:flex-end; justify-content:center;
+  transition: all 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+.char-wrap.pos-left   { left: 8%; }
+.char-wrap.pos-right  { right: 8%; }
+.char-wrap.pos-center { left:50%; transform:translateX(-50%); }
+
+.char-inner {
+  position:relative; width:100%; height:100%;
+  display:flex; align-items:flex-end; justify-content:center;
+  transition: filter 0.4s ease, opacity 0.4s ease;
+}
+
+.char-inner.dimmed { filter: brightness(0.28) saturate(0.2); }
+.char-inner.dimmed::after {
+  content:''; position:absolute; inset:0;
+  background: var(--char-dim);
+  border-radius:4px;
+}
+
+.char-img {
+  height:100%; width:auto;
+  max-width:100%;
+  object-fit:contain;
+  object-position:bottom center;
+  display:block;
+  filter: drop-shadow(0 0 30px rgba(0,0,0,0.9));
+  transition: filter 0.4s ease;
+}
+
+.char-inner.speaking .char-img {
+  filter: drop-shadow(0 0 20px rgba(200,144,58,0.25)) drop-shadow(0 0 60px rgba(0,0,0,0.9));
+}
+
+/* fallback silhouette when image fails to load */
+.char-fallback {
+  width:180px; height:380px;
+  border-radius:90px 90px 30px 30px;
+  display:flex; align-items:center; justify-content:center;
+  position:relative; overflow:hidden;
+  box-shadow: 0 0 60px rgba(0,0,0,0.8);
+}
+.char-fallback-initial {
+  font-family:'Cinzel',serif; font-size:64px; font-weight:700;
+  color:rgba(255,255,255,0.06); user-select:none;
+}
+.char-fallback-bar {
+  position:absolute; bottom:0; left:0; right:0; height:3px;
+}
+
+/* per-character accent colors */
+.char-C001 .char-fallback { background:linear-gradient(180deg,#12203a,#080e1a); }
+.char-C001 .char-fallback-bar { background:var(--c001); }
+.char-C002 .char-fallback { background:linear-gradient(180deg,#3a1212,#1a0808); }
+.char-C002 .char-fallback-bar { background:var(--c002); }
+.char-C003 .char-fallback { background:linear-gradient(180deg,#123a1a,#081a0c); }
+.char-C003 .char-fallback-bar { background:var(--c003); }
+.char-C004 .char-fallback { background:linear-gradient(180deg,#3a3412,#1a1808); }
+.char-C004 .char-fallback-bar { background:var(--c004); }
+.char-C005 .char-fallback { background:linear-gradient(180deg,#2a123a,#12081a); }
+.char-C005 .char-fallback-bar { background:var(--c005); }
+
+/* ════════════════════════ TOPBAR ════════════════════════ */
+#topbar {
+  position:absolute; top:0; left:0; right:0; z-index:20;
+  display:flex; justify-content:flex-end; align-items:center;
+  padding:14px 20px; gap:10px;
+  background:linear-gradient(180deg,rgba(0,0,0,0.55) 0%,transparent 100%);
+  pointer-events:none;
+}
+.top-btn {
+  pointer-events:all;
+  font-family:'Cinzel',serif; font-size:10px; letter-spacing:2.5px;
+  color:var(--text-dim); background:var(--glass);
+  border:1px solid var(--border); padding:7px 16px;
+  cursor:pointer; text-transform:uppercase;
+  transition:all 0.2s; outline:none;
+}
+.top-btn:hover { color:var(--accent); border-color:rgba(200,144,58,0.4); background:var(--accent-glow); }
+.top-btn.active { color:var(--accent); border-color:rgba(200,144,58,0.4); }
+
+#progress {
+  position:absolute; bottom:0; left:0;
+  height:1px; background:var(--accent);
+  transition:width 0.4s ease; opacity:0.45;
+}
+
+/* ════════════════════════ TEXTBOX ════════════════════════ */
+#textbox {
+  position:relative; z-index:10;
+  width:100%;
+  margin:0;
+  padding:22px 48px 26px;
+  background:rgba(0,0,0,0.88);
+  border:none;
+  border-top:1px solid rgba(200,144,58,0.18);
+  backdrop-filter:blur(24px);
+  transition:opacity 0.25s, transform 0.25s;
+}
+#textbox::before {
+  content:''; position:absolute; top:0; left:40px; right:40px; height:1px;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);
+  opacity:0.35;
+}
+
+#speaker {
+  font-family:'Cinzel',serif; font-size:12px; letter-spacing:3px;
+  color:var(--accent); text-transform:uppercase;
+  margin-bottom:10px; min-height:18px;
+  transition:color 0.3s;
+}
+
+#text {
+  font-size:19px; line-height:1.8; font-weight:300;
+  letter-spacing:0.02em; color:var(--text);
+}
+
+#textbox.narrator #speaker { opacity:0; pointer-events:none; }
+#textbox.narrator #text { font-style:normal; color:var(--text-dim); font-size:16px; }
+#textbox.monologue #text { font-style:italic; color:#c8bfaa; }
+
+/* caret */
+#caret {
+  display:inline-block; width:7px; height:7px;
+  background:var(--accent); border-radius:50%;
+  margin-left:8px; vertical-align:middle;
+  opacity:0; animation:blink 1.3s ease infinite;
+  transition:opacity 0.3s;
+}
+#caret.show { opacity:1; }
+@keyframes blink { 0%,100%{transform:scale(1);opacity:.8} 50%{transform:scale(1.6);opacity:.2} }
+
+/* word spans */
+.w {
+  cursor:pointer; border-radius:2px; padding:1px 2px;
+  transition:background 0.15s, color 0.15s;
+}
+.w:hover { background:rgba(200,144,58,0.2); color:#ffd590; }
+
+/* slide counter */
+#counter {
+  position:absolute; bottom:135px; right:22px; z-index:10;
+  font-family:'Cinzel',serif; font-size:9px; letter-spacing:2px;
+  color:var(--text-dim); opacity:0.4;
+}
+
+/* ════════════════════════ WORD TOOLTIP ════════════════════════ */
+#tooltip {
+  position:fixed; z-index:200;
+  width:300px;
+  background:#0e0e1c; border:1px solid rgba(200,144,58,0.3);
+  padding:16px 18px 14px;
+  box-shadow:0 12px 50px rgba(0,0,0,0.8);
+  pointer-events:none; opacity:0;
+  transform:translateY(8px);
+  transition:opacity 0.2s, transform 0.2s;
+}
+#tooltip.show { opacity:1; transform:translateY(0); pointer-events:all; }
+
+#tt-word { font-family:'Cinzel',serif; font-size:13px; color:var(--accent); letter-spacing:1px; margin-bottom:6px; }
+#tt-def  { font-size:14px; line-height:1.6; color:var(--text); font-weight:300; }
+#tt-ctx  { font-size:12px; color:var(--text-dim); font-style:italic; line-height:1.5; margin-top:8px; padding-top:8px; border-top:1px solid var(--border); }
+#tt-spin { font-size:13px; color:var(--text-dim); font-style:italic; }
+#tt-close { position:absolute; top:8px; right:12px; color:var(--text-dim); cursor:pointer; font-size:17px; line-height:1; pointer-events:all; }
+#tt-close:hover { color:var(--text); }
+
+/* ════════════════════════ LOGS PANEL ════════════════════════ */
+#logs {
+  position:fixed; top:0; right:0; width:400px; height:100%;
+  z-index:100; background:rgba(6,6,12,0.98);
+  border-left:1px solid var(--border); backdrop-filter:blur(20px);
+  transform:translateX(100%); transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);
+  display:flex; flex-direction:column;
+}
+#logs.open { transform:translateX(0); }
+
+#logs-head {
+  padding:22px 22px 14px; border-bottom:1px solid var(--border);
+  display:flex; justify-content:space-between; align-items:center; flex-shrink:0;
+}
+#logs-title { font-family:'Cinzel',serif; font-size:11px; letter-spacing:3px; color:var(--accent); text-transform:uppercase; }
+#logs-x { color:var(--text-dim); cursor:pointer; font-size:20px; line-height:1; transition:color 0.2s; }
+#logs-x:hover { color:var(--text); }
+
+#logs-body { flex:1; overflow-y:auto; padding:18px 22px; }
+#logs-body::-webkit-scrollbar { width:3px; }
+#logs-body::-webkit-scrollbar-thumb { background:var(--border); border-radius:2px; }
+
+.log-item { margin-bottom:18px; }
+.log-item.log-narrator .log-txt { font-size:13px; color:var(--text-dim); font-style:normal; line-height:1.7; }
+.log-item.log-dialogue, .log-item.log-monologue { padding-left:12px; border-left:2px solid rgba(200,144,58,0.25); }
+.log-spk { font-family:'Cinzel',serif; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--accent); margin-bottom:3px; }
+.log-txt { font-size:13px; line-height:1.65; color:var(--text); font-style:italic; font-weight:300; }
+
+/* ════════════════════════ QUIZ ════════════════════════ */
+#quiz-screen {
+  position:fixed; inset:0; z-index:300;
+  background:var(--bg); overflow-y:auto;
+  opacity:0; pointer-events:none;
+  transition:opacity 0.6s ease;
+  display:flex; flex-direction:column; align-items:center;
+}
+#quiz-screen.show { opacity:1; pointer-events:all; }
+
+#quiz-inner {
+  width:100%; max-width:760px;
+  padding:60px 40px 100px;
+}
+
+#quiz-head {
+  text-align:center; margin-bottom:48px;
+}
+#quiz-title {
+  font-family:'Cinzel',serif; font-size:22px; letter-spacing:5px;
+  color:var(--accent); text-transform:uppercase; margin-bottom:10px;
+}
+#quiz-sub { font-size:15px; color:var(--text-dim); letter-spacing:1px; }
+
+.q-block {
+  margin-bottom:36px;
+  border:1px solid var(--border);
+  padding:24px 28px;
+  background:var(--glass);
+  position:relative;
+}
+.q-block::before {
+  content:''; position:absolute; top:0; left:20px; right:20px; height:1px;
+  background:linear-gradient(90deg,transparent,var(--border),transparent);
+}
+
+.q-num {
+  font-family:'Cinzel',serif; font-size:9px; letter-spacing:2px;
+  color:var(--text-dim); text-transform:uppercase; margin-bottom:8px;
+}
+.q-type-badge {
+  display:inline-block; font-size:9px; letter-spacing:1.5px;
+  padding:2px 8px; border:1px solid var(--border);
+  color:var(--text-dim); text-transform:uppercase; margin-bottom:10px; margin-left:8px;
+}
+.q-text { font-size:17px; line-height:1.65; color:var(--text); margin-bottom:16px; }
+
+/* MC options */
+.mc-opts { display:flex; flex-direction:column; gap:8px; }
+.mc-opt {
+  display:flex; align-items:center; gap:12px;
+  padding:10px 14px; border:1px solid var(--border);
+  cursor:pointer; transition:all 0.2s; font-size:15px; color:var(--text-dim);
+  background:transparent;
+}
+.mc-opt:hover { border-color:rgba(200,144,58,0.3); color:var(--text); background:var(--accent-glow); }
+.mc-opt.selected { border-color:var(--accent); color:var(--text); background:var(--accent-glow); }
+.mc-opt.correct { border-color:#5aff8a; color:#5aff8a; background:rgba(90,255,138,0.08); }
+.mc-opt.wrong   { border-color:#ff5a5a; color:#ff5a5a; background:rgba(255,90,90,0.08); }
+.opt-letter {
+  font-family:'Cinzel',serif; font-size:11px; font-weight:600;
+  color:var(--accent); min-width:18px;
+}
+
+/* text answers */
+.q-textarea {
+  width:100%; min-height:90px; resize:vertical;
+  background:rgba(255,255,255,0.02); border:1px solid var(--border);
+  color:var(--text); font-family:'Crimson Pro',serif; font-size:16px;
+  line-height:1.6; padding:12px 14px; outline:none;
+  transition:border-color 0.2s;
+}
+.q-textarea:focus { border-color:rgba(200,144,58,0.35); }
+.para-textarea { min-height:160px; }
+
+/* feedback */
+.q-feedback {
+  margin-top:14px; padding:14px 16px;
+  border:1px solid var(--border); display:none;
+  font-size:14px; line-height:1.65;
+}
+.q-feedback.show { display:block; }
+.q-feedback .fb-score { font-family:'Cinzel',serif; font-size:11px; letter-spacing:2px; color:var(--accent); margin-bottom:6px; }
+.q-feedback .fb-text  { color:var(--text-dim); }
+.q-feedback.grading .fb-text { font-style:italic; color:var(--text-dim); }
+
+/* quiz actions */
+#quiz-actions { display:flex; flex-direction:column; align-items:center; gap:16px; margin-top:20px; }
+#btn-submit-quiz {
+  font-family:'Cinzel',serif; font-size:11px; letter-spacing:3px;
+  color:var(--bg); background:var(--accent); border:none;
+  padding:14px 48px; cursor:pointer; text-transform:uppercase;
+  transition:all 0.2s; outline:none;
+}
+#btn-submit-quiz:hover { background:#e0a84a; }
+#btn-submit-quiz:disabled { background:var(--text-dim); cursor:not-allowed; }
+
+#quiz-score-banner {
+  text-align:center; padding:28px;
+  border:1px solid rgba(200,144,58,0.3);
+  background:var(--accent-glow); display:none;
+}
+#quiz-score-banner.show { display:block; }
+#score-big { font-family:'Cinzel',serif; font-size:42px; color:var(--accent); }
+#score-msg { font-size:16px; color:var(--text-dim); margin-top:8px; letter-spacing:1px; }
+
+#btn-restart {
+  font-family:'Cinzel',serif; font-size:10px; letter-spacing:2px;
+  color:var(--text-dim); background:transparent;
+  border:1px solid var(--border); padding:10px 28px;
+  cursor:pointer; text-transform:uppercase; transition:all 0.2s;
+  display:none;
+}
+#btn-restart.show { display:block; }
+#btn-restart:hover { color:var(--accent); border-color:rgba(200,144,58,0.4); }
+
+/* loading spinner */
+.spin {
+  display:inline-block; width:14px; height:14px;
+  border:2px solid var(--border); border-top-color:var(--accent);
+  border-radius:50%; animation:spin 0.7s linear infinite;
+  vertical-align:middle; margin-left:6px;
+}
+@keyframes spin { to { transform:rotate(360deg); } }
+
+/* ════════════════════════ END SCREEN ════════════════════════ */
+#end-screen {
+  position:fixed; inset:0; z-index:250;
+  background:rgba(0,0,0,0.92);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:18px; opacity:0; pointer-events:none;
+  transition:opacity 0.7s ease;
+}
+#end-screen.show { opacity:1; pointer-events:all; }
+#end-title { font-family:'Cinzel',serif; font-size:26px; letter-spacing:6px; color:var(--accent); }
+#end-sub   { font-size:14px; color:var(--text-dim); letter-spacing:2px; }
+.end-btn {
+  font-family:'Cinzel',serif; font-size:10px; letter-spacing:2.5px;
+  color:var(--text-dim); background:var(--glass);
+  border:1px solid var(--border); padding:10px 28px;
+  cursor:pointer; text-transform:uppercase; transition:all 0.2s;
+}
+.end-btn:hover { color:var(--accent); border-color:rgba(200,144,58,0.4); }
+.end-btn.primary { color:var(--bg); background:var(--accent); border-color:var(--accent); }
+.end-btn.primary:hover { background:#e0a84a; }
+
+/* ════════════════════════ UTILS ════════════════════════ */
+.fade-out { animation:fo 0.22s ease forwards; }
+.fade-in  { animation:fi 0.22s ease forwards; }
+@keyframes fo { to   { opacity:0; transform:translateY(5px); } }
+@keyframes fi { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:none; } }
+</style>
+</head>
+<body>
+
+<!-- ═══ MAIN SCENE ═══ -->
+<div id="scene">
+  <div id="bg"></div>
+
+  <div id="chars"></div>
+
+  <div id="topbar">
+    <div id="progress"></div>
+    <button class="top-btn" id="btn-auto">Auto</button>
+    <button class="top-btn" id="btn-logs">Logs</button>
+  </div>
+
+  <div id="counter"></div>
+
+  <div id="textbox">
+    <div id="speaker"></div>
+    <div id="text"></div>
+    <span id="caret"></span>
+  </div>
+</div>
+
+<!-- ═══ WORD TOOLTIP ═══ -->
+<div id="tooltip">
+  <span id="tt-close">×</span>
+  <div id="tt-word"></div>
+  <div id="tt-def"></div>
+  <div id="tt-ctx"></div>
+</div>
+
+<!-- ═══ LOGS ═══ -->
+<div id="logs">
+  <div id="logs-head">
+    <div id="logs-title">Story Log</div>
+    <div id="logs-x">×</div>
+  </div>
+  <div id="logs-body"></div>
+</div>
+
+<!-- ═══ END SCREEN ═══ -->
+<div id="end-screen">
+  <div id="end-title">Chapter End</div>
+  <div id="end-sub">What would you like to do?</div>
+  <button class="end-btn primary" id="btn-go-quiz">Take the Quiz</button>
+  <button class="end-btn" id="btn-replay">Read Again</button>
+</div>
+
+<!-- ═══ QUIZ SCREEN ═══ -->
+<div id="quiz-screen">
+  <div id="quiz-inner">
+    <div id="quiz-head">
+      <div id="quiz-title">Chapter Quiz</div>
+      <div id="quiz-sub">High School English · 10 Questions</div>
+    </div>
+    <div id="quiz-loading" style="text-align:center;padding:60px 0;color:var(--text-dim);font-style:italic;font-size:16px;">
+      Generating questions<span class="spin"></span>
+    </div>
+    <div id="quiz-questions"></div>
+    <div id="quiz-actions" style="display:none">
+      <div id="quiz-score-banner">
+        <div id="score-big"></div>
+        <div id="score-msg"></div>
+      </div>
+      <button id="btn-submit-quiz">Submit Answers</button>
+      <button id="btn-restart">Read Again</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+// CONFIG
+// ═══════════════════════════════════════════════════════
+const API_BASE = "http://localhost:3001"
+
+// Accent colors and initials per character slot
+const CHAR_ACCENTS  = { "C001":"#5a8eff", "C002":"#ff5a5a", "C003":"#5aff8a", "C004":"#ffd85a", "C005":"#c05aff" }
+const CHAR_INITIALS = { "C001":"I", "C002":"II", "C003":"III", "C004":"IV", "C005":"V" }
+
+// Populated automatically from /api/characters on init
+let CHARACTER_CONFIG = {}
+
+// ═══════════════════════════════════════════════════════
+// LOAD SLIDES
+// ═══════════════════════════════════════════════════════
+// Since we're running as file://, we use a hardcoded path trick.
+// Replace the path below with your actual story_slides.json absolute path.
+const SLIDES_PATH = "http://localhost:3001/slides"
+
+// Sample slides shown if real file can't load
+const FALLBACK_SLIDES = [
+  { type:"narrator", text:"The reader could not load story_slides.json. Make sure the path in SLIDES_PATH is correct and the file exists." },
+  { type:"narrator", text:"Run node engines/story_system/run_story.js to generate your first scene, which will produce the slides file." }
+]
+
+// ═══════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════
+let slides = []
+let idx = 0
+let transitioning = false
+let prevSpeakerId = null
+let autoPlay = false
+let autoTimer = null
+let quizData = null
+let storyFullText = ""
+
+// ═══════════════════════════════════════════════════════
+// DOM
+// ═══════════════════════════════════════════════════════
+const $ = id => document.getElementById(id)
+const scene      = $('scene')
+const charsEl    = $('chars')
+const progressEl = $('progress')
+const speakerEl  = $('speaker')
+const textEl     = $('text')
+const caretEl    = $('caret')
+const counterEl  = $('counter')
+const textbox    = $('textbox')
+const tooltip    = $('tooltip')
+const ttWord     = $('tt-word')
+const ttDef      = $('tt-def')
+const ttCtx      = $('tt-ctx')
+const logsEl     = $('logs')
+const logsBody   = $('logs-body')
+const endScreen  = $('end-screen')
+const quizScreen = $('quiz-screen')
+const quizQs     = $('quiz-questions')
+const quizLoading= $('quiz-loading')
+const quizActions= $('quiz-actions')
+
+// ═══════════════════════════════════════════════════════
+// CHARACTER RENDERING
+// ═══════════════════════════════════════════════════════
+function getCharId(speaker) {
+  if (!speaker) return null
+  const direct = Object.keys(CHARACTER_CONFIG).find(k => k === speaker)
+  if (direct) return direct
+  return Object.keys(CHARACTER_CONFIG).find(k =>
+    CHARACTER_CONFIG[k].displayName.toLowerCase() === speaker.toLowerCase()
+  ) || null
+}
+
+function buildChar(charId, speaking, dimmed) {
+  const cfg = CHARACTER_CONFIG[charId] || { displayName: charId, accentColor:'#888', initial:'?', imagePath:'' }
+
+  const wrap = document.createElement('div')
+  wrap.className = 'char-inner' + (speaking?' speaking':'') + (dimmed?' dimmed':'') + ` char-${charId}`
+
+  // Try image first
+  const img = document.createElement('img')
+  img.className = 'char-img'
+  // Use local absolute path — works when opening HTML as file://
+  img.src = cfg.imagePath
+  img.alt = cfg.displayName
+
+  // Fallback silhouette if image fails
+  img.onerror = () => {
+    img.remove()
+    const fb = document.createElement('div')
+    fb.className = 'char-fallback'
+    fb.innerHTML = `
+      <div class="char-fallback-initial">${cfg.initial}</div>
+      <div class="char-fallback-bar" style="background:${cfg.accentColor}"></div>
+    `
+    wrap.appendChild(fb)
+  }
+
+  wrap.appendChild(img)
+  return wrap
+}
+
+function renderChars(slide) {
+  charsEl.innerHTML = ''
+
+  const type = slide.type
+  const speakerId = getCharId(slide.speaker)
+
+  if (type === 'narrator') return
+
+  if (!speakerId) return
+
+  if (prevSpeakerId && prevSpeakerId !== speakerId) {
+    // Two characters: prev dimmed on left, current speaking on right
+    const wrapL = document.createElement('div')
+    wrapL.className = 'char-wrap pos-left'
+    wrapL.appendChild(buildChar(prevSpeakerId, false, true))
+    charsEl.appendChild(wrapL)
+
+    const wrapR = document.createElement('div')
+    wrapR.className = 'char-wrap pos-right'
+    wrapR.appendChild(buildChar(speakerId, true, false))
+    charsEl.appendChild(wrapR)
+  } else {
+    // Single character centered
+    const wrapC = document.createElement('div')
+    wrapC.className = 'char-wrap pos-center'
+    wrapC.appendChild(buildChar(speakerId, true, false))
+    charsEl.appendChild(wrapC)
+  }
+
+  prevSpeakerId = speakerId
+}
+
+// ═══════════════════════════════════════════════════════
+// WORD SPANS
+// ═══════════════════════════════════════════════════════
+function buildWordSpans(text) {
+  const frag = document.createDocumentFragment()
+  text.split(/(\s+)/).forEach(part => {
+    if (/^\s+$/.test(part)) {
+      frag.appendChild(document.createTextNode(part))
+    } else {
+      const span = document.createElement('span')
+      span.className = 'w'
+      span.textContent = part
+      span.addEventListener('click', e => {
+        e.stopPropagation()
+        const clean = part.replace(/[^a-zA-Z''-]/g, '')
+        if (clean.length > 1) showDefinition(clean, text, e)
+      })
+      frag.appendChild(span)
+    }
+  })
+  return frag
+}
+
+// ═══════════════════════════════════════════════════════
+// SLIDE DISPLAY
+// ═══════════════════════════════════════════════════════
+function showSlide(i) {
+  if (i >= slides.length) { showEnd(); return }
+
+  const slide = slides[i]
+  storyFullText += slide.text + ' '
+
+  textbox.classList.add('fade-out')
+  caretEl.classList.remove('show')
+
+  setTimeout(() => {
+    textbox.classList.remove('fade-out')
+    textbox.classList.remove('narrator','monologue','dialogue')
+
+    if (slide.type === 'narrator') {
+      textbox.classList.add('narrator')
+      speakerEl.textContent = ''
+    } else {
+      textbox.classList.add(slide.type)
+      const charId = getCharId(slide.speaker)
+      const cfg = CHARACTER_CONFIG[charId] || {}
+      speakerEl.textContent = cfg.displayName || slide.speaker || ''
+      speakerEl.style.color = cfg.accentColor || 'var(--accent)'
+    }
+
+    textEl.innerHTML = ''
+    textEl.appendChild(buildWordSpans(slide.text))
+
+    renderChars(slide)
+    addLog(slide)
+
+    progressEl.style.width = ((i+1)/slides.length*100)+'%'
+    counterEl.textContent = `${i+1} / ${slides.length}`
+
+    textbox.classList.add('fade-in')
+    setTimeout(() => textbox.classList.remove('fade-in'), 220)
+
+    caretEl.classList.add('show')
+    transitioning = false
+  }, 220)
+}
+
+function advance() {
+  if (transitioning) return
+  closeTooltip()
+  if (idx >= slides.length) { showEnd(); return }
+  transitioning = true
+  showSlide(idx)
+  idx++
+}
+
+// ═══════════════════════════════════════════════════════
+// LOG
+// ═══════════════════════════════════════════════════════
+function addLog(slide) {
+  const item = document.createElement('div')
+  item.className = `log-item log-${slide.type}`
+
+  if (slide.type !== 'narrator' && slide.speaker) {
+    const charId = getCharId(slide.speaker)
+    const cfg = CHARACTER_CONFIG[charId] || {}
+    const spk = document.createElement('div')
+    spk.className = 'log-spk'
+    spk.textContent = cfg.displayName || slide.speaker
+    spk.style.color = cfg.accentColor || 'var(--accent)'
+    item.appendChild(spk)
+  }
+
+  const txt = document.createElement('div')
+  txt.className = 'log-txt'
+  txt.textContent = slide.text
+  item.appendChild(txt)
+
+  logsBody.appendChild(item)
+  logsBody.scrollTop = logsBody.scrollHeight
+}
+
+// ═══════════════════════════════════════════════════════
+// WORD DEFINITION
+// ═══════════════════════════════════════════════════════
+async function showDefinition(word, sentence, event) {
+  const rect = event.target.getBoundingClientRect()
+  const left = Math.min(rect.left, window.innerWidth - 320)
+  const top  = rect.top > 180 ? rect.top - 150 : rect.bottom + 12
+
+  tooltip.style.left = left + 'px'
+  tooltip.style.top  = top  + 'px'
+
+  ttWord.textContent = word
+  ttDef.innerHTML = '<span style="font-style:italic;color:var(--text-dim)">Looking up<span class="spin"></span></span>'
+  ttCtx.textContent = ''
+  tooltip.classList.add('show')
+
+  try {
+    const res = await fetch(`${API_BASE}/api/define`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ word, sentence })
+    })
+    const data = await res.json()
+    ttDef.textContent = data.definition || 'No definition found.'
+    ttCtx.textContent = data.context ? `In context: ${data.context}` : ''
+  } catch {
+    ttDef.textContent = 'Could not connect to the API server.'
+    ttCtx.textContent = 'Make sure api_server.js is running on port 3001.'
+  }
+}
+
+function closeTooltip() { tooltip.classList.remove('show') }
+
+// ═══════════════════════════════════════════════════════
+// AUTO PLAY
+// ═══════════════════════════════════════════════════════
+function toggleAuto() {
+  autoPlay = !autoPlay
+  const btn = $('btn-auto')
+  btn.textContent = autoPlay ? 'Auto ON' : 'Auto'
+  btn.classList.toggle('active', autoPlay)
+  if (autoPlay) {
+    autoTimer = setInterval(() => {
+      if (!tooltip.classList.contains('show') && !logsEl.classList.contains('open')) advance()
+    }, 3800)
+  } else {
+    clearInterval(autoTimer)
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// END SCREEN
+// ═══════════════════════════════════════════════════════
+function showEnd() {
+  clearInterval(autoTimer)
+  endScreen.classList.add('show')
+}
+
+$('btn-go-quiz').onclick = () => {
+  endScreen.classList.remove('show')
+  openQuiz()
+}
+
+$('btn-replay').onclick = () => {
+  endScreen.classList.remove('show')
+  idx = 0; prevSpeakerId = null; storyFullText = ''
+  logsBody.innerHTML = ''
+  advance()
+}
+
+// ═══════════════════════════════════════════════════════
+// QUIZ
+// ═══════════════════════════════════════════════════════
+async function openQuiz() {
+  quizScreen.classList.add('show')
+
+  if (quizData) { renderQuiz(); return }
+
+  quizLoading.style.display = 'block'
+  quizQs.innerHTML = ''
+  quizActions.style.display = 'none'
+
+  try {
+    const res = await fetch(`${API_BASE}/api/quiz`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ storyText: storyFullText.trim() })
+    })
+    const data = await res.json()
+    quizData = data.questions || []
+  } catch {
+    quizData = []
+    quizQs.innerHTML = '<p style="color:var(--text-dim);font-style:italic;text-align:center;padding:40px 0">Could not generate quiz. Make sure api_server.js is running.</p>'
+    quizLoading.style.display = 'none'
+    return
+  }
+
+  quizLoading.style.display = 'none'
+  renderQuiz()
+}
+
+function renderQuiz() {
+  quizQs.innerHTML = ''
+  quizActions.style.display = 'flex'
+  $('quiz-score-banner').classList.remove('show')
+  $('btn-restart').classList.remove('show')
+  $('btn-submit-quiz').disabled = false
+  $('btn-submit-quiz').textContent = 'Submit Answers'
+
+  const letters = ['A','B','C','D']
+
+  quizData.forEach((q, qi) => {
+    const block = document.createElement('div')
+    block.className = 'q-block'
+    block.dataset.qi = qi
+    block.dataset.type = q.type
+
+    const typeLabel = q.type === 'mc' ? 'Multiple Choice' : q.type === 'short' ? 'Short Answer' : 'Paragraph'
+
+    block.innerHTML = `
+      <div style="display:flex;align-items:center;margin-bottom:6px">
+        <span class="q-num">Question ${qi+1}</span>
+        <span class="q-type-badge">${typeLabel}</span>
+      </div>
+      <div class="q-text">${q.question}</div>
+    `
+
+    if (q.type === 'mc') {
+      const opts = document.createElement('div')
+      opts.className = 'mc-opts'
+      q.options.forEach((opt, oi) => {
+        const btn = document.createElement('div')
+        btn.className = 'mc-opt'
+        btn.dataset.oi = oi
+        btn.innerHTML = `<span class="opt-letter">${letters[oi]}</span>${opt}`
+        btn.onclick = () => {
+          opts.querySelectorAll('.mc-opt').forEach(b => b.classList.remove('selected'))
+          btn.classList.add('selected')
+        }
+        opts.appendChild(btn)
+      })
+      block.appendChild(opts)
+    } else {
+      const ta = document.createElement('textarea')
+      ta.className = 'q-textarea' + (q.type === 'paragraph' ? ' para-textarea' : '')
+      ta.placeholder = q.type === 'short' ? 'Write 1–3 sentences...' : 'Write 5–8 sentences with your analysis...'
+      block.appendChild(ta)
+    }
+
+    const fb = document.createElement('div')
+    fb.className = 'q-feedback'
+    fb.innerHTML = '<div class="fb-score"></div><div class="fb-text"></div>'
+    block.appendChild(fb)
+
+    quizQs.appendChild(block)
+  })
+}
+
+$('btn-submit-quiz').onclick = async () => {
+  const btn = $('btn-submit-quiz')
+  btn.disabled = true
+  btn.textContent = 'Grading'
+
+  const blocks = quizQs.querySelectorAll('.q-block')
+  let mcCorrect = 0, mcTotal = 0
+  let totalScore = 0, maxTotal = 0
+  const gradePromises = []
+
+  blocks.forEach((block, qi) => {
+    const q = quizData[qi]
+    const fb = block.querySelector('.q-feedback')
+    const fbScore = block.querySelector('.fb-score')
+    const fbText  = block.querySelector('.fb-text')
+
+    if (q.type === 'mc') {
+      mcTotal++
+      maxTotal += 1
+      const selected = block.querySelector('.mc-opt.selected')
+      const allOpts  = block.querySelectorAll('.mc-opt')
+
+      allOpts.forEach((opt, oi) => {
+        if (oi === q.answer) opt.classList.add('correct')
+      })
+
+      if (selected) {
+        const selIdx = parseInt(selected.dataset.oi)
+        if (selIdx === q.answer) {
+          mcCorrect++; totalScore++
+          fbScore.textContent = '✓ Correct'
+          fbScore.style.color = '#5aff8a'
+          fbText.textContent = ''
+        } else {
+          selected.classList.add('wrong')
+          fbScore.textContent = '✗ Incorrect'
+          fbScore.style.color = '#ff5a5a'
+          fbText.textContent = `Correct answer: ${['A','B','C','D'][q.answer]}`
+        }
+      } else {
+        fbScore.textContent = 'Not answered'
+        fbScore.style.color = 'var(--text-dim)'
+      }
+
+      fb.classList.add('show')
+
+    } else {
+      const ta = block.querySelector('textarea')
+      const answer = ta ? ta.value.trim() : ''
+      const max = q.type === 'paragraph' ? 10 : 5
+      maxTotal += max
+
+      if (!answer) {
+        fb.classList.add('show')
+        fbScore.textContent = 'Not answered'
+        fbScore.style.color = 'var(--text-dim)'
+        fbText.textContent = ''
+        return
+      }
+
+      fb.classList.add('show', 'grading')
+      fbScore.textContent = 'Grading'
+      fbText.innerHTML = '<span class="spin"></span>'
+
+      const promise = fetch(`${API_BASE}/api/grade`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          question: q.question,
+          sampleAnswer: q.sampleAnswer,
+          userAnswer: answer,
+          type: q.type
+        })
+      })
+      .then(r => r.json())
+      .then(data => {
+        fb.classList.remove('grading')
+        fbScore.textContent = `Score: ${data.score} / ${max}`
+        fbScore.style.color = data.score >= max*0.7 ? '#5aff8a' : data.score >= max*0.4 ? '#ffd85a' : '#ff5a5a'
+        fbText.textContent = data.feedback || ''
+        totalScore += data.score
+      })
+      .catch(() => {
+        fb.classList.remove('grading')
+        fbScore.textContent = 'Grading failed'
+        fbText.textContent = 'Could not reach API server.'
+      })
+
+      gradePromises.push(promise)
+    }
+  })
+
+  await Promise.all(gradePromises)
+
+  btn.textContent = 'Submitted'
+
+  // Show score banner
+  const pct = Math.round(totalScore / maxTotal * 100)
+  $('score-big').textContent = `${pct}%`
+  $('score-msg').textContent = pct >= 80 ? 'Excellent work!' : pct >= 60 ? 'Good effort — keep reading!' : 'Keep practicing — you\'ll get there!'
+  $('quiz-score-banner').classList.add('show')
+  $('btn-restart').classList.add('show')
+
+  quizScreen.scrollTop = quizScreen.scrollHeight
+}
+
+$('btn-restart').onclick = () => {
+  quizScreen.classList.remove('show')
+  idx = 0; prevSpeakerId = null; storyFullText = ''
+  logsBody.innerHTML = ''
+  quizData = null
+  advance()
+}
+
+// ═══════════════════════════════════════════════════════
+// EVENTS
+// ═══════════════════════════════════════════════════════
+scene.addEventListener('click', e => {
+  if (tooltip.classList.contains('show')) { closeTooltip(); return }
+  if (logsEl.classList.contains('open')) { logsEl.classList.remove('open'); return }
+  advance()
+})
+
+$('btn-logs').onclick = e => { e.stopPropagation(); logsEl.classList.toggle('open') }
+$('logs-x').onclick = () => logsEl.classList.remove('open')
+$('btn-auto').onclick = e => { e.stopPropagation(); toggleAuto() }
+$('tt-close').onclick = e => { e.stopPropagation(); closeTooltip() }
+
+// ═══════════════════════════════════════════════════════
+// INIT — Load characters then slides
+// ═══════════════════════════════════════════════════════
+async function init() {
+  // 1. Load character data from API server (reads personality JSON files)
+  try {
+    const res = await fetch(`${API_BASE}/api/characters`)
+    const data = await res.json()
+    // data = { C001: { name, role, ... }, C002: ... }
+    Object.keys(data).forEach(id => {
+      CHARACTER_CONFIG[id] = {
+        displayName: data[id].name,
+        accentColor: CHAR_ACCENTS[id]  || "#888888",
+        initial:     CHAR_INITIALS[id] || id,
+        imagePath:   data[id].imagePath
+      }
+    })
+  } catch {
+    console.warn("Could not load characters from API — using ID labels as names.")
+    // Fallback: build config from just the IDs
+    Object.keys(CHAR_ACCENTS).forEach(id => {
+      CHARACTER_CONFIG[id] = {
+        displayName: id,
+        accentColor: CHAR_ACCENTS[id],
+        initial:     CHAR_INITIALS[id],
+        imagePath:   ""
+      }
+    })
+  }
+
+  // 2. Load slides
+  try {
+    // NOTE: Chrome blocks local file fetches by default when opening as file://
+    // Launch Chrome with: chrome.exe --allow-file-access-from-files
+    const res = await fetch(SLIDES_PATH)
+    slides = await res.json()
+  } catch {
+    console.warn("Could not load story_slides.json — using fallback slides.")
+    slides = FALLBACK_SLIDES
+  }
+
+  advance()
+}
+
+init()
+</script>
+</body>
+</html>
