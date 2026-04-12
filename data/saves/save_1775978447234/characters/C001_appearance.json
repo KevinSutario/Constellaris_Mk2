@@ -1,0 +1,53 @@
+{
+  "face": {
+    "structure": "oval with angular jawline, high cheekbones, and a narrow chin",
+    "eyes": {
+      "shape": "sharp almond shape with a pronounced outer edge",
+      "color": "rich amber with flecks of gold",
+      "details": [
+        "dark, defined eyelashes enhancing upper eye line",
+        "soft gradient shading from a deeper hue at the limbal ring"
+      ],
+      "expression_effect": "intense, focused gaze conveying depth"
+    },
+    "expression": "a contemplative and slightly distant look suggesting deep thought",
+    "skin": {
+      "tone": "pale porcelain",
+      "undertone": "cool blue",
+      "texture": "smooth with minimal pores",
+      "rendering_notes": "lightly diffused with subtle highlights on the nose and brow"
+    }
+  },
+  "character": {
+    "hair": {
+      "color": "midnight black with subtle blue highlights",
+      "style": "long and straight with a slight wave at the ends",
+      "flow": "cascading smoothly over shoulders with a silky texture",
+      "details": [
+        "deep side part adding asymmetry",
+        "a thin braid runs behind the right ear for a touch of complexity"
+      ]
+    },
+    "aura": "an enigmatic and impenetrable presence, like a dark, swirling mist"
+  },
+  "outfit": {
+    "base": "dark velvet coat with a high collar",
+    "design": "minimalist with sharp, clean lines and subtle silver thread detailing",
+    "details": [
+      "sleeves feature fine embroidery that catches the light",
+      "inner lining is a deep crimson, barely visible"
+    ],
+    "fit": "tailored close to the body, emphasizing a lean frame"
+  },
+  "composition": {
+    "framing": "medium close-up, centered",
+    "pose": "seated with a slight forward lean, indicative of engagement in thought",
+    "gesture": "one hand lightly touching the neckline of the coat, index and thumb barely separated"
+  },
+  "background": {
+    "type": "abstract",
+    "color_palette": "dark hues of indigo and charcoal, with faint traces of violet",
+    "details": "soft, swirling patterns creating a sense of movement",
+    "rules": "should not distract from the character, only complement by enhancing aura"
+  }
+}

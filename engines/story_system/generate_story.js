@@ -212,9 +212,29 @@ ${tension <= 2 ? "LOW TENSION: subtle reactions, no confrontation, hesitation an
 
 ---
 
+CHARACTER BEHAVIOUR:
 Each character must behave according to their personality, current conditions, and what THEY personally know.
 
-OUTPUT LENGTH: Write between 500 to 700 words. Maintain continuous narrative flow.
+---
+
+DIALOGUE REQUIREMENTS (MANDATORY):
+- Every scene MUST contain at least 6 to 10 lines of spoken dialogue
+- Dialogue is the PRIMARY way characters reveal thoughts, tension, and relationships
+- Every character who appears must speak at least once
+- Spoken lines must be wrapped in quotation marks
+- After each spoken line, include a short action or reaction beat
+- Do NOT summarize what a character said — show the actual words
+- Vary dialogue: some short sharp lines, some longer emotional ones
+
+DIALOGUE FORMAT (follow exactly):
+"I told you this would happen," CHARACTER_001 said, her voice flat.
+CHARACTER_002 turned sharply.
+"You don't know what you're talking about."
+"Don't I?" She stepped closer. "Think about what you saw."
+
+---
+
+OUTPUT LENGTH: Write between 500 to 700 words. At least 40% must be direct spoken dialogue.
 
 Write the scene.
 `

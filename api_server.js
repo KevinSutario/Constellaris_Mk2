@@ -245,11 +245,11 @@ app.post("/api/define", async (req, res) => {
   if (!word || !sentence) return res.status(400).json({ error: "Missing word or sentence" })
 
   const levelMap = {
-    beginner:             "very simple words and very short sentences (A1-A2)",
-    elementary:           "simple clear sentences with common words (B1)",
-    intermediate:         "clear sentences suitable for high school (B2)",
-    "upper-intermediate": "varied grammar including conditionals (C1)",
-    advanced:             "sophisticated vocabulary and complex structures (C2)"
+    beginner:             "Use only the simplest words a child would know. One very short sentence for definition, one for context. Example sentence must use present tense only.",
+    elementary:           "Use common everyday words. Short clear sentences. Example sentence should be simple and relatable.",
+    intermediate:         "Use standard high-school vocabulary. 1-2 clear sentences. Example can use varied tenses and connectors like although, however, because.",
+    "upper-intermediate": "Use richer vocabulary in your explanation. Include nuance in the context sentence. Example should show the word in a complex or idiomatic context.",
+    advanced:             "Use precise academic-level language. Explain subtle connotations and register. Example sentence should demonstrate sophisticated usage in a formal or literary context."
   }
   const levelDesc = levelMap[grammarLevel] || levelMap.intermediate
 
@@ -292,11 +292,39 @@ app.post("/api/quiz", async (req, res) => {
   if (!storyText) return res.status(400).json({ error: "Missing storyText" })
 
   const levelMap = {
-    beginner:             "very simple vocabulary, present tense only",
-    elementary:           "simple questions, basic grammar",
-    intermediate:         "high school level, varied question types",
-    "upper-intermediate": "challenging, idioms, inference required",
-    advanced:             "university level, nuanced analysis"
+    beginner: (
+      "BEGINNER LEVEL (A1-A2): Write extremely simple questions a 10-year-old can understand. " +
+      "Use only present and past tense. Vocabulary must be basic everyday words. " +
+      "MC options must be obvious and clearly different. " +
+      "Short answer: expect 1 simple sentence. Paragraph: expect 3 simple sentences. " +
+      "Example MC: What did the character do? A) Slept B) Ran C) Ate D) Cried" 
+    ),
+    elementary: (
+      "ELEMENTARY LEVEL (B1): Simple questions with clear right answers. " +
+      "Use common vocabulary and simple sentence structures. " +
+      "Short answer: expect 1-2 simple sentences. Paragraph: expect 3-4 sentences. " +
+      "Focus on who, what, where questions about plot events."
+    ),
+    intermediate: (
+      "INTERMEDIATE LEVEL (B2): High school level questions. " +
+      "Mix comprehension and vocabulary-in-context questions. " +
+      "Short answer: expect 2-3 sentences with explanation. Paragraph: 4-6 sentences with opinion. " +
+      "Ask about character motivation, mood, and meaning of specific phrases."
+    ),
+    "upper-intermediate": (
+      "UPPER INTERMEDIATE LEVEL (C1): Challenging questions requiring inference and analysis. " +
+      "Include idioms, implied meaning, and vocabulary in subtle context. " +
+      "Short answer: expect 3-4 sentences with evidence from text. Paragraph: 5-7 sentences of analysis. " +
+      "Ask about themes, character development, narrative techniques, and implicit meaning."
+    ),
+    advanced: (
+      "ADVANCED LEVEL (C2): University entrance level critical analysis. " +
+      "Questions must require deep literary analysis, sophisticated vocabulary knowledge, " +
+      "and the ability to write nuanced arguments. " +
+      "Short answer: expect 4-5 sentences of precise analytical writing. " +
+      "Paragraph: 6-8 sentences of structured argument with textual evidence. " +
+      "Ask about authorial intent, symbolism, narrative voice, and complex thematic connections."
+    )
   }
 
   const langNote = storyLanguage !== "English"
@@ -345,7 +373,14 @@ app.post("/api/grade", async (req, res) => {
   if (!question || !userAnswer) return res.status(400).json({ error: "Missing fields" })
 
   const maxScore    = type === "paragraph" ? 10 : 5
-  const expectation = type === "paragraph" ? "5-8 sentences" : "1-3 sentences"
+  const gradeExpectations = {
+    beginner:             type === "paragraph" ? "3 simple sentences" : "1 simple sentence",
+    elementary:           type === "paragraph" ? "3-4 sentences" : "1-2 sentences",
+    intermediate:         type === "paragraph" ? "4-6 sentences with opinion" : "2-3 sentences with explanation",
+    "upper-intermediate": type === "paragraph" ? "5-7 sentences of analysis with text evidence" : "3-4 sentences with evidence",
+    advanced:             type === "paragraph" ? "6-8 sentences of structured argument" : "4-5 sentences of precise analysis"
+  }
+  const expectation = gradeExpectations[grammarLevel] || gradeExpectations.intermediate
   const langNote    = storyLanguage !== "English" ? `The quiz is in ${storyLanguage}. Provide feedback in ${storyLanguage}.` : ""
 
   try {
@@ -357,15 +392,20 @@ app.post("/api/grade", async (req, res) => {
         {
           role: "user",
           content: `${langNote}
-Grade this student answer. Level: ${grammarLevel}.
+Grade this student answer at ${grammarLevel} level.
 Question: ${question}
-Expected (${expectation}): ${sampleAnswer}
+Model answer: ${sampleAnswer}
 Student answer: ${userAnswer}
+Expected length: ${expectation}
 
-Score out of ${maxScore}. Consider comprehension, language accuracy, depth.
+Score out of ${maxScore}:
+- Full marks: answer is complete, accurate, at the right length and complexity for ${grammarLevel} level
+- Half marks: partially correct or too short
+- Zero: blank, irrelevant, or completely wrong
+Be strict about length — a beginner writing 1 sentence is fine, an advanced student writing 1 sentence is not.
 
 Return ONLY JSON:
-{"score":<0-${maxScore}>,"feedback":"<2-3 encouraging sentences>"}`
+{"score":<0-${maxScore}>,"feedback":"<2-3 sentences: what was good, what to improve, one concrete tip>"}`
         }
       ]
     })

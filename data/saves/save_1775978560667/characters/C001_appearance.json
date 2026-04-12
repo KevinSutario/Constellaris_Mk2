@@ -1,0 +1,55 @@
+{
+  "face": {
+    "structure": "oval with pronounced cheekbones and a sharp jawline",
+    "eyes": {
+      "shape": "sharp almond",
+      "color": "deep amber",
+      "details": [
+        "slight upward tilt at the outer corners",
+        "deep-set",
+        "contrasting dark lashes"
+      ],
+      "expression_effect": "intense focus"
+    },
+    "expression": "pensive with a hint of suspicion",
+    "skin": {
+      "tone": "warm beige",
+      "undertone": "golden",
+      "texture": "smooth with subtle freckles across the nose",
+      "rendering_notes": "soft matte finish with slight highlights on the cheekbones"
+    }
+  },
+  "character": {
+    "hair": {
+      "color": "dark chestnut brown",
+      "style": "long and layered with face-framing strands",
+      "flow": "softly cascading down past the shoulders",
+      "details": [
+        "gently tousled",
+        "slight shine on the strands, particularly at the tips"
+      ]
+    },
+    "aura": "mysterious and enigmatic with an underlying intensity"
+  },
+  "outfit": {
+    "base": "lightweight, fitted military jacket",
+    "design": "minimalist with functional pockets and subtle stitching detailing",
+    "details": [
+      "high collar",
+      "sleeve tabs",
+      "faint insignia on the left shoulder"
+    ],
+    "fit": "form-fitting but allows for comfortable movement"
+  },
+  "composition": {
+    "framing": "mid-length, capturing from the waist up",
+    "pose": "slightly turned to the side to imply readiness",
+    "gesture": "right hand softly gripping the edge of the jacket, left arm relaxed at the side"
+  },
+  "background": {
+    "type": "simplistic urban setting",
+    "color_palette": "muted grays and blues",
+    "details": "faded cityscape with soft focus",
+    "rules": "keep elements minimal to emphasize character foreground"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "C001",
+  "name": "Kim Hana",
+  "age": 17,
+  "personality": [
+    "calculating under pressure",
+    "emotionally guarded",
+    "quietly observant"
+  ],
+  "traits": [
+    "avoids eye contact when lying",
+    "steps in only when necessary"
+  ],
+  "role": "strategist"
+}

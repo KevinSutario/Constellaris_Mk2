@@ -1,0 +1,54 @@
+{
+  "face": {
+    "structure": "oval with a softly pointed chin, high cheekbones",
+    "eyes": {
+      "shape": "sharp almond shape",
+      "color": "deep chestnut with golden flecks",
+      "details": [
+        "dark, defined eyelashes",
+        "subtle gradient shading from outer to inner iris",
+        "slight shimmer at the lower right corner"
+      ],
+      "expression_effect": "intensely focused yet approachable"
+    },
+    "expression": "thoughtfully curious with slightly raised eyebrows",
+    "skin": {
+      "tone": "light olive",
+      "undertone": "warm with a slight gold hue",
+      "texture": "smooth with faint, barely visible freckles",
+      "rendering_notes": "soft luminosity to emphasize youthful skin"
+    }
+  },
+  "character": {
+    "hair": {
+      "color": "dark espresso brown",
+      "style": "long, slightly wavy with layered ends",
+      "flow": "naturally cascading with a gentle leftward part",
+      "details": [
+        "soft shine reflecting light at the tips",
+        "subtle, natural highlights underneath"
+      ]
+    },
+    "aura": "bright and keen with a hint of mystery"
+  },
+  "outfit": {
+    "base": "lightweight, tailored jacket over a fitted turtleneck",
+    "design": "minimalistic with subtle geometric patterns on the edges",
+    "details": [
+      "fine stitching visible on collars and cuffs",
+      "small, unobtrusive designer logo near the hem"
+    ],
+    "fit": "snug yet comfortable, allowing ease of movement"
+  },
+  "composition": {
+    "framing": "mid-shot focusing on torso and head",
+    "pose": "standing at a slight angle with one arm loosely crossed",
+    "gesture": "index finger gently supporting chin in a contemplative manner"
+  },
+  "background": {
+    "type": "indoor, modern library",
+    "color_palette": "earthy tones with subtle pops of emerald and brass",
+    "details": "rows of neatly arranged books and softly glowing desk lamps",
+    "rules": "create a calm and intellectual ambiance"
+  }
+}
