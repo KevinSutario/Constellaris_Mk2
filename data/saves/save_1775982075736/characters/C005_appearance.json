@@ -1,0 +1,56 @@
+{
+  "face": {
+    "structure": "chiselled with a slightly round chin, prominent cheekbones hinting at a sharp intelligence",
+    "eyes": {
+      "shape": "narrow, with a sharp almond shape accentuating a calculating nature",
+      "color": "dark brown with flecks of gold",
+      "details": [
+        "thin, precise eyelashes",
+        "contrast between the sclera and iris",
+        "subtle highlight on the lower arc"
+      ],
+      "expression_effect": "introspective, often casting a downward glance when inwardly focused"
+    },
+    "expression": "set in a thoughtful, neutral manner with a slight furrow in the brow",
+    "skin": {
+      "tone": "light olive",
+      "undertone": "warm, with a hint of yellow",
+      "texture": "smooth with a barely visible matte finish",
+      "rendering_notes": "subtle gradient shading to accentuate bone structure"
+    }
+  },
+  "character": {
+    "hair": {
+      "color": "midnight black",
+      "style": "medium length, layered with soft waves",
+      "flow": "neatly parted to the left, ends slightly flipping outwards",
+      "details": [
+        "soft shine at the apex",
+        "gentle movement towards the ends",
+        "a few stray strands adding to a natural look"
+      ]
+    },
+    "aura": "a calm and controlled presence with an air of mystery"
+  },
+  "outfit": {
+    "base": "tailored charcoal grey blazer",
+    "design": "minimalistic with fine stitching details",
+    "details": [
+      "small silver buttons",
+      "a subtle check pattern on the inner lining",
+      "crisp white collared shirt underneath"
+    ],
+    "fit": "slim fit, accentuates a lanky frame with precise tailoring"
+  },
+  "composition": {
+    "framing": "medium shot from waist up",
+    "pose": "standing with hands clasped in front",
+    "gesture": "head slightly tilted as if listening, body angled subtly to the side"
+  },
+  "background": {
+    "type": "indoor with a strategic setting",
+    "color_palette": "soft greys and muted blues",
+    "details": "a blurred map and a softly glowing screen in the background",
+    "rules": "background elements should not distract from the character's focused gaze"
+  }
+}

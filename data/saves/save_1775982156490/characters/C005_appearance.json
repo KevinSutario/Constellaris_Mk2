@@ -1,0 +1,53 @@
+{
+  "face": {
+    "structure": "oval with a subtle taper at the jawline, suggesting a mixture of youthfulness and maturity",
+    "eyes": {
+      "shape": "narrow almond",
+      "color": "deep onyx with a reflective sheen",
+      "details": [
+        "slight upward tilt at the outer corners suggesting a hint of intrigue",
+        "thin lashes that accentuate the eye shape"
+      ],
+      "expression_effect": "conveys a deep, calculating look, often paired with furrowed brows"
+    },
+    "expression": "perpetually thoughtful, with slightly pursed lips and a crease between the eyebrows",
+    "skin": {
+      "tone": "light olive",
+      "undertone": "neutral cool",
+      "texture": "smooth with subtle pore visibility",
+      "rendering_notes": "incorporates soft diffused highlights for a natural glow"
+    }
+  },
+  "character": {
+    "hair": {
+      "color": "charcoal black with cool highlights",
+      "style": "straight, side-parted fringe falling over one eyebrow",
+      "flow": "gentle tapering that curves slightly at the ends, resting just at the nape of the neck",
+      "details": [
+        "occasional strands that fall over the eyes when leaning forward",
+        "understated volume with natural light reflection"
+      ]
+    },
+    "aura": "surrounded by a palpable sense of reserved intelligence, hinting at complexity and depth of thought"
+  },
+  "outfit": {
+    "base": "fitted dark grey turtleneck",
+    "design": "sleek and minimalist with no visible embellishments",
+    "details": [
+      "long sleeves with thumb holes",
+      "subtle texture on fabric surface for added dimension"
+    ],
+    "fit": "snug yet comfortable, accentuating a lean build"
+  },
+  "composition": {
+    "framing": "medium close-up focusing on upper torso and face",
+    "pose": "seated with arms rested on a knee, leaning slightly forward",
+    "gesture": "right hand tapping fingers on a chin, illustrating deep contemplation"
+  },
+  "background": {
+    "type": "abstract blurred environment",
+    "color_palette": "cool greys and blues",
+    "details": "out of focus architecture elements suggesting an urban setting",
+    "rules": "minimal distraction, enhancing focus on the character"
+  }
+}

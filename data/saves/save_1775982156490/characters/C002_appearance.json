@@ -1,0 +1,54 @@
+{
+  "face": {
+    "structure": "sharp, high cheekbones with a delicate jawline and a slightly pointed chin",
+    "eyes": {
+      "shape": "narrow, elongated almond",
+      "color": "deep hazel with flecks of gold",
+      "details": [
+        "thin black ring encircling the irises",
+        "slightly downward-tilted outer corners",
+        "prominent, straight lashes"
+      ],
+      "expression_effect": "calculating, piercing gaze"
+    },
+    "expression": "thoughtful with a slight furrow of the brows",
+    "skin": {
+      "tone": "light olive",
+      "undertone": "cool, greyish",
+      "texture": "smooth with a matte finish",
+      "rendering_notes": "soft shadows under cheekbones and a subtle highlight on the nose bridge"
+    }
+  },
+  "character": {
+    "hair": {
+      "color": "deep chestnut brown with subtle auburn undertones",
+      "style": "layered bob just above shoulder length",
+      "flow": "naturally wavy, parted to one side",
+      "details": [
+        "gentle waves frame the face",
+        "a few slightly tangled strands for a natural look"
+      ]
+    },
+    "aura": "a faint aura of calculated calmness and quiet confidence"
+  },
+  "outfit": {
+    "base": "navy blue tailored blazer",
+    "design": "classic, minimalist with subtle pinstripes",
+    "details": [
+      "white buttoned blouse visible under the blazer",
+      "simple silver brooch pinned to the lapel"
+    ],
+    "fit": "form-fitting but with room for comfortable movement"
+  },
+  "composition": {
+    "framing": "medium close-up centered",
+    "pose": "slightly angled to the left with face turned forward",
+    "gesture": "right hand subtly resting under the chin, left arm crossed over the body"
+  },
+  "background": {
+    "type": "blurred abstract cityscape",
+    "color_palette": "cool greys and blues with hints of white for contrast",
+    "details": "impression of tall buildings and a clear sky",
+    "rules": "minimal detail to keep the focus on the character"
+  }
+}

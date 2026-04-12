@@ -1,0 +1,54 @@
+{
+  "face": {
+    "structure": "angular with high cheekbones and a defined jawline",
+    "eyes": {
+      "shape": "sharp almond",
+      "color": "dark brown",
+      "details": [
+        "thin streaks of amber",
+        "delicate, crisp black eyelashes",
+        "bold, well-defined eyebrows"
+      ],
+      "expression_effect": "insightfully piercing, conveying deep thought"
+    },
+    "expression": "calm with a hint of subtle curiosity",
+    "skin": {
+      "tone": "light beige",
+      "undertone": "cool",
+      "texture": "smooth with slight matte finish",
+      "rendering_notes": "soft shadowing across the forehead and cheekbones"
+    }
+  },
+  "character": {
+    "hair": {
+      "color": "jet black",
+      "style": "straight with a sleek bob cut",
+      "flow": "tucked behind ears, slightly layered ending just above shoulders",
+      "details": [
+        "subtle shine under light",
+        "wisps framing the face gently"
+      ]
+    },
+    "aura": "tranquil yet alert presence"
+  },
+  "outfit": {
+    "base": "fitted turtleneck sweater",
+    "design": "simple with subtle horizontal lines",
+    "details": [
+      "deep navy blue",
+      "sleeves rolled up neatly to mid-forearm"
+    ],
+    "fit": "tailored fit, accentuating slim figure"
+  },
+  "composition": {
+    "framing": "mid-length, centered focus",
+    "pose": "slightly leaning forward with elbows on a desk",
+    "gesture": "right hand raised to chin"
+  },
+  "background": {
+    "type": "minimalistic indoor setting",
+    "color_palette": "muted earth tones",
+    "details": "a simple wooden desk and a blurred bookshelf in the distance",
+    "rules": "avoid distracting elements"
+  }
+}

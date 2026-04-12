@@ -1,0 +1,796 @@
+{
+  "meta": {
+    "current_iteration": 3,
+    "phase": "controlled",
+    "tension_level": 0
+  },
+  "characters": {
+    "C001": {
+      "knowledge": {
+        "known_facts": [
+          "Detected: noticed"
+        ],
+        "beliefs": [
+          "Detected: thought",
+          "Detected: thought"
+        ],
+        "misconceptions": []
+      },
+      "conditions": [
+        {
+          "type": "emotional",
+          "value": "calm"
+        },
+        {
+          "type": "mental",
+          "value": "unstable"
+        }
+      ],
+      "location": ""
+    },
+    "C002": {
+      "knowledge": {
+        "known_facts": [
+          "Detected: noticed"
+        ],
+        "beliefs": [
+          "Detected: thought",
+          "Detected: thought"
+        ],
+        "misconceptions": []
+      },
+      "conditions": [
+        {
+          "type": "emotional",
+          "value": "calm"
+        },
+        {
+          "type": "mental",
+          "value": "unstable"
+        }
+      ],
+      "location": ""
+    },
+    "C003": {
+      "knowledge": {
+        "known_facts": [
+          "Detected: noticed"
+        ],
+        "beliefs": [
+          "Detected: thought",
+          "Detected: thought"
+        ],
+        "misconceptions": []
+      },
+      "conditions": [
+        {
+          "type": "emotional",
+          "value": "calm"
+        },
+        {
+          "type": "mental",
+          "value": "unstable"
+        }
+      ],
+      "location": ""
+    },
+    "C004": {
+      "knowledge": {
+        "known_facts": [
+          "Detected: noticed"
+        ],
+        "beliefs": [
+          "Detected: thought",
+          "Detected: thought"
+        ],
+        "misconceptions": []
+      },
+      "conditions": [
+        {
+          "type": "emotional",
+          "value": "calm"
+        },
+        {
+          "type": "mental",
+          "value": "unstable"
+        }
+      ],
+      "location": ""
+    },
+    "C005": {
+      "knowledge": {
+        "known_facts": [
+          "Detected: noticed"
+        ],
+        "beliefs": [
+          "Detected: thought",
+          "Detected: thought"
+        ],
+        "misconceptions": []
+      },
+      "conditions": [
+        {
+          "type": "emotional",
+          "value": "calm"
+        },
+        {
+          "type": "mental",
+          "value": "unstable"
+        }
+      ],
+      "location": ""
+    }
+  },
+  "relationships": {
+    "C001": {
+      "C002": {
+        "metrics": {
+          "trust": 2,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 1,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Choi Hye-Jin and Seo Jin-ah",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775982199065
+          },
+          {
+            "event": "Interaction between Choi Hye-Jin and Seo Jin-ah",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 1,
+              "respect": 0
+            },
+            "timestamp": 1775982444028
+          }
+        ]
+      },
+      "C003": {
+        "metrics": {
+          "trust": 2,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 1,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Choi Hye-Jin and Ji-Ah Min",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775982199065
+          },
+          {
+            "event": "Interaction between Choi Hye-Jin and Ji-Ah Min",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 1,
+              "respect": 0
+            },
+            "timestamp": 1775982444028
+          }
+        ]
+      },
+      "C004": {
+        "metrics": {
+          "trust": 2,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 1,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Choi Hye-Jin and Jihoon Kang",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775982199065
+          },
+          {
+            "event": "Interaction between Choi Hye-Jin and Jihoon Kang",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 1,
+              "respect": 0
+            },
+            "timestamp": 1775982444028
+          }
+        ]
+      },
+      "C005": {
+        "metrics": {
+          "trust": 2,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 1,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Choi Hye-Jin and Jihoon Park",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775982199065
+          },
+          {
+            "event": "Interaction between Choi Hye-Jin and Jihoon Park",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 1,
+              "respect": 0
+            },
+            "timestamp": 1775982444028
+          }
+        ]
+      }
+    },
+    "C002": {
+      "C001": {
+        "metrics": {
+          "trust": 2,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 1,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Seo Jin-ah and Choi Hye-Jin",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775982199065
+          },
+          {
+            "event": "Interaction between Seo Jin-ah and Choi Hye-Jin",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 1,
+              "respect": 0
+            },
+            "timestamp": 1775982444028
+          }
+        ]
+      },
+      "C003": {
+        "metrics": {
+          "trust": 2,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 1,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Seo Jin-ah and Ji-Ah Min",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775982199065
+          },
+          {
+            "event": "Interaction between Seo Jin-ah and Ji-Ah Min",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 1,
+              "respect": 0
+            },
+            "timestamp": 1775982444028
+          }
+        ]
+      },
+      "C004": {
+        "metrics": {
+          "trust": 2,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 1,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Seo Jin-ah and Jihoon Kang",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775982199065
+          },
+          {
+            "event": "Interaction between Seo Jin-ah and Jihoon Kang",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 1,
+              "respect": 0
+            },
+            "timestamp": 1775982444028
+          }
+        ]
+      },
+      "C005": {
+        "metrics": {
+          "trust": 2,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 1,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Seo Jin-ah and Jihoon Park",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775982199065
+          },
+          {
+            "event": "Interaction between Seo Jin-ah and Jihoon Park",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 1,
+              "respect": 0
+            },
+            "timestamp": 1775982444028
+          }
+        ]
+      }
+    },
+    "C003": {
+      "C001": {
+        "metrics": {
+          "trust": 2,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 1,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Ji-Ah Min and Choi Hye-Jin",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775982199065
+          },
+          {
+            "event": "Interaction between Ji-Ah Min and Choi Hye-Jin",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 1,
+              "respect": 0
+            },
+            "timestamp": 1775982444028
+          }
+        ]
+      },
+      "C002": {
+        "metrics": {
+          "trust": 2,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 1,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Ji-Ah Min and Seo Jin-ah",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775982199065
+          },
+          {
+            "event": "Interaction between Ji-Ah Min and Seo Jin-ah",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 1,
+              "respect": 0
+            },
+            "timestamp": 1775982444028
+          }
+        ]
+      },
+      "C004": {
+        "metrics": {
+          "trust": 2,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 1,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Ji-Ah Min and Jihoon Kang",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775982199065
+          },
+          {
+            "event": "Interaction between Ji-Ah Min and Jihoon Kang",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 1,
+              "respect": 0
+            },
+            "timestamp": 1775982444028
+          }
+        ]
+      },
+      "C005": {
+        "metrics": {
+          "trust": 2,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 1,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Ji-Ah Min and Jihoon Park",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775982199065
+          },
+          {
+            "event": "Interaction between Ji-Ah Min and Jihoon Park",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 1,
+              "respect": 0
+            },
+            "timestamp": 1775982444028
+          }
+        ]
+      }
+    },
+    "C004": {
+      "C001": {
+        "metrics": {
+          "trust": 2,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 1,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Jihoon Kang and Choi Hye-Jin",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775982199065
+          },
+          {
+            "event": "Interaction between Jihoon Kang and Choi Hye-Jin",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 1,
+              "respect": 0
+            },
+            "timestamp": 1775982444028
+          }
+        ]
+      },
+      "C002": {
+        "metrics": {
+          "trust": 2,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 1,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Jihoon Kang and Seo Jin-ah",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775982199065
+          },
+          {
+            "event": "Interaction between Jihoon Kang and Seo Jin-ah",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 1,
+              "respect": 0
+            },
+            "timestamp": 1775982444028
+          }
+        ]
+      },
+      "C003": {
+        "metrics": {
+          "trust": 2,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 1,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Jihoon Kang and Ji-Ah Min",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775982199065
+          },
+          {
+            "event": "Interaction between Jihoon Kang and Ji-Ah Min",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 1,
+              "respect": 0
+            },
+            "timestamp": 1775982444028
+          }
+        ]
+      },
+      "C005": {
+        "metrics": {
+          "trust": 2,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 1,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Jihoon Kang and Jihoon Park",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775982199065
+          },
+          {
+            "event": "Interaction between Jihoon Kang and Jihoon Park",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 1,
+              "respect": 0
+            },
+            "timestamp": 1775982444028
+          }
+        ]
+      }
+    },
+    "C005": {
+      "C001": {
+        "metrics": {
+          "trust": 2,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 1,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Jihoon Park and Choi Hye-Jin",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775982199065
+          },
+          {
+            "event": "Interaction between Jihoon Park and Choi Hye-Jin",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 1,
+              "respect": 0
+            },
+            "timestamp": 1775982444028
+          }
+        ]
+      },
+      "C002": {
+        "metrics": {
+          "trust": 2,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 1,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Jihoon Park and Seo Jin-ah",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775982199065
+          },
+          {
+            "event": "Interaction between Jihoon Park and Seo Jin-ah",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 1,
+              "respect": 0
+            },
+            "timestamp": 1775982444028
+          }
+        ]
+      },
+      "C003": {
+        "metrics": {
+          "trust": 2,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 1,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Jihoon Park and Ji-Ah Min",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775982199065
+          },
+          {
+            "event": "Interaction between Jihoon Park and Ji-Ah Min",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 1,
+              "respect": 0
+            },
+            "timestamp": 1775982444028
+          }
+        ]
+      },
+      "C004": {
+        "metrics": {
+          "trust": 2,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 1,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Jihoon Park and Jihoon Kang",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775982199065
+          },
+          {
+            "event": "Interaction between Jihoon Park and Jihoon Kang",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 1,
+              "respect": 0
+            },
+            "timestamp": 1775982444028
+          }
+        ]
+      }
+    }
+  }
+}

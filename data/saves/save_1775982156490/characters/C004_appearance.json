@@ -1,0 +1,55 @@
+{
+  "face": {
+    "structure": "angular with a defined jawline, prominent cheekbones, and a slight hint of youthfulness",
+    "eyes": {
+      "shape": "sharp almond shape with an upward tilt",
+      "color": "dark brown with flecks of gold",
+      "details": [
+        "high contrast between iris and sclera",
+        "subtle, almost invisible lower lashes",
+        "a focused glint suggesting intelligence"
+      ],
+      "expression_effect": "penetrating and observant"
+    },
+    "expression": "a reserved smile that conveys cautious friendliness",
+    "skin": {
+      "tone": "warm olive",
+      "undertone": "golden",
+      "texture": "smooth with a hint of natural sheen",
+      "rendering_notes": "light reflects softly, emphasizing natural contours"
+    }
+  },
+  "character": {
+    "hair": {
+      "color": "midnight black",
+      "style": "slightly tousled medium length with an undercut",
+      "flow": "gently swaying to the side, accentuating the undercut",
+      "details": [
+        "glossy strands catching light",
+        "occasional flyaways indicating a casual styling"
+      ]
+    },
+    "aura": "an enigmatic presence amplified by an analytical demeanor"
+  },
+  "outfit": {
+    "base": "sleek casual attire suited for smart occasions",
+    "design": "a fitted charcoal-grey turtleneck paired with a tailored black blazer",
+    "details": [
+      "subtle pinstripe pattern on the blazer",
+      "rolled-up sleeves",
+      "black utility wristwatch"
+    ],
+    "fit": "slim with precise tailoring"
+  },
+  "composition": {
+    "framing": "mid-shot centered on the character",
+    "pose": "standing with weight shifted slightly to one hip",
+    "gesture": "right hand casually touching the chin in a thoughtful pose"
+  },
+  "background": {
+    "type": "minimalistic urban setting",
+    "color_palette": "muted greys and blues with occasional warm light accents",
+    "details": "blurred cityscape with hints of bustling activity in soft focus, capturing a sense of engagement and movement",
+    "rules": "background should not distract from the character's silhouette"
+  }
+}

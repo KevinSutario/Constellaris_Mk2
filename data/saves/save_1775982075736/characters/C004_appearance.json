@@ -1,0 +1,55 @@
+{
+  "face": {
+    "structure": "oval with a pronounced jawline and cheekbones",
+    "eyes": {
+      "shape": "upturned almond",
+      "color": "rich hazel",
+      "details": [
+        "a golden fleck in the left eye",
+        "defined lashes",
+        "crisp, dark brown eyebrows"
+      ],
+      "expression_effect": "a glint of sarcasm and quick wit"
+    },
+    "expression": "a subtle smirk often gracing his lips, hinting at mischief",
+    "skin": {
+      "tone": "warm beige",
+      "undertone": "golden",
+      "texture": "smooth with a hint of youthful glow",
+      "rendering_notes": "gentle gradient shading with emphasis around the temples and cheeks for depth"
+    }
+  },
+  "character": {
+    "hair": {
+      "color": "jet black",
+      "style": "tousled and slightly wavy at the top, tapering towards the sides",
+      "flow": "combed back but naturally falling in playful strands around the forehead",
+      "details": [
+        "occasional highlights caught under bright light",
+        "subtle volume at the crown"
+      ]
+    },
+    "aura": "an air of sincere confidence with undertones of playful nonchalance"
+  },
+  "outfit": {
+    "base": "sleek, dark bomber jacket over a fitted, light gray t-shirt",
+    "design": "minimalist with subtle geometrical stitching on the jacket shoulders",
+    "details": [
+      "metallic zippered pockets",
+      "rolled-up sleeves",
+      "faded black jeans"
+    ],
+    "fit": "tailored yet relaxed, allowing ease of movement"
+  },
+  "composition": {
+    "framing": "mid-shot focusing on the upper torso and face",
+    "pose": "standing slightly sideways with one shoulder forward",
+    "gesture": "casual slouch with hands tucked into pockets, head slightly turned towards camera"
+  },
+  "background": {
+    "type": "urban cityscape",
+    "color_palette": "cool blues and grays punctuated with warm streetlights",
+    "details": "subtle blur of passing crowds and distant skyline",
+    "rules": "keep the background unfocused to highlight the character"
+  }
+}

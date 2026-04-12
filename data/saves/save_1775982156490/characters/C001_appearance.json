@@ -1,0 +1,55 @@
+{
+  "face": {
+    "structure": "angular with high cheekbones, slightly pointed chin",
+    "eyes": {
+      "shape": "narrow almond with slight upwards tilt",
+      "color": "dark brown with a hint of gold flecks",
+      "details": [
+        "pronounced eyelids",
+        "subtle dark eyeliner",
+        "soft gradient shading from dark to light towards the center"
+      ],
+      "expression_effect": "piercing and contemplative"
+    },
+    "expression": "smirk suggesting a sardonic sense of humor",
+    "skin": {
+      "tone": "light olive",
+      "undertone": "warm yellow",
+      "texture": "smooth with faint freckles across the nose",
+      "rendering_notes": "soft matte finish with subtle blushing on cheeks and nose"
+    }
+  },
+  "character": {
+    "hair": {
+      "color": "rich espresso brown",
+      "style": "short bob with asymmetrical bangs",
+      "flow": "gently curving inwards towards the chin with slight flyaways",
+      "details": [
+        "subtle highlights",
+        "slight tousled fringe effect"
+      ]
+    },
+    "aura": "confident and slightly rebellious"
+  },
+  "outfit": {
+    "base": "fitted denim jacket over a classic white t-shirt",
+    "design": "casual with minimalist details",
+    "details": [
+      "embroidered patches on jacket",
+      "black choker necklace",
+      "silver hoop earrings"
+    ],
+    "fit": "slightly oversized jacket, snug shirt"
+  },
+  "composition": {
+    "framing": "medium close-up from the waist up",
+    "pose": "leaning slightly forward with arms crossed",
+    "gesture": "one eyebrow slightly raised, head tilted back slightly"
+  },
+  "background": {
+    "type": "urban landscape",
+    "color_palette": "muted greys and blues with a pop of neon signs",
+    "details": "blurred cityscape with distant skyscrapers",
+    "rules": "keep background understated to highlight character"
+  }
+}

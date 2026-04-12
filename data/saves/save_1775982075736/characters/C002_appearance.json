@@ -1,0 +1,54 @@
+{
+  "face": {
+    "structure": "oval with a defined jawline and high cheekbones",
+    "eyes": {
+      "shape": "sharp almond",
+      "color": "icy blue",
+      "details": [
+        "dark outer rim",
+        "specks of silver near the pupil",
+        "elongated arch of the eyebrows"
+      ],
+      "expression_effect": "calculated intensity"
+    },
+    "expression": "analytical with a slight smirk",
+    "skin": {
+      "tone": "pale ivory",
+      "undertone": "cool",
+      "texture": "smooth with slight freckles on the nose bridge",
+      "rendering_notes": "soft gradient shading with subtle highlights on the cheeks and nose"
+    }
+  },
+  "character": {
+    "hair": {
+      "color": "jet black",
+      "style": "asymmetrical bob with one side tucked behind the ear",
+      "flow": "straight with a slight sheen, ends tapering sharply",
+      "details": [
+        "wispy bangs framing the left eye",
+        "slight volume at the crown"
+      ]
+    },
+    "aura": "a cloak of quiet command and enigmatic sophistication"
+  },
+  "outfit": {
+    "base": "tailored high-collared coat",
+    "design": "monochrome grid pattern",
+    "details": [
+      "multiple discreet pockets",
+      "subtle silver embroidery along the cuffs"
+    ],
+    "fit": "snug fit accentuating the shoulders and waist"
+  },
+  "composition": {
+    "framing": "mid-shot centered",
+    "pose": "standing with a slight forward lean",
+    "gesture": "right hand gracefully touching the chin, left arm crossed under"
+  },
+  "background": {
+    "type": "digital abstraction",
+    "color_palette": "muted grays and blues",
+    "details": "geometric patterns subtly visible",
+    "rules": "background should not overpower the character's presence"
+  }
+}

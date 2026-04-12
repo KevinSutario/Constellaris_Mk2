@@ -1,0 +1,54 @@
+{
+  "face": {
+    "structure": "heart-shaped with a softly pointed chin, high cheekbones that accentuate an inquisitive nature",
+    "eyes": {
+      "shape": "sharp almond shape",
+      "color": "deep jade green",
+      "details": [
+        "subtle gold flecks",
+        "high contrast whites",
+        "dynamic lighting with a soft, natural shadow around the lashes"
+      ],
+      "expression_effect": "reflecting deep thought and curiosity"
+    },
+    "expression": "contemplative with a slight upward curve of the lips suggesting a bemused thought",
+    "skin": {
+      "tone": "light olive",
+      "undertone": "warm yellow",
+      "texture": "velvety smooth with a light dusting of freckles across the nose",
+      "rendering_notes": "gently matte with slight specular highlights on the forehead and cheeks"
+    }
+  },
+  "character": {
+    "hair": {
+      "color": "deep chestnut brown",
+      "style": "long and straight with a slight wave towards the ends",
+      "flow": "flows freely, cascading over shoulders, with dynamic movement suggested by fine strands drifting lightly as if caught by a gentle breeze",
+      "details": [
+        "side-swept bangs",
+        "soft shine with hints of lighter strands catching the light"
+      ]
+    },
+    "aura": "an ethereal shimmer that hints of creativity and an unbound curiosity"
+  },
+  "outfit": {
+    "base": "a minimalist ivory blouse with an asymmetrical hem",
+    "design": "subtle geometric embroidery along the collar and cuffs",
+    "details": [
+      "rolled-up sleeves",
+      "brass button accents"
+    ],
+    "fit": "tailored yet relaxed, allowing freedom of movement"
+  },
+  "composition": {
+    "framing": "close-up with a focus on upper torso and face",
+    "pose": "head slightly tilted to the side as if in mid-thought",
+    "gesture": "one hand gently resting against the side of the face, the other clutching a sketchbook with visible pencil tucked in"
+  },
+  "background": {
+    "type": "abstract",
+    "color_palette": "soothing pastels of blues and greens with soft gradients",
+    "details": "hints of swirling clouds that signify imagination",
+    "rules": "not overpowering, should complement the character's introspective aura"
+  }
+}

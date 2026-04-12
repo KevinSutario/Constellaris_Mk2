@@ -1,0 +1,15 @@
+{
+  "id": "C004",
+  "name": "Jihoon Kang",
+  "age": 17,
+  "personality": [
+    "sharp-witted yet absent-minded",
+    "stoically compassionate",
+    "skeptical of authority"
+  ],
+  "traits": [
+    "sleeps odd hours",
+    "fiddles with objects when anxious"
+  ],
+  "role": "analyst"
+}

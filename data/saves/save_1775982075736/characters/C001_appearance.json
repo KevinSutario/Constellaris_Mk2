@@ -1,0 +1,54 @@
+{
+  "face": {
+    "structure": "oval with a defined jawline and subtle cheekbones connoting analytical demeanor",
+    "eyes": {
+      "shape": "sharp almond",
+      "color": "dark brown",
+      "details": [
+        "thin charcoal eyeliner",
+        "bright white sclera",
+        "piercing gaze with subtle light reflection"
+      ],
+      "expression_effect": "intense curiosity and alertness"
+    },
+    "expression": "slightly furrowed brows with a focused and questioning look",
+    "skin": {
+      "tone": "light olive",
+      "undertone": "cool, with a hint of blue",
+      "texture": "smooth with slightly matte finish",
+      "rendering_notes": "soft gradient shading around the cheeks and nose bridge"
+    }
+  },
+  "character": {
+    "hair": {
+      "color": "midnight black",
+      "style": "straight and sleek",
+      "flow": "neatly parted to the right, cascading just past the shoulders",
+      "details": [
+        "single silver hair clip on left side",
+        "subtle shine where light hits"
+      ]
+    },
+    "aura": "organized yet somewhat stern"
+  },
+  "outfit": {
+    "base": "crisp white blouse",
+    "design": "minimalistic with a subtle striped pattern",
+    "details": [
+      "two-tone vest over blouse",
+      "thin gold chain necklace"
+    ],
+    "fit": "tailored yet comfortable"
+  },
+  "composition": {
+    "framing": "mid-shot framing from the waist up",
+    "pose": "slightly turned to the side with a hand raised thoughtfully to chin",
+    "gesture": "fingers lightly touching chin indicating contemplation"
+  },
+  "background": {
+    "type": "abstract geometric pattern",
+    "color_palette": "cool tones with blues and grays",
+    "details": "subtle diagonal lines creating a dynamic tension",
+    "rules": "simple and not distracting from the character's focused persona"
+  }
+}
