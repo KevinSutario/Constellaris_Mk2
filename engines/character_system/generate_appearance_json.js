@@ -1,94 +1,72 @@
-import OpenAI from "openai";
-import { config } from "../../config/env.js";
-import fs from "fs";
+import OpenAI from "openai"
+import { config } from "../../config/env.js"
+import fs from "fs"
 
-const client = new OpenAI({
-  apiKey: config.OPENAI_API_KEY,
-});
+const client = new OpenAI({ apiKey: config.OPENAI_API_KEY })
 
-
-// load prompt
 function loadPrompt(path) {
-  return fs.readFileSync(path, "utf-8");
+  return fs.readFileSync(path, "utf-8")
 }
 
-
-// safe parse
 function safeParse(text) {
   try {
-    const cleaned = text
-      .replace(/```json/g, "")
-      .replace(/```/g, "")
-      .trim();
-
-    return JSON.parse(cleaned);
+    return JSON.parse(text.replace(/```json/g, "").replace(/```/g, "").trim())
   } catch (err) {
-    console.error("Parsing failed:");
-    console.log(text);
-    return null;
+    console.error("Parsing failed:", text)
+    return null
   }
 }
 
-
-// 🎯 generate appearance for ONE character
+// Generate appearance JSON for one character — pure API call
 export async function generateAppearance(characterData) {
-  const promptTemplate = loadPrompt(
-    "prompts/character/appearance_prompt.txt"
-  );
+  const promptTemplate = loadPrompt("prompts/character/appearance_prompt.txt")
 
   const prompt = `
 ${promptTemplate}
 
 Character:
 ${JSON.stringify(characterData, null, 2)}
-`;
+`
 
   const response = await client.chat.completions.create({
     model: "gpt-4o",
     messages: [
       { role: "system", content: "You output strict JSON only." },
-      { role: "user", content: prompt },
-    ],
-  });
+      { role: "user",   content: prompt }
+    ]
+  })
 
-  const text = response.choices[0].message.content;
-
-  return safeParse(text);
+  return safeParse(response.choices[0].message.content)
 }
 
+// Save appearance to a specific save directory
+export function saveAppearance(appearance, id, saveDir) {
+  const charDir  = `${saveDir}/characters`
+  const filename = `${charDir}/${id}_appearance.json`
 
-// 💾 save appearance
-function saveAppearance(appearance, id) {
-  const filename = `data/characters/${id}_appearance.json`;
+  if (!fs.existsSync(charDir)) fs.mkdirSync(charDir, { recursive: true })
 
-  fs.writeFileSync(filename, JSON.stringify(appearance, null, 2));
-
-  console.log(`Saved ${id}_appearance.json`);
+  fs.writeFileSync(filename, JSON.stringify(appearance, null, 2))
+  console.log(`Saved ${id}_appearance.json → ${saveDir}`)
 }
 
-
-// 🔁 process ALL characters one by one
-export async function generateAllAppearances(count = 5) {
+// Generate appearances for all characters in a save
+export async function generateAllAppearances(saveDir, count = 5) {
   for (let i = 1; i <= count; i++) {
-    const id = `C${String(i).padStart(3, "0")}`;
-    const path = `data/characters/${id}_personality.json`;
+    const id   = `C${String(i).padStart(3, "0")}`
+    const path = `${saveDir}/characters/${id}_personality.json`
 
     if (!fs.existsSync(path)) {
-      console.log(`Skipping ${id} (no personality file)`);
-      continue;
+      console.log(`Skipping ${id} (no personality file)`)
+      continue
     }
 
-    console.log(`\nGenerating appearance for ${id}...`);
+    console.log(`\nGenerating appearance for ${id}...`)
+    const characterData = JSON.parse(fs.readFileSync(path, "utf-8"))
+    const appearance    = await generateAppearance(characterData)
 
-    const characterData = JSON.parse(fs.readFileSync(path, "utf-8"));
+    if (!appearance) { console.log("Skipping due to parse error"); continue }
 
-    const appearance = await generateAppearance(characterData);
-
-    if (!appearance) {
-      console.log("Skipping due to parse error...");
-      continue;
-    }
-
-    saveAppearance(appearance, id);
+    saveAppearance(appearance, id, saveDir)
   }
 }

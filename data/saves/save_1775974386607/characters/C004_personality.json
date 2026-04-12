@@ -1,0 +1,15 @@
+{
+  "id": "C004",
+  "name": "Joon-Ho Kim",
+  "age": 17,
+  "personality": [
+    "articulate yet evasive",
+    "deeply introspective",
+    "slow to anger but explosive when triggered"
+  ],
+  "traits": [
+    "tends to overthink decisions",
+    "writes poetry to cope with stress"
+  ],
+  "role": "strategist"
+}

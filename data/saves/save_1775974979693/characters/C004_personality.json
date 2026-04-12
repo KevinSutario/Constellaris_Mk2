@@ -1,0 +1,15 @@
+{
+  "id": "C004",
+  "name": "Lee Min-kyu",
+  "age": 17,
+  "personality": [
+    "calculating under pressure",
+    "emotionally guarded",
+    "confident but avoids responsibility"
+  ],
+  "traits": [
+    "tends to overthink decisions",
+    "withdraws in uncertain social situations"
+  ],
+  "role": "strategist"
+}

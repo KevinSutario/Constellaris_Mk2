@@ -1,0 +1,55 @@
+{
+  "face": {
+    "structure": "heart-shaped with high cheekbones and a pointed chin",
+    "eyes": {
+      "shape": "sharp almond shape",
+      "color": "dark hazel with subtle gold flecks",
+      "details": [
+        "thick lashes",
+        "well-defined lower lid",
+        "stern gaze"
+      ],
+      "expression_effect": "sharp, discerning"
+    },
+    "expression": "keen and analytical with hints of skepticism",
+    "skin": {
+      "tone": "light olive",
+      "undertone": "warm yellow",
+      "texture": "smooth with barely visible freckles across the nose",
+      "rendering_notes": "subtle gradient shading to highlight cheekbones"
+    }
+  },
+  "character": {
+    "hair": {
+      "color": "deep chestnut brown",
+      "style": "long, straight with a blunt fringe",
+      "flow": "neat and silky, with slight movement at the tips",
+      "details": [
+        "slight wave at the lower ends",
+        "glossy sheen"
+      ]
+    },
+    "aura": "intense and focused with a subtle hint of mystery"
+  },
+  "outfit": {
+    "base": "fitted dark navy blazer over a crisp white blouse",
+    "design": "minimalistic with clean lines",
+    "details": [
+      "silver cufflinks",
+      "mid-length sleeves",
+      "small brooch on the lapel"
+    ],
+    "fit": "tailored and precise"
+  },
+  "composition": {
+    "framing": "mid-length portrait focusing on upper torso and head",
+    "pose": "standing with one arm crossed over the chest, the other lightly touching the chin",
+    "gesture": "calm and introspective, with a hint of defiance in posture"
+  },
+  "background": {
+    "type": "abstract with geometric shapes",
+    "color_palette": "cool tones of blues and greys",
+    "details": "slight blur effect to focus on the character",
+    "rules": "no stark contrasts that compete with the character's presence"
+  }
+}

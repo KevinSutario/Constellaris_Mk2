@@ -1,0 +1,571 @@
+{
+  "meta": {
+    "current_iteration": 2,
+    "phase": "controlled",
+    "tension_level": 0
+  },
+  "characters": {
+    "C001": {
+      "knowledge": {
+        "known_facts": [
+          "Detected: noticed"
+        ],
+        "beliefs": [
+          "Detected: thought"
+        ],
+        "misconceptions": []
+      },
+      "conditions": [
+        {
+          "type": "emotional",
+          "value": "calm"
+        },
+        {
+          "type": "mental",
+          "value": "overwhelmed"
+        }
+      ],
+      "location": ""
+    },
+    "C002": {
+      "knowledge": {
+        "known_facts": [
+          "Detected: noticed"
+        ],
+        "beliefs": [
+          "Detected: thought"
+        ],
+        "misconceptions": []
+      },
+      "conditions": [
+        {
+          "type": "emotional",
+          "value": "calm"
+        },
+        {
+          "type": "mental",
+          "value": "overwhelmed"
+        }
+      ],
+      "location": ""
+    },
+    "C003": {
+      "knowledge": {
+        "known_facts": [
+          "Detected: noticed"
+        ],
+        "beliefs": [
+          "Detected: thought"
+        ],
+        "misconceptions": []
+      },
+      "conditions": [
+        {
+          "type": "emotional",
+          "value": "calm"
+        },
+        {
+          "type": "mental",
+          "value": "overwhelmed"
+        }
+      ],
+      "location": ""
+    },
+    "C004": {
+      "knowledge": {
+        "known_facts": [
+          "Detected: noticed"
+        ],
+        "beliefs": [
+          "Detected: thought"
+        ],
+        "misconceptions": []
+      },
+      "conditions": [
+        {
+          "type": "emotional",
+          "value": "calm"
+        },
+        {
+          "type": "mental",
+          "value": "overwhelmed"
+        }
+      ],
+      "location": ""
+    },
+    "C005": {
+      "knowledge": {
+        "known_facts": [
+          "Detected: noticed"
+        ],
+        "beliefs": [
+          "Detected: thought"
+        ],
+        "misconceptions": []
+      },
+      "conditions": [
+        {
+          "type": "emotional",
+          "value": "calm"
+        },
+        {
+          "type": "mental",
+          "value": "overwhelmed"
+        }
+      ],
+      "location": ""
+    }
+  },
+  "relationships": {
+    "C001": {
+      "C002": {
+        "metrics": {
+          "trust": 1,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 0,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Lee Ji-eun and Seo-Hyun",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775975021137
+          }
+        ]
+      },
+      "C003": {
+        "metrics": {
+          "trust": 1,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 0,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Lee Ji-eun and Cha Yoon-Hee",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775975021137
+          }
+        ]
+      },
+      "C004": {
+        "metrics": {
+          "trust": 1,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 0,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Lee Ji-eun and Lee Min-kyu",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775975021137
+          }
+        ]
+      },
+      "C005": {
+        "metrics": {
+          "trust": 1,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 0,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Lee Ji-eun and Kwon Hyun-Jin",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775975021137
+          }
+        ]
+      }
+    },
+    "C002": {
+      "C001": {
+        "metrics": {
+          "trust": 1,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 0,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Seo-Hyun and Lee Ji-eun",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775975021137
+          }
+        ]
+      },
+      "C003": {
+        "metrics": {
+          "trust": 1,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 0,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Seo-Hyun and Cha Yoon-Hee",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775975021137
+          }
+        ]
+      },
+      "C004": {
+        "metrics": {
+          "trust": 1,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 0,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Seo-Hyun and Lee Min-kyu",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775975021137
+          }
+        ]
+      },
+      "C005": {
+        "metrics": {
+          "trust": 1,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 0,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Seo-Hyun and Kwon Hyun-Jin",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775975021137
+          }
+        ]
+      }
+    },
+    "C003": {
+      "C001": {
+        "metrics": {
+          "trust": 1,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 0,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Cha Yoon-Hee and Lee Ji-eun",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775975021137
+          }
+        ]
+      },
+      "C002": {
+        "metrics": {
+          "trust": 1,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 0,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Cha Yoon-Hee and Seo-Hyun",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775975021137
+          }
+        ]
+      },
+      "C004": {
+        "metrics": {
+          "trust": 1,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 0,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Cha Yoon-Hee and Lee Min-kyu",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775975021137
+          }
+        ]
+      },
+      "C005": {
+        "metrics": {
+          "trust": 1,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 0,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Cha Yoon-Hee and Kwon Hyun-Jin",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775975021137
+          }
+        ]
+      }
+    },
+    "C004": {
+      "C001": {
+        "metrics": {
+          "trust": 1,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 0,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Lee Min-kyu and Lee Ji-eun",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775975021137
+          }
+        ]
+      },
+      "C002": {
+        "metrics": {
+          "trust": 1,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 0,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Lee Min-kyu and Seo-Hyun",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775975021137
+          }
+        ]
+      },
+      "C003": {
+        "metrics": {
+          "trust": 1,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 0,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Lee Min-kyu and Cha Yoon-Hee",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775975021137
+          }
+        ]
+      },
+      "C005": {
+        "metrics": {
+          "trust": 1,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 0,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Lee Min-kyu and Kwon Hyun-Jin",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775975021137
+          }
+        ]
+      }
+    },
+    "C005": {
+      "C001": {
+        "metrics": {
+          "trust": 1,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 0,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Kwon Hyun-Jin and Lee Ji-eun",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775975021137
+          }
+        ]
+      },
+      "C002": {
+        "metrics": {
+          "trust": 1,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 0,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Kwon Hyun-Jin and Seo-Hyun",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775975021137
+          }
+        ]
+      },
+      "C003": {
+        "metrics": {
+          "trust": 1,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 0,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Kwon Hyun-Jin and Cha Yoon-Hee",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775975021137
+          }
+        ]
+      },
+      "C004": {
+        "metrics": {
+          "trust": 1,
+          "tension": 0,
+          "dependency": 0,
+          "fear": 0,
+          "respect": 0
+        },
+        "history": [
+          {
+            "event": "Interaction between Kwon Hyun-Jin and Lee Min-kyu",
+            "impact": {
+              "trust": 1,
+              "tension": 0,
+              "dependency": 0,
+              "fear": 0,
+              "respect": 0
+            },
+            "timestamp": 1775975021137
+          }
+        ]
+      }
+    }
+  }
+}

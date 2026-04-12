@@ -1,0 +1,56 @@
+{
+  "face": {
+    "structure": "symmetrical with high cheekbones and a pointed chin",
+    "eyes": {
+      "shape": "sharp almond",
+      "color": "icy blue",
+      "details": [
+        "dark pupils",
+        "thin, well-defined eyebrows",
+        "slight upward tilt"
+      ],
+      "expression_effect": "intense focus"
+    },
+    "expression": "scrutinizing with a hint of reserved interest",
+    "skin": {
+      "tone": "porcelain",
+      "undertone": "cool",
+      "texture": "smooth with minimal blemishes",
+      "rendering_notes": "crisp and light reflects subtly on cheekbones"
+    }
+  },
+  "character": {
+    "hair": {
+      "color": "jet black with subtle hints of blue",
+      "style": "long and straight with blunt bangs",
+      "flow": "flows smoothly down to mid-back",
+      "details": [
+        "high shine",
+        "occasional flyaways",
+        "sharp, well-maintained ends"
+      ]
+    },
+    "aura": "a sense of precision and quiet strength"
+  },
+  "outfit": {
+    "base": "fitted wool blazer",
+    "design": "simple yet elegant with sharp lines",
+    "details": [
+      "silver buttons",
+      "delicate pinstripes",
+      "hidden inner pocket"
+    ],
+    "fit": "tailored and slightly structured"
+  },
+  "composition": {
+    "framing": "medium close-up centered around the shoulders and head",
+    "pose": "standing with one arm crossed over the other at torso level",
+    "gesture": "right hand lightly touching chin as if in thought"
+  },
+  "background": {
+    "type": "minimalist indoor setting",
+    "color_palette": "neutral hues with grey and beige tones",
+    "details": "blurred bookshelf with indistinct books",
+    "rules": "background should not draw attention away from the character"
+  }
+}

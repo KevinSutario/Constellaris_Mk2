@@ -1,0 +1,53 @@
+{
+  "face": {
+    "structure": "slightly rounded with a delicate chin and high cheekbones adding to a subtly angled jawline that conveys her composed demeanor",
+    "eyes": {
+      "shape": "sharp almond shape with a slightly upward tilt at the outer corners",
+      "color": "dark chocolate brown with a subtle gradient of amber near the pupils",
+      "details": [
+        "fine light-catching lines radiating from the pupils",
+        "small, sharp highlights in the upper right quadrant for depth"
+      ],
+      "expression_effect": "a thoughtful and calculating gaze, often seen with narrowed lids as if analyzing"
+    },
+    "expression": "a faint, controlled smile with a demeanor that is both inviting yet distant",
+    "skin": {
+      "tone": "light beige with a cool, soft pink undertone",
+      "undertone": "cool with subtle, gentle transitioning areas",
+      "texture": "smooth with minimal visible pores and a delicate glow across the cheeks",
+      "rendering_notes": "maintain soft gradients with a light bounce of natural highlights across the forehead and nose"
+    }
+  },
+  "character": {
+    "hair": {
+      "color": "deep black with subtle blue highlights at the edges",
+      "style": "naturally straight and long, reaching mid-back",
+      "flow": "flows sleekly over shoulders, ends taper softly",
+      "details": [
+        "a singular thin braid intertwined on the right side",
+        "occasional stray hairs framing the face"
+      ]
+    },
+    "aura": "calm and composed, yet harboring a sense of silent intensity"
+  },
+  "outfit": {
+    "base": "a sleek, fitted modern uniform",
+    "design": "clean lines with gentle accents of silver threading along the seams",
+    "details": [
+      "stand-up collar with a subtle embroidered pattern",
+      "tight cuffs voicing attention to detail"
+    ],
+    "fit": "tailored to fit snugly while allowing ease of movement"
+  },
+  "composition": {
+    "framing": "medium close-up capturing from the waist up",
+    "pose": "slightly angled to the viewer with one hand resting on the hip",
+    "gesture": "right hand lightly touching the chin, indicating contemplation"
+  },
+  "background": {
+    "type": "abstract",
+    "color_palette": "muted grays and blues creating a soft, blurred effect",
+    "details": "gentle diagonal stripes giving a sense of forward motion",
+    "rules": "avoid any specific or distracting elements that take focus from the character"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "face": {
+    "structure": "oval with softly pronounced cheekbones and a narrow chin",
+    "eyes": {
+      "shape": "sharp almond shape with a slight upward slant",
+      "color": "deep brown with flecks of gold",
+      "details": [
+        "distinctive dark eyelashes",
+        "faint gold rim around the irises",
+        "subtle highlights at the top edge"
+      ],
+      "expression_effect": "analytical and perceptive gaze"
+    },
+    "expression": "contemplative with a slight furrow of the brow",
+    "skin": {
+      "tone": "pale olive",
+      "undertone": "warm yellow",
+      "texture": "smooth with a hint of natural sheen",
+      "rendering_notes": "soft diffused light highlights cheekbones and nose bridge"
+    }
+  },
+  "character": {
+    "hair": {
+      "color": "deep black with a subtle blue sheen",
+      "style": "waist-length straight hair with side-swept bangs",
+      "flow": "flows smoothly with slight movement at the tips",
+      "details": [
+        "silky texture",
+        "wears a simple silver hairpin on the left side"
+      ]
+    },
+    "aura": "intellectual intensity with a calm, composed demeanor"
+  },
+  "outfit": {
+    "base": "high-collared dark navy tunic",
+    "design": "minimalist design with subtle geometric patterns on the sleeves",
+    "details": [
+      "silver threads decorating the hem",
+      "hidden inner pockets"
+    ],
+    "fit": "tailored to fit snugly, allowing ease of movement"
+  },
+  "composition": {
+    "framing": "medium close-up focusing on the upper body and face",
+    "pose": "slightly turned head as if listening intently",
+    "gesture": "fingertips touching the chin in thoughtful contemplation"
+  },
+  "background": {
+    "type": "abstract minimalist",
+    "color_palette": "cool tones of soft grey and muted blues",
+    "details": "abstract shapes suggesting motion and thought process",
+    "rules": "background should enhance the character's aura, not distract from it"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "face": {
+    "structure": "oval with subtly defined cheekbones, a slender jawline that gives a balanced appearance",
+    "eyes": {
+      "shape": "sharp almond shape",
+      "color": "warm hazel with flecks of gold",
+      "details": [
+        "subtle dark outer rims",
+        "fine inner striations",
+        "tiny gold flecks near pupil"
+      ],
+      "expression_effect": "piercing, conveys depth and intelligence"
+    },
+    "expression": "slightly furrowed brows with a thoughtful, intensely observant look",
+    "skin": {
+      "tone": "light olive",
+      "undertone": "warm peach",
+      "texture": "smooth with a few natural freckles across the nose",
+      "rendering_notes": "applies soft gradient shading, mild reflective highlights on high points"
+    }
+  },
+  "character": {
+    "hair": {
+      "color": "deep chestnut brown with subtle auburn highlights",
+      "style": "straight and sleek, reaches just past the shoulders",
+      "flow": "slight inward curve at the ends",
+      "details": [
+        "side-swept bangs",
+        "occasional loose strands framing the face"
+      ]
+    },
+    "aura": "a silent storm, charged yet concealed, always assessing and pondering"
+  },
+  "outfit": {
+    "base": "slim-fit, structured blazer over a plain white blouse",
+    "design": "modern urban with tactical elements",
+    "details": [
+      "discreet inside pockets",
+      "tailored for mobility"
+    ],
+    "fit": "tailored to fit snugly, allowing agile movement"
+  },
+  "composition": {
+    "framing": "mid-length portrait capturing from hips upwards",
+    "pose": "slightly turned to the side, one arm across the body holding the opposite elbow",
+    "gesture": "gaze directed sideways as if looking past the viewer, fingers curled around the elbow"
+  },
+  "background": {
+    "type": "urban cityscape",
+    "color_palette": "muted blues and grays with occasional soft yellow lights",
+    "details": "blurred outlines of skyscrapers and city lights to indicate depth and activity",
+    "rules": "ensure a slightly out-of-focus effect on background to keep character as focal point"
+  }
+}

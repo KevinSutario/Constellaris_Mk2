@@ -1,40 +1,26 @@
-import OpenAI from "openai";
-import { config } from "../../config/env.js";
-import fs from "fs";
+import OpenAI from "openai"
+import { config } from "../../config/env.js"
+import fs from "fs"
 
-const client = new OpenAI({
-  apiKey: config.OPENAI_API_KEY,
-});
+const client = new OpenAI({ apiKey: config.OPENAI_API_KEY })
 
-
-// 🧱 Load prompt from file
 function loadPrompt(path) {
-  return fs.readFileSync(path, "utf-8");
+  return fs.readFileSync(path, "utf-8")
 }
 
-
-// 🛡️ Safe JSON parse
 function safeParse(text) {
   try {
-    const cleaned = text
-      .replace(/```json/g, "")
-      .replace(/```/g, "")
-      .trim();
-
-    return JSON.parse(cleaned);
+    return JSON.parse(text.replace(/```json/g, "").replace(/```/g, "").trim())
   } catch (err) {
-    console.error("Parsing failed:");
-    console.log(text);
-    return null;
+    console.error("Parsing failed:", text)
+    return null
   }
 }
 
-
-// 🎯 ACTION: generate personality
+// Generate one personality — pure API call, no file ops
 export async function generatePersonality(gender) {
-  const basePrompt = loadPrompt("prompts/character/Personality_Prompt.txt");
+  const basePrompt = loadPrompt("prompts/character/Personality_Prompt.txt")
 
-  // 👇 inject gender into the prompt
   const prompt = `
 ${basePrompt}
 
@@ -45,57 +31,49 @@ Character constraints:
 - The name must be unique among characters
 - Do NOT leave name empty
 - Name must be Korean Manhwa Style
-`;
-
+`
 
   const response = await client.chat.completions.create({
     model: "gpt-4o",
     messages: [
       { role: "system", content: "You output strict JSON only." },
-      { role: "user", content: prompt },
-    ],
-  });
+      { role: "user",   content: prompt }
+    ]
+  })
 
-  const text = response.choices[0].message.content;
-
-  return safeParse(text);
+  return safeParse(response.choices[0].message.content)
 }
 
+// Save one character to a specific save directory
+export function saveCharacter(personality, index, saveDir) {
+  const id       = `C${String(index).padStart(3, "0")}`
+  const charDir  = `${saveDir}/characters`
+  const filename = `${charDir}/${id}_personality.json`
 
-// 💾 ACTION: save one character
-function saveCharacter(personality, index) {
-  const id = `C${String(index).padStart(3, "0")}`;
+  if (!fs.existsSync(charDir)) fs.mkdirSync(charDir, { recursive: true })
 
-  const filename = `data/characters/${id}_personality.json`;
-
-  const fullData = {
-    id,
-    ...personality,
-  };
-
-  fs.writeFileSync(filename, JSON.stringify(fullData, null, 2));
-
-  console.log(`Saved ${id}_personality.json`);
+  const fullData = { id, ...personality }
+  fs.writeFileSync(filename, JSON.stringify(fullData, null, 2))
+  console.log(`Saved ${id}_personality.json → ${saveDir}`)
+  return fullData
 }
 
-
-// 🔁 ACTION: create multiple characters
-export async function createMultipleCharacters() {
-  const genders = ["female", "female", "female", "male", "male"];
+// Generate all 5 characters and save to saveDir
+export async function createCharactersForSave(saveDir) {
+  const genders = ["female", "female", "female", "male", "male"]
+  const results = []
 
   for (let i = 0; i < genders.length; i++) {
-    const index = i + 1;
-    const gender = genders[i];
+    const index  = i + 1
+    const gender = genders[i]
+    console.log(`\nGenerating character ${index} (${gender})...`)
 
-    console.log(`\nGenerating character ${index} (${gender})...`);
+    const personality = await generatePersonality(gender)
+    if (!personality) { console.log("Skipping due to parse error"); continue }
 
-    const character = await generatePersonality(gender);
-
-    if (!character) {
-      console.log("Skipping due to parse error...");
-      continue;
-    }
-
-    saveCharacter(character, index);
+    const saved = saveCharacter(personality, index, saveDir)
+    results.push(saved)
   }
+
+  return results
 }

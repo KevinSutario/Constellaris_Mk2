@@ -1,11 +1,14 @@
 import express from "express"
-import cors from "cors"
-import OpenAI from "openai"
-import path from "path"
-import fs, { readdirSync, readFileSync, existsSync, writeFileSync, mkdirSync, copyFileSync } from "fs"
-import { createReadStream } from "fs"
-import { spawn } from "child_process"
-import { config } from "./config/env.js"
+import cors    from "cors"
+import OpenAI  from "openai"
+import path    from "path"
+import fs      from "fs"
+import { createReadStream }        from "fs"
+import { spawn }                   from "child_process"
+import { config }                  from "./config/env.js"
+import { createCharactersForSave } from "./engines/character_system/generate_personality.js"
+import { generateAllAppearances }  from "./engines/character_system/generate_appearance_json.js"
+import { generateAllCharacterImages } from "./engines/character_system/generate_character_image.js"
 
 const app    = express()
 const openai = new OpenAI({ apiKey: config.OPENAI_API_KEY })
@@ -14,155 +17,170 @@ app.use(cors())
 app.use(express.json())
 
 // ─── PATHS ────────────────────────────────────────────────────────────────────
-const ROOT       = "C:/Users/sutar/Documents/Constellaris_Mk2"
-const CHAR_DIR   = `${ROOT}/data/characters`
-const IMAGES_DIR = `${ROOT}/outputs/images`
-const STORY_DIR  = `${ROOT}/data/story`
-const SAVES_DIR  = `${ROOT}/data/story/saves`
-const SAVES_IDX  = `${ROOT}/data/story/saves_index.json`
-const SETTINGS_F = `${ROOT}/data/settings.json`
+const ROOT      = "C:/Users/sutar/Documents/Constellaris_Mk2"
+const SAVES_DIR = `${ROOT}/data/saves`
+const CHAR_DIR  = `${ROOT}/data/characters`   // template reference only
 
-// ensure directories exist
-;[SAVES_DIR].forEach(d => { if (!existsSync(d)) mkdirSync(d, { recursive: true }) })
+if (!fs.existsSync(SAVES_DIR)) fs.mkdirSync(SAVES_DIR, { recursive: true })
 
 // ─── HELPERS ──────────────────────────────────────────────────────────────────
 function loadJSON(p, fallback = {}) {
-  try { return JSON.parse(readFileSync(p, "utf-8")) } catch { return fallback }
+  try { return JSON.parse(fs.readFileSync(p, "utf-8")) } catch { return fallback }
 }
 function saveJSON(p, data) {
-  writeFileSync(p, JSON.stringify(data, null, 2))
+  fs.writeFileSync(p, JSON.stringify(data, null, 2))
 }
 
-const STORY_FILES = ["story_state.json", "story_memory.json", "story_slides.json", "story_log.txt"]
+function getSaveDir(saveId) { return `${SAVES_DIR}/${saveId}` }
 
-function copyStoryToSave(saveId) {
-  const dir = `${SAVES_DIR}/${saveId}`
-  if (!existsSync(dir)) mkdirSync(dir, { recursive: true })
-  STORY_FILES.forEach(f => {
-    const src = `${STORY_DIR}/${f}`
-    if (existsSync(src)) copyFileSync(src, `${dir}/${f}`)
+function createSaveStructure(saveId) {
+  const base = getSaveDir(saveId)
+  ;[
+    `${base}/characters`,
+    `${base}/story`,
+    `${base}/images`
+  ].forEach(d => { if (!fs.existsSync(d)) fs.mkdirSync(d, { recursive: true }) })
+  return base
+}
+
+function blankStoryFiles(saveDir) {
+  const storyDir = `${saveDir}/story`
+  saveJSON(`${storyDir}/story_state.json`,  {
+    meta: { current_iteration: 1, phase: "controlled", tension_level: 0 },
+    characters: {}, relationships: {}
   })
+  saveJSON(`${storyDir}/story_memory.json`, { summary:"", key_events:[], character_arcs:{} })
+  fs.writeFileSync(`${storyDir}/story_log.txt`,      "")
+  fs.writeFileSync(`${storyDir}/story_slides.json`, "[]")
 }
 
-function copyStoryFromSave(saveId) {
-  const dir = `${SAVES_DIR}/${saveId}`
-  STORY_FILES.forEach(f => {
-    const src = `${dir}/${f}`
-    if (existsSync(src)) copyFileSync(src, `${STORY_DIR}/${f}`)
-  })
+function readMeta(saveId) {
+  return loadJSON(`${getSaveDir(saveId)}/meta.json`, null)
 }
 
-function updateSaveIndex(saveId, patch) {
-  const idx = loadJSON(SAVES_IDX, { saves: [] })
-  const i   = idx.saves.findIndex(s => s.id === saveId)
-  if (i >= 0) Object.assign(idx.saves[i], patch)
-  else         idx.saves.push({ id: saveId, ...patch })
-  saveJSON(SAVES_IDX, idx)
+function writeMeta(saveId, patch) {
+  const existing = readMeta(saveId) || {}
+  const updated  = { ...existing, ...patch }
+  saveJSON(`${getSaveDir(saveId)}/meta.json`, updated)
+  return updated
 }
 
-// ─── GET /api/characters ──────────────────────────────────────────────────────
-app.get("/api/characters", (req, res) => {
-  const result = {}
+// Track background image generation status
+const imageGenStatus = {}   // { [saveId]: "pending" | "done" | "failed" }
+
+async function runImageGenerationInBackground(saveId) {
+  const saveDir = getSaveDir(saveId)
+  imageGenStatus[saveId] = "pending"
   try {
-    readdirSync(CHAR_DIR).forEach(file => {
-      if (!file.endsWith("_personality.json")) return
-      const data = JSON.parse(readFileSync(path.join(CHAR_DIR, file), "utf-8"))
-      const id   = data.id
-      result[id] = {
-        name:      data.name,
-        role:      data.role,
-        imagePath: existsSync(path.join(IMAGES_DIR, `${id}_image.png`))
-          ? `http://localhost:3001/images/${id}_image.png`
-          : ""
-      }
-    })
-    res.json(result)
+    await generateAllCharacterImages(saveDir, 5)
+    imageGenStatus[saveId] = "done"
+    writeMeta(saveId, { imagesReady: true })
+    console.log(`✔ Images ready for ${saveId}`)
   } catch (err) {
-    res.status(500).json({ error: "Failed to load characters" })
+    imageGenStatus[saveId] = "failed"
+    console.error(`Image gen failed for ${saveId}:`, err.message)
   }
-})
-
-// ─── GET/POST /api/settings ───────────────────────────────────────────────────
-const DEFAULT_SETTINGS = { language: "English", grammarLevel: "intermediate" }
-
-app.get("/api/settings", (req, res) => {
-  res.json(loadJSON(SETTINGS_F, DEFAULT_SETTINGS))
-})
-
-app.post("/api/settings", (req, res) => {
-  const current  = loadJSON(SETTINGS_F, DEFAULT_SETTINGS)
-  const updated  = { ...current, ...req.body }
-  saveJSON(SETTINGS_F, updated)
-  res.json(updated)
-})
+}
 
 // ─── GET /api/saves ───────────────────────────────────────────────────────────
 app.get("/api/saves", (req, res) => {
-  const idx = loadJSON(SAVES_IDX, { saves: [] })
-  res.json(idx.saves)
-})
-
-// ─── POST /api/saves ──────────────────────────────────────────────────────────
-// Creates a new save slot, resets story files, copies blank state into save dir
-app.post("/api/saves", (req, res) => {
-  const { name } = req.body
-  const id       = `save_${Date.now()}`
-  const now      = new Date().toISOString()
-
-  // Reset story state
-  const blankState  = { meta: { current_iteration: 1, phase: "controlled", tension_level: 0 }, characters: {}, relationships: {} }
-  const blankMemory = { summary: "", key_events: [], character_arcs: {} }
-
-  saveJSON(`${STORY_DIR}/story_state.json`,  blankState)
-  saveJSON(`${STORY_DIR}/story_memory.json`, blankMemory)
-  writeFileSync(`${STORY_DIR}/story_log.txt`, "")
-  writeFileSync(`${STORY_DIR}/story_slides.json`, "[]")
-
-  copyStoryToSave(id)
-  updateSaveIndex(id, { id, name: name || "New Story", lastEdited: now, iteration: 1 })
-
-  res.json({ id, name, lastEdited: now, iteration: 1 })
-})
-
-// ─── PUT /api/saves/:id/name ──────────────────────────────────────────────────
-app.put("/api/saves/:id/name", (req, res) => {
-  const { name } = req.body
-  updateSaveIndex(req.params.id, { name })
-  res.json({ success: true })
-})
-
-// ─── DELETE /api/saves/:id ────────────────────────────────────────────────────
-app.delete("/api/saves/:id", (req, res) => {
-  const idx = loadJSON(SAVES_IDX, { saves: [] })
-  idx.saves  = idx.saves.filter(s => s.id !== req.params.id)
-  saveJSON(SAVES_IDX, idx)
-
-  const dir = `${SAVES_DIR}/${req.params.id}`
-  if (existsSync(dir)) fs.rmSync(dir, { recursive: true })
-
-  res.json({ success: true })
-})
-
-// ─── POST /api/saves/:id/load ─────────────────────────────────────────────────
-// Copies a save's files into the active story directory
-app.post("/api/saves/:id/load", (req, res) => {
   try {
-    copyStoryFromSave(req.params.id)
-    res.json({ success: true })
+    const saves = fs.readdirSync(SAVES_DIR)
+      .filter(d => fs.statSync(`${SAVES_DIR}/${d}`).isDirectory())
+      .map(d => {
+        const meta = loadJSON(`${SAVES_DIR}/${d}/meta.json`, null)
+        if (!meta) return null
+        return { ...meta, imageStatus: imageGenStatus[d] || (meta.imagesReady ? "done" : "pending") }
+      })
+      .filter(Boolean)
+      .sort((a, b) => new Date(b.lastEdited) - new Date(a.lastEdited))
+
+    res.json(saves)
   } catch (err) {
     res.status(500).json({ error: err.message })
   }
 })
 
+// ─── POST /api/saves ──────────────────────────────────────────────────────────
+// Body: { name, language, grammarLevel }
+// 1. Creates folder structure
+// 2. Generates 5 personalities + appearances (blocking — fast ~10s)
+// 3. Kicks off image generation in background (slow)
+// 4. Returns save metadata immediately
+app.post("/api/saves", async (req, res) => {
+  const { name = "New Story", language = "English", grammarLevel = "intermediate" } = req.body
+  const saveId  = `save_${Date.now()}`
+  const saveDir = createSaveStructure(saveId)
+  const now     = new Date().toISOString()
+
+  try {
+    console.log(`\nCreating save ${saveId}...`)
+
+    // Write meta first so the save appears in list
+    writeMeta(saveId, { id: saveId, name, language, grammarLevel, iteration: 1, lastEdited: now, imagesReady: false, status: "generating_characters" })
+
+    // Generate personalities (blocking)
+    console.log("Generating personalities...")
+    await createCharactersForSave(saveDir)
+
+    // Generate appearances (blocking)
+    console.log("Generating appearances...")
+    await generateAllAppearances(saveDir, 5)
+
+    // Update status
+    writeMeta(saveId, { status: "ready" })
+
+    // Blank story files
+    blankStoryFiles(saveDir)
+
+    // Kick off image generation in background (non-blocking)
+    runImageGenerationInBackground(saveId)
+
+    const meta = readMeta(saveId)
+    res.json(meta)
+
+  } catch (err) {
+    console.error("Save creation failed:", err)
+    res.status(500).json({ error: err.message })
+  }
+})
+
+// ─── GET /api/saves/:id ───────────────────────────────────────────────────────
+app.get("/api/saves/:id", (req, res) => {
+  const meta = readMeta(req.params.id)
+  if (!meta) return res.status(404).json({ error: "Save not found" })
+  res.json({ ...meta, imageStatus: imageGenStatus[req.params.id] || (meta.imagesReady ? "done" : "pending") })
+})
+
+// ─── PUT /api/saves/:id/name ──────────────────────────────────────────────────
+app.put("/api/saves/:id/name", (req, res) => {
+  const meta = writeMeta(req.params.id, { name: req.body.name })
+  res.json(meta)
+})
+
+// ─── DELETE /api/saves/:id ────────────────────────────────────────────────────
+app.delete("/api/saves/:id", (req, res) => {
+  const saveDir = getSaveDir(req.params.id)
+  if (fs.existsSync(saveDir)) fs.rmSync(saveDir, { recursive: true })
+  delete imageGenStatus[req.params.id]
+  res.json({ success: true })
+})
+
 // ─── POST /api/continue ───────────────────────────────────────────────────────
-// Runs the next story iteration, then syncs the save file
+// Body: { saveId }
+// Spawns run_story.js and waits for completion
 app.post("/api/continue", (req, res) => {
   const { saveId } = req.body
+  if (!saveId) return res.status(400).json({ error: "saveId required" })
 
-  const child = spawn("node", ["engines/story_system2/run_story.js"], {
-    cwd: ROOT,
-    env: { ...process.env }
-  })
+  const meta     = readMeta(saveId)
+  const language = meta?.language || "English"
+
+  const child = spawn(
+    "node",
+    ["engines/story_system/run_story.js", "--save", saveId, "--lang", language],
+    { cwd: ROOT, env: { ...process.env } }
+  )
 
   let output = ""
   child.stdout.on("data", d => { output += d.toString(); process.stdout.write(d) })
@@ -170,17 +188,12 @@ app.post("/api/continue", (req, res) => {
 
   child.on("close", code => {
     if (code === 0) {
-      // Sync updated story files back to the save slot
-      if (saveId) {
-        copyStoryToSave(saveId)
-        // Update iteration count in index
-        const state = loadJSON(`${STORY_DIR}/story_state.json`)
-        updateSaveIndex(saveId, {
-          lastEdited: new Date().toISOString(),
-          iteration:  state?.meta?.current_iteration || 1
-        })
-      }
-      res.json({ success: true, output })
+      const state = loadJSON(`${getSaveDir(saveId)}/story/story_state.json`)
+      writeMeta(saveId, {
+        lastEdited: new Date().toISOString(),
+        iteration:  state?.meta?.current_iteration || 1
+      })
+      res.json({ success: true })
     } else {
       res.status(500).json({ error: "Story generation failed", output })
     }
@@ -189,46 +202,83 @@ app.post("/api/continue", (req, res) => {
   child.on("error", err => res.status(500).json({ error: err.message }))
 })
 
+// ─── GET /api/characters/:saveId ─────────────────────────────────────────────
+app.get("/api/characters/:saveId", (req, res) => {
+  const saveDir = getSaveDir(req.params.saveId)
+  const charDir = `${saveDir}/characters`
+
+  if (!fs.existsSync(charDir)) return res.status(404).json({ error: "No characters found" })
+
+  const result = {}
+  fs.readdirSync(charDir).forEach(file => {
+    if (!file.endsWith("_personality.json")) return
+    const data = JSON.parse(fs.readFileSync(path.join(charDir, file), "utf-8"))
+    const id   = data.id
+    const imgPath = `${saveDir}/images/${id}_image.png`
+    result[id] = {
+      name:      data.name,
+      role:      data.role,
+      imagePath: fs.existsSync(imgPath)
+        ? `http://localhost:3001/images/${req.params.saveId}/${id}_image.png`
+        : ""
+    }
+  })
+
+  res.json(result)
+})
+
+// ─── GET/POST /api/settings ───────────────────────────────────────────────────
+const SETTINGS_PATH    = `${ROOT}/data/settings.json`
+const DEFAULT_SETTINGS = { systemLanguage: "English", grammarLevel: "intermediate" }
+
+app.get("/api/settings", (req, res) => res.json(loadJSON(SETTINGS_PATH, DEFAULT_SETTINGS)))
+
+app.post("/api/settings", (req, res) => {
+  const updated = { ...loadJSON(SETTINGS_PATH, DEFAULT_SETTINGS), ...req.body }
+  saveJSON(SETTINGS_PATH, updated)
+  res.json(updated)
+})
+
 // ─── POST /api/define ─────────────────────────────────────────────────────────
-// Body: { word, sentence, grammarLevel? }
-// Returns: { definition, context, example }
 app.post("/api/define", async (req, res) => {
-  const { word, sentence, grammarLevel = "intermediate" } = req.body
+  const { word, sentence, grammarLevel = "intermediate", storyLanguage = "English" } = req.body
   if (!word || !sentence) return res.status(400).json({ error: "Missing word or sentence" })
 
   const levelMap = {
-    beginner:          "very simple words and very short sentences (A1-A2 level)",
-    elementary:        "simple clear sentences with common words (B1 level)",
-    intermediate:      "clear sentences with some variety, suitable for high school (B2 level)",
-    "upper-intermediate": "varied grammar including conditionals and complex clauses (C1 level)",
-    advanced:          "sophisticated vocabulary and complex sentence structures (C2 level)"
+    beginner:             "very simple words and very short sentences (A1-A2)",
+    elementary:           "simple clear sentences with common words (B1)",
+    intermediate:         "clear sentences suitable for high school (B2)",
+    "upper-intermediate": "varied grammar including conditionals (C1)",
+    advanced:             "sophisticated vocabulary and complex structures (C2)"
   }
   const levelDesc = levelMap[grammarLevel] || levelMap.intermediate
+
+  const langNote = storyLanguage !== "English"
+    ? `The story is written in ${storyLanguage}. The word "${word}" appears in a ${storyLanguage} sentence. Provide definition, context, and example IN ${storyLanguage}.`
+    : ""
 
   try {
     const response = await openai.chat.completions.create({
       model: "gpt-4o",
-      max_tokens: 300,
+      max_tokens: 350,
       messages: [
         { role: "system", content: "You are an English vocabulary assistant. Return only valid JSON." },
         {
           role: "user",
-          content: `Define the word "${word}" as used in this sentence: "${sentence}"
+          content: `${langNote}
+Define the word "${word}" as used in this sentence: "${sentence}"
+Learner level: ${levelDesc}
 
-The learner's level is: ${levelDesc}. Match your language to that level.
-
-Return ONLY this JSON (no markdown, no fences):
+Return ONLY this JSON (no markdown):
 {
-  "definition": "clear meaning in 1-2 sentences matching the learner level",
-  "context": "what '${word}' means specifically in this sentence, in 1 sentence",
-  "example": "one new example sentence using '${word}' in a different context, at the learner level"
+  "definition": "clear meaning in 1-2 sentences at the learner level",
+  "context": "what '${word}' means specifically in this sentence, 1 sentence",
+  "example": "a new example sentence using '${word}' in a different context at the learner level"
 }`
         }
       ]
     })
-
-    const raw    = response.choices[0].message.content.trim()
-    const clean  = raw.replace(/```json|```/g, "").trim()
+    const clean = response.choices[0].message.content.trim().replace(/```json|```/g, "").trim()
     res.json(JSON.parse(clean))
   } catch (err) {
     console.error("Define error:", err)
@@ -238,17 +288,20 @@ Return ONLY this JSON (no markdown, no fences):
 
 // ─── POST /api/quiz ───────────────────────────────────────────────────────────
 app.post("/api/quiz", async (req, res) => {
-  const { storyText, grammarLevel = "intermediate" } = req.body
+  const { storyText, grammarLevel = "intermediate", storyLanguage = "English" } = req.body
   if (!storyText) return res.status(400).json({ error: "Missing storyText" })
 
   const levelMap = {
-    beginner:             "very simple vocabulary, present tense only, short questions",
-    elementary:           "simple questions, basic grammar, common words",
-    intermediate:         "high school level, some complex vocabulary, varied question types",
-    "upper-intermediate": "challenging questions, idioms, inference required",
-    advanced:             "university entrance level, nuanced analysis, sophisticated vocabulary"
+    beginner:             "very simple vocabulary, present tense only",
+    elementary:           "simple questions, basic grammar",
+    intermediate:         "high school level, varied question types",
+    "upper-intermediate": "challenging, idioms, inference required",
+    advanced:             "university level, nuanced analysis"
   }
-  const levelDesc = levelMap[grammarLevel] || levelMap.intermediate
+
+  const langNote = storyLanguage !== "English"
+    ? `The story is in ${storyLanguage}. Write ALL questions and answers in ${storyLanguage}.`
+    : ""
 
   try {
     const response = await openai.chat.completions.create({
@@ -258,17 +311,12 @@ app.post("/api/quiz", async (req, res) => {
         { role: "system", content: "You are an English teacher. Return only valid JSON." },
         {
           role: "user",
-          content: `Create a 10-question English quiz based on this story.
+          content: `${langNote}
+Create a 10-question quiz. Difficulty: ${levelMap[grammarLevel] || levelMap.intermediate}
 
-Difficulty: ${levelDesc}
-
-Split:
-- 5 multiple choice (comprehension + vocabulary in context)
-- 3 short answer (1-3 sentences expected)
-- 2 paragraph (5-8 sentences expected, analysis + opinion)
-
-For MC: 4 options, correct answer as index 0-3.
-For short/paragraph: include a sampleAnswer.
+Split: 5 MC, 3 short answer, 2 paragraph.
+MC: 4 options, correct answer index 0-3.
+Short/paragraph: include sampleAnswer.
 
 Return ONLY JSON:
 {
@@ -284,9 +332,7 @@ ${storyText}`
         }
       ]
     })
-
-    const raw   = response.choices[0].message.content.trim()
-    const clean = raw.replace(/```json|```/g, "").trim()
+    const clean = response.choices[0].message.content.trim().replace(/```json|```/g, "").trim()
     res.json(JSON.parse(clean))
   } catch (err) {
     res.status(500).json({ error: "Failed to generate quiz" })
@@ -295,39 +341,35 @@ ${storyText}`
 
 // ─── POST /api/grade ──────────────────────────────────────────────────────────
 app.post("/api/grade", async (req, res) => {
-  const { question, sampleAnswer, userAnswer, type, grammarLevel = "intermediate" } = req.body
+  const { question, sampleAnswer, userAnswer, type, grammarLevel = "intermediate", storyLanguage = "English" } = req.body
   if (!question || !userAnswer) return res.status(400).json({ error: "Missing fields" })
 
-  const maxScore   = type === "paragraph" ? 10 : 5
+  const maxScore    = type === "paragraph" ? 10 : 5
   const expectation = type === "paragraph" ? "5-8 sentences" : "1-3 sentences"
+  const langNote    = storyLanguage !== "English" ? `The quiz is in ${storyLanguage}. Provide feedback in ${storyLanguage}.` : ""
 
   try {
     const response = await openai.chat.completions.create({
       model: "gpt-4o",
       max_tokens: 300,
       messages: [
-        { role: "system", content: "You are a supportive English teacher. Be encouraging but honest. Return only valid JSON." },
+        { role: "system", content: "You are a supportive English teacher. Return only valid JSON." },
         {
           role: "user",
-          content: `Grade this student answer. Learner level: ${grammarLevel}.
-
+          content: `${langNote}
+Grade this student answer. Level: ${grammarLevel}.
 Question: ${question}
 Expected (${expectation}): ${sampleAnswer}
 Student answer: ${userAnswer}
 
-Score out of ${maxScore}. Consider comprehension, language accuracy, and depth.
+Score out of ${maxScore}. Consider comprehension, language accuracy, depth.
 
 Return ONLY JSON:
-{
-  "score": <0-${maxScore}>,
-  "feedback": "<2-3 encouraging sentences: what they did well and what to improve>"
-}`
+{"score":<0-${maxScore}>,"feedback":"<2-3 encouraging sentences>"}`
         }
       ]
     })
-
-    const raw   = response.choices[0].message.content.trim()
-    const clean = raw.replace(/```json|```/g, "").trim()
+    const clean = response.choices[0].message.content.trim().replace(/```json|```/g, "").trim()
     res.json(JSON.parse(clean))
   } catch (err) {
     res.status(500).json({ error: "Failed to grade answer" })
@@ -335,23 +377,26 @@ Return ONLY JSON:
 })
 
 // ─── STATIC FILES ─────────────────────────────────────────────────────────────
-app.get("/slides", (req, res) => {
+// Slides per save
+app.get("/slides/:saveId", (req, res) => {
+  const p = `${getSaveDir(req.params.saveId)}/story/story_slides.json`
   res.setHeader("Content-Type", "application/json")
-  createReadStream(`${STORY_DIR}/story_slides.json`)
-    .on("error", () => res.status(404).json({ error: "story_slides.json not found — run run_story.js first" }))
+  createReadStream(p)
+    .on("error", () => res.status(404).json({ error: "Slides not found — run continue first" }))
     .pipe(res)
 })
 
-app.get("/images/:filename", (req, res) => {
-  const imgPath = `${IMAGES_DIR}/${req.params.filename}`
+// Images per save
+app.get("/images/:saveId/:filename", (req, res) => {
+  const imgPath = `${getSaveDir(req.params.saveId)}/images/${req.params.filename}`
   const ext     = path.extname(req.params.filename).toLowerCase()
-  const mime    = ext === ".jpg" ? "image/jpeg" : "image/png"
-  res.setHeader("Content-Type", mime)
+  res.setHeader("Content-Type", ext === ".jpg" ? "image/jpeg" : "image/png")
   createReadStream(imgPath)
     .on("error", () => res.status(404).send("Image not found"))
     .pipe(res)
 })
 
+// Serve HTML
 app.get("/", (req, res) => {
   createReadStream(`${ROOT}/outputs/visual_novel_trial.html`)
     .on("error", () => res.status(404).send("visual_novel_trial.html not found"))
@@ -361,12 +406,14 @@ app.get("/", (req, res) => {
 // ─── START ────────────────────────────────────────────────────────────────────
 const PORT = 3001
 app.listen(PORT, () => {
-  console.log(`\n✔ Constellaris API server running at http://localhost:${PORT}\n`)
-  console.log("  Open the reader: http://localhost:3001")
-  console.log("  GET  /api/characters")
-  console.log("  GET  /api/saves  |  POST /api/saves")
-  console.log("  POST /api/saves/:id/load  |  PUT /api/saves/:id/name")
-  console.log("  POST /api/continue")
-  console.log("  GET  /api/settings  |  POST /api/settings")
-  console.log("  POST /api/define  |  /api/quiz  |  /api/grade\n")
+  console.log(`\n✔ Constellaris API — http://localhost:${PORT}\n`)
+  console.log("  GET  /api/saves           — list saves")
+  console.log("  POST /api/saves           — create save (generates characters)")
+  console.log("  GET  /api/saves/:id       — get one save")
+  console.log("  PUT  /api/saves/:id/name  — rename")
+  console.log("  DELETE /api/saves/:id     — delete")
+  console.log("  POST /api/continue        — run next iteration")
+  console.log("  GET  /api/characters/:saveId")
+  console.log("  GET  /api/settings  POST /api/settings")
+  console.log("  POST /api/define  /api/quiz  /api/grade\n")
 })

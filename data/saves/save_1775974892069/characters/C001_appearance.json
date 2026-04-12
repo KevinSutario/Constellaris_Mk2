@@ -1,0 +1,53 @@
+{
+  "face": {
+    "structure": "heart-shaped with a subtly pointed chin, high cheekbones that lend an impression of maturity tempered with youthful smoothness.",
+    "eyes": {
+      "shape": "sharp almond shape with a slight upward tilt at the outer corners enhancing an insightful, curious look.",
+      "color": "soft hazel with flecks of gold and green, creating a gentle contrast and an intriguing depth.",
+      "details": [
+        "long, dark lashes adding to the intensity and mystique",
+        "highlights strategically placed near the bottom rim to suggest warmth and receptivity"
+      ],
+      "expression_effect": "curious yet enigmatic, often giving the impression of being lost in thought"
+    },
+    "expression": "subtle and composed, with a relaxed mouth hinting at warmth and a furrowed brow suggesting contemplation and latent anxiety.",
+    "skin": {
+      "tone": "fair with a faint porcelain quality",
+      "undertone": "cool with hints of pink, offsetting any severe boldness",
+      "texture": "smooth with a youthful radiance, suggestive of careful skincare",
+      "rendering_notes": "soft gradient shading to highlight the cheekbones and jawline, underscoring her attentive expressiveness"
+    }
+  },
+  "character": {
+    "hair": {
+      "color": "jet black with a natural sheen catching the light to add dimension",
+      "style": "straight with layered ends that fall just below the shoulders",
+      "flow": "lightly tousled, with a slight inward curl near the chin framing her face",
+      "details": [
+        "wispy bangs parted just off-center",
+        "a single streak of violet hidden beneath the dominant layers, peeking through per movements"
+      ]
+    },
+    "aura": "a delicate mix of elegance and mystery, suggesting an unspoken depth and inner world"
+  },
+  "outfit": {
+    "base": "a sleek tailored sweater dress, slightly fitted to highlight a silhouette of poised grace",
+    "design": "minimalist with subtle intricate embroidery along the cuffs and neckline",
+    "details": [
+      "a small silver pendant hanging from a simple necklace",
+      "a thin, modern bracelet on her right wrist, suggesting a blend of contemporary and personal style"
+    ],
+    "fit": "comfortable yet sufficiently snug to convey sophistication"
+  },
+  "composition": {
+    "framing": "mid shot emphasizing the upper-body, allowing a view of expression and attire",
+    "pose": "standing with a slight lean towards the left, right arm casually resting at her side while the left hand tucks a lock of hair behind the ear",
+    "gesture": "an open posture indicating readiness to engage, with subtle movements suggesting restlessness"
+  },
+  "background": {
+    "type": "soft-focus setting",
+    "color_palette": "muted pastels and warm tones creating a tranquil atmosphere",
+    "details": "blurred silhouettes of gentle flowing drapes, suggesting a private, serene environment",
+    "rules": "keep the focus on the character while providing context through soft color transitions and abstract shapes"
+  }
+}
