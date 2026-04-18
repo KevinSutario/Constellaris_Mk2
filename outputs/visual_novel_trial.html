@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Constellaris</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+:root {
+  --bg:      #08080f;
+  --panel:   rgba(255,255,255,0.06);
+  --text:    #e8dfc8;
+  --dim:     #6a6258;
+  --accent:  #c8903a;
+  --aglow:   rgba(200,144,58,0.14);
+  --border:  rgba(255,255,255,0.09);
+  --glass:   rgba(255,255,255,0.04);
+  --c001:#5a8eff; --c002:#ff5a5a; --c003:#5aff8a; --c004:#ffd85a; --c005:#c05aff;
+}
+html,body { width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:'Crimson Pro',Georgia,serif; }
+
+/* ══════════ SCREENS ══════════ */
+.screen { position:fixed;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center; }
+.screen.active { display:flex; }
+
+/* ══════════ MENU ══════════ */
+#screen-menu {
+  background: radial-gradient(ellipse at 40% 50%, #0d0d22 0%, #08080f 70%);
+}
+#menu-bg-lines {
+  position:absolute;inset:0;pointer-events:none;overflow:hidden;
+}
+#menu-bg-lines::before {
+  content:'';position:absolute;inset:0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(200,144,58,0.03) 80px, rgba(200,144,58,0.03) 81px);
+}
+.menu-inner { position:relative;z-index:1;text-align:center; }
+.menu-logo {
+  font-family:'Cinzel',serif;font-size:52px;font-weight:700;
+  letter-spacing:10px;color:var(--text);text-transform:uppercase;
+  margin-bottom:6px;
+}
+.menu-logo span { color:var(--accent); }
+.menu-tagline {
+  font-size:14px;letter-spacing:4px;color:var(--dim);
+  text-transform:uppercase;margin-bottom:64px;
+}
+.menu-btns { display:flex;flex-direction:column;gap:16px;align-items:center; }
+.menu-btn {
+  font-family:'Cinzel',serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;
+  width:220px;padding:14px 0;
+  background:transparent;border:1px solid var(--border);color:var(--dim);
+  cursor:pointer;transition:all 0.25s;outline:none;
+}
+.menu-btn:hover { color:var(--accent);border-color:rgba(200,144,58,0.5);background:var(--aglow); }
+.menu-btn.primary { border-color:var(--accent);color:var(--accent);background:var(--aglow); }
+.menu-btn.primary:hover { background:rgba(200,144,58,0.22);color:#ffd590; }
+
+/* ══════════ SAVES ══════════ */
+#screen-saves {
+  background:var(--bg);
+  overflow-y:auto;
+  justify-content:flex-start;
+  padding:60px 0 80px;
+}
+.saves-inner { width:100%;max-width:700px;padding:0 32px; }
+.saves-header {
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:40px;
+}
+.saves-title {
+  font-family:'Cinzel',serif;font-size:18px;letter-spacing:5px;
+  color:var(--text);text-transform:uppercase;
+}
+.back-btn {
+  font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--dim);background:transparent;border:1px solid var(--border);
+  padding:8px 18px;cursor:pointer;transition:all 0.2s;outline:none;
+}
+.back-btn:hover { color:var(--accent);border-color:rgba(200,144,58,0.4); }
+
+#btn-new-save {
+  font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--accent);background:var(--aglow);border:1px solid rgba(200,144,58,0.35);
+  padding:8px 18px;cursor:pointer;transition:all 0.2s;outline:none;
+}
+#btn-new-save:hover { background:rgba(200,144,58,0.22); }
+
+#saves-list { display:flex;flex-direction:column;gap:12px; }
+.save-card {
+  border:1px solid var(--border);padding:20px 22px;
+  background:var(--glass);
+  transition:border-color 0.2s,background 0.2s;
+  position:relative;
+}
+.save-card:hover { border-color:rgba(200,144,58,0.25);background:rgba(255,255,255,0.05); }
+.save-card-top { display:flex;align-items:center;justify-content:space-between;margin-bottom:8px; }
+.save-name-wrap { display:flex;align-items:center;gap:10px;flex:1;min-width:0; }
+.save-name {
+  font-family:'Cinzel',serif;font-size:14px;letter-spacing:1px;color:var(--text);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.save-name-input {
+  font-family:'Cinzel',serif;font-size:14px;letter-spacing:1px;color:var(--text);
+  background:transparent;border:none;border-bottom:1px solid var(--accent);
+  outline:none;width:200px;padding:2px 0;
+}
+.save-rename-btn {
+  font-size:11px;color:var(--dim);background:none;border:none;
+  cursor:pointer;padding:2px 6px;transition:color 0.2s;flex-shrink:0;
+}
+.save-rename-btn:hover { color:var(--accent); }
+.save-meta { font-size:12px;color:var(--dim);letter-spacing:1px;margin-bottom:14px; }
+.save-meta span { color:var(--accent);font-size:11px; }
+.save-actions { display:flex;gap:8px; }
+.save-action-btn {
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  padding:7px 16px;border:1px solid var(--border);color:var(--dim);
+  background:transparent;cursor:pointer;transition:all 0.2s;outline:none;
+}
+.save-action-btn:hover { color:var(--text);border-color:rgba(255,255,255,0.2); }
+.save-action-btn.continue { border-color:rgba(200,144,58,0.4);color:var(--accent); }
+.save-action-btn.continue:hover { background:var(--aglow); }
+.save-action-btn.delete { border-color:rgba(255,90,90,0.25);color:rgba(255,90,90,0.5); }
+.save-action-btn.delete:hover { color:#ff5a5a;border-color:rgba(255,90,90,0.5); }
+.saves-empty {
+  text-align:center;padding:60px 0;color:var(--dim);
+  font-style:italic;font-size:16px;
+}
+
+/* ══════════ SETTINGS ══════════ */
+#screen-settings {
+  background:var(--bg);
+  overflow-y:auto;
+  justify-content:flex-start;
+  padding:60px 0 80px;
+}
+.settings-inner { width:100%;max-width:600px;padding:0 32px; }
+.settings-header {
+  display:flex;align-items:center;justify-content:space-between;margin-bottom:48px;
+}
+.settings-title {
+  font-family:'Cinzel',serif;font-size:18px;letter-spacing:5px;
+  color:var(--text);text-transform:uppercase;
+}
+.settings-section { margin-bottom:36px; }
+.settings-label {
+  font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:10px;
+}
+.settings-desc { font-size:13px;color:var(--dim);margin-bottom:14px;line-height:1.6; }
+
+/* custom select */
+.custom-select {
+  position:relative;width:100%;
+}
+.custom-select select {
+  width:100%;appearance:none;
+  background:var(--glass);border:1px solid var(--border);
+  color:var(--text);font-family:'Crimson Pro',serif;font-size:16px;
+  padding:12px 40px 12px 16px;cursor:pointer;outline:none;
+  transition:border-color 0.2s;
+}
+.custom-select select:focus { border-color:rgba(200,144,58,0.4); }
+.custom-select select option { background:#0e0e1c;color:var(--text); }
+.custom-select::after {
+  content:'▾';position:absolute;right:14px;top:50%;transform:translateY(-50%);
+  color:var(--accent);pointer-events:none;font-size:14px;
+}
+
+/* grammar level preview box */
+.level-preview {
+  margin-top:14px;padding:16px 18px;
+  border:1px solid var(--border);background:var(--glass);
+  display:none;
+}
+.level-preview.show { display:block; }
+.preview-label {
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:8px;
+}
+.preview-example {
+  font-size:15px;line-height:1.7;color:var(--text);font-style:italic;font-weight:300;
+}
+.preview-note { font-size:12px;color:var(--dim);margin-top:6px; }
+
+.settings-save-btn {
+  font-family:'Cinzel',serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--bg);background:var(--accent);border:none;
+  padding:13px 40px;cursor:pointer;transition:all 0.2s;outline:none;margin-top:8px;
+}
+.settings-save-btn:hover { background:#e0a84a; }
+.settings-saved-msg {
+  font-size:13px;color:#5aff8a;letter-spacing:1px;
+  opacity:0;transition:opacity 0.3s;margin-left:14px;font-style:italic;
+}
+.settings-saved-msg.show { opacity:1; }
+
+/* ══════════ STORY SCREEN ══════════ */
+#screen-story {
+  background:var(--bg);
+  display:none;
+  flex-direction:column;
+}
+#screen-story.active { display:flex; }
+
+#scene {
+  position:relative;width:100%;height:100%;
+  display:flex;align-items:flex-end;justify-content:center;
+  cursor:pointer;
+}
+#bg {
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at 30% 60%,#0d0d20 0%,#08080f 70%);
+}
+#bg::after {
+  content:'';position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;opacity:0.5;
+}
+#chars { position:absolute;inset:0;display:flex;align-items:flex-end;pointer-events:none; }
+
+.char-wrap {
+  position:absolute;bottom:120px;width:340px;height:85%;
+  display:flex;align-items:flex-end;justify-content:center;
+  transition:all 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+.char-wrap.pos-left   { left:8%; }
+.char-wrap.pos-right  { right:8%; }
+.char-wrap.pos-center { left:50%;transform:translateX(-50%); }
+
+.char-inner {
+  position:relative;width:100%;height:100%;
+  display:flex;align-items:flex-end;justify-content:center;
+  transition:filter 0.4s ease,opacity 0.4s ease;
+}
+.char-inner.dimmed { filter:brightness(0.28) saturate(0.2); }
+.char-inner.dimmed::after {
+  content:'';position:absolute;inset:0;background:rgba(0,0,0,0.58);border-radius:4px;
+}
+.char-img {
+  height:100%;width:auto;max-width:100%;object-fit:contain;object-position:bottom center;
+  display:block;filter:drop-shadow(0 0 30px rgba(0,0,0,0.9));transition:filter 0.4s ease;
+}
+.char-inner.speaking .char-img {
+  filter:drop-shadow(0 0 20px rgba(200,144,58,0.25)) drop-shadow(0 0 60px rgba(0,0,0,0.9));
+}
+.char-fallback {
+  width:180px;height:380px;border-radius:90px 90px 30px 30px;
+  display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;
+  box-shadow:0 0 60px rgba(0,0,0,0.8);
+}
+.char-fallback-initial { font-family:'Cinzel',serif;font-size:64px;font-weight:700;color:rgba(255,255,255,0.06); }
+.char-fallback-bar { position:absolute;bottom:0;left:0;right:0;height:3px; }
+.char-C001 .char-fallback { background:linear-gradient(180deg,#12203a,#080e1a); } .char-C001 .char-fallback-bar { background:var(--c001); }
+.char-C002 .char-fallback { background:linear-gradient(180deg,#3a1212,#1a0808); } .char-C002 .char-fallback-bar { background:var(--c002); }
+.char-C003 .char-fallback { background:linear-gradient(180deg,#123a1a,#081a0c); } .char-C003 .char-fallback-bar { background:var(--c003); }
+.char-C004 .char-fallback { background:linear-gradient(180deg,#3a3412,#1a1808); } .char-C004 .char-fallback-bar { background:var(--c004); }
+.char-C005 .char-fallback { background:linear-gradient(180deg,#2a123a,#12081a); } .char-C005 .char-fallback-bar { background:var(--c005); }
+
+/* topbar */
+#topbar {
+  position:absolute;top:0;left:0;right:0;z-index:20;
+  display:flex;justify-content:flex-end;align-items:center;
+  padding:14px 20px;gap:10px;
+  background:linear-gradient(180deg,rgba(0,0,0,0.55) 0%,transparent 100%);
+  pointer-events:none;
+}
+.top-btn {
+  pointer-events:all;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2.5px;
+  color:rgba(255,255,255,0.45);background:var(--glass);border:1px solid var(--border);
+  padding:7px 16px;cursor:pointer;text-transform:uppercase;transition:all 0.2s;outline:none;
+}
+.top-btn:hover { color:var(--accent);border-color:rgba(200,144,58,0.4);background:var(--aglow); }
+.top-btn.active { color:var(--accent);border-color:rgba(200,144,58,0.4); }
+#progress { position:absolute;bottom:0;left:0;height:1px;background:var(--accent);transition:width 0.4s;opacity:0.45; }
+
+/* textbox — LIGHTER so text is readable */
+#textbox {
+  position:relative;z-index:10;width:100%;margin:0;
+  padding:22px 48px 26px;
+  background:rgba(18,16,28,0.92);
+  border:none;border-top:1px solid rgba(200,144,58,0.25);
+  backdrop-filter:blur(28px);
+  transition:opacity 0.25s,transform 0.25s;
+}
+#textbox::before {
+  content:'';position:absolute;top:0;left:60px;right:60px;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(200,144,58,0.4),transparent);
+}
+#speaker {
+  font-family:'Cinzel',serif;font-size:12px;letter-spacing:3px;color:var(--accent);
+  text-transform:uppercase;margin-bottom:10px;min-height:18px;transition:color 0.3s;
+}
+#text { font-size:20px;line-height:1.8;font-weight:300;letter-spacing:0.02em;color:#f0e8d0; }
+#textbox.narrator #speaker { opacity:0;pointer-events:none; }
+#textbox.narrator #text    { font-style:normal;color:#c8bfaa;font-size:17px; }
+#textbox.monologue #text   { font-style:italic;color:#ddd4bc; }
+
+#caret {
+  display:inline-block;width:7px;height:7px;background:var(--accent);border-radius:50%;
+  margin-left:8px;vertical-align:middle;opacity:0;animation:blink 1.3s ease infinite;transition:opacity 0.3s;
+}
+#caret.show { opacity:1; }
+@keyframes blink { 0%,100%{transform:scale(1);opacity:.8}50%{transform:scale(1.6);opacity:.2} }
+
+.w { cursor:pointer;border-radius:2px;padding:1px 2px;transition:background 0.15s,color 0.15s; }
+.w:hover { background:rgba(200,144,58,0.22);color:#ffd590; }
+
+#counter {
+  position:absolute;bottom:140px;right:22px;z-index:10;
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.25);
+}
+
+/* ══════════ WORD TOOLTIP ══════════ */
+#tooltip {
+  position:fixed;z-index:500;width:320px;
+  background:#0c0c1a;border:1px solid rgba(200,144,58,0.35);
+  padding:18px 20px 16px;
+  box-shadow:0 16px 60px rgba(0,0,0,0.85);
+  pointer-events:none;opacity:0;transform:translateY(8px);
+  transition:opacity 0.2s,transform 0.2s;
+}
+#tooltip.show { opacity:1;transform:translateY(0);pointer-events:all; }
+#tt-word { font-family:'Cinzel',serif;font-size:15px;color:var(--accent);letter-spacing:1px;margin-bottom:8px; }
+#tt-def  { font-size:14px;line-height:1.65;color:#e0d8c4;font-weight:300; }
+#tt-ctx  {
+  font-size:13px;color:#a09880;font-style:italic;line-height:1.55;
+  margin-top:10px;padding-top:10px;border-top:1px solid var(--border);
+}
+#tt-example {
+  font-size:13px;color:#c8c0a8;line-height:1.55;
+  margin-top:8px;padding-top:8px;border-top:1px solid var(--border);
+}
+#tt-example-label {
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--accent);opacity:0.7;display:block;margin-bottom:4px;
+}
+#tt-close { position:absolute;top:10px;right:14px;color:var(--dim);cursor:pointer;font-size:18px;line-height:1;pointer-events:all; }
+#tt-close:hover { color:var(--text); }
+
+/* ══════════ LOGS ══════════ */
+#logs {
+  position:fixed;top:0;right:0;width:400px;height:100%;
+  z-index:400;background:rgba(6,6,12,0.98);border-left:1px solid var(--border);
+  backdrop-filter:blur(20px);transform:translateX(100%);
+  transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column;
+}
+#logs.open { transform:translateX(0); }
+#logs-head { padding:22px 22px 14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-shrink:0; }
+#logs-title { font-family:'Cinzel',serif;font-size:11px;letter-spacing:3px;color:var(--accent);text-transform:uppercase; }
+#logs-x { color:var(--dim);cursor:pointer;font-size:20px;line-height:1;transition:color 0.2s; }
+#logs-x:hover { color:var(--text); }
+#logs-body { flex:1;overflow-y:auto;padding:18px 22px; }
+#logs-body::-webkit-scrollbar { width:3px; }
+#logs-body::-webkit-scrollbar-thumb { background:var(--border);border-radius:2px; }
+.log-item { margin-bottom:18px; }
+.log-item.log-narrator .log-txt { font-size:13px;color:var(--dim);font-style:normal;line-height:1.7; }
+.log-item.log-dialogue,.log-item.log-monologue { padding-left:12px;border-left:2px solid rgba(200,144,58,0.25); }
+.log-spk { font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:3px; }
+.log-txt { font-size:13px;line-height:1.65;color:var(--text);font-style:italic;font-weight:300; }
+
+/* ══════════ END SCREEN ══════════ */
+#end-screen {
+  position:fixed;inset:0;z-index:250;background:rgba(0,0,0,0.92);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:16px;opacity:0;pointer-events:none;transition:opacity 0.7s;
+}
+#end-screen.show { opacity:1;pointer-events:all; }
+#end-title { font-family:'Cinzel',serif;font-size:26px;letter-spacing:6px;color:var(--accent); }
+#end-sub   { font-size:14px;color:var(--dim);letter-spacing:2px;margin-bottom:8px; }
+.end-btn {
+  font-family:'Cinzel',serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--dim);background:var(--glass);border:1px solid var(--border);
+  padding:10px 28px;cursor:pointer;transition:all 0.2s;outline:none;
+}
+.end-btn:hover { color:var(--accent);border-color:rgba(200,144,58,0.4); }
+.end-btn.primary { color:var(--bg);background:var(--accent);border-color:var(--accent); }
+.end-btn.primary:hover { background:#e0a84a; }
+
+/* ══════════ QUIZ ══════════ */
+#quiz-screen {
+  position:fixed;inset:0;z-index:300;background:var(--bg);overflow-y:auto;
+  opacity:0;pointer-events:none;transition:opacity 0.6s;
+  display:flex;flex-direction:column;align-items:center;
+}
+#quiz-screen.show { opacity:1;pointer-events:all; }
+#quiz-inner { width:100%;max-width:760px;padding:60px 40px 100px; }
+#quiz-head  { text-align:center;margin-bottom:48px; }
+#quiz-title { font-family:'Cinzel',serif;font-size:22px;letter-spacing:5px;color:var(--accent);text-transform:uppercase;margin-bottom:10px; }
+#quiz-sub   { font-size:15px;color:var(--dim);letter-spacing:1px; }
+
+.q-block { margin-bottom:32px;border:1px solid var(--border);padding:22px 26px;background:var(--glass);position:relative; }
+.q-block::before { content:'';position:absolute;top:0;left:20px;right:20px;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent); }
+.q-num  { font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--dim);text-transform:uppercase;margin-bottom:5px; }
+.q-badge { display:inline-block;font-size:9px;letter-spacing:1.5px;padding:2px 8px;border:1px solid var(--border);color:var(--dim);text-transform:uppercase;margin-bottom:10px;margin-left:8px; }
+.q-text { font-size:17px;line-height:1.65;color:var(--text);margin-bottom:16px; }
+
+.mc-opts { display:flex;flex-direction:column;gap:8px; }
+.mc-opt {
+  display:flex;align-items:center;gap:12px;padding:10px 14px;
+  border:1px solid var(--border);cursor:pointer;font-size:15px;color:var(--dim);
+  background:transparent;transition:all 0.2s;
+}
+.mc-opt:hover { border-color:rgba(200,144,58,0.3);color:var(--text);background:var(--aglow); }
+.mc-opt.selected { border-color:var(--accent);color:var(--text);background:var(--aglow); }
+.mc-opt.correct  { border-color:#5aff8a;color:#5aff8a;background:rgba(90,255,138,0.08); }
+.mc-opt.wrong    { border-color:#ff5a5a;color:#ff5a5a;background:rgba(255,90,90,0.08); }
+.opt-letter { font-family:'Cinzel',serif;font-size:11px;font-weight:600;color:var(--accent);min-width:18px; }
+
+.q-textarea {
+  width:100%;min-height:90px;resize:vertical;
+  background:rgba(255,255,255,0.03);border:1px solid var(--border);
+  color:#f0e8d0;font-family:'Crimson Pro',serif;font-size:16px;
+  line-height:1.6;padding:12px 14px;outline:none;transition:border-color 0.2s;
+}
+.q-textarea:focus { border-color:rgba(200,144,58,0.35); }
+.para-textarea { min-height:160px; }
+
+.q-feedback { margin-top:14px;padding:14px 16px;border:1px solid var(--border);display:none;font-size:14px;line-height:1.65; }
+.q-feedback.show { display:block; }
+.fb-score { font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;color:var(--accent);margin-bottom:6px; }
+.fb-text  { color:#b0a890; }
+
+#quiz-actions { display:flex;flex-direction:column;align-items:center;gap:16px;margin-top:20px; }
+#btn-submit-quiz {
+  font-family:'Cinzel',serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--bg);background:var(--accent);border:none;padding:14px 48px;
+  cursor:pointer;transition:all 0.2s;outline:none;
+}
+#btn-submit-quiz:hover { background:#e0a84a; }
+#btn-submit-quiz:disabled { background:var(--dim);cursor:not-allowed; }
+
+#quiz-score-banner { text-align:center;padding:28px;border:1px solid rgba(200,144,58,0.3);background:var(--aglow);display:none; }
+#quiz-score-banner.show { display:block; }
+#score-big { font-family:'Cinzel',serif;font-size:42px;color:var(--accent); }
+#score-msg { font-size:16px;color:var(--dim);margin-top:8px;letter-spacing:1px; }
+
+.quiz-post-btns { display:flex;gap:12px;flex-wrap:wrap;justify-content:center;display:none; }
+.quiz-post-btns.show { display:flex; }
+.qpost-btn {
+  font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--dim);background:transparent;border:1px solid var(--border);
+  padding:10px 24px;cursor:pointer;transition:all 0.2s;outline:none;
+}
+.qpost-btn:hover { color:var(--accent);border-color:rgba(200,144,58,0.4); }
+.qpost-btn.primary { color:var(--bg);background:var(--accent);border-color:var(--accent); }
+.qpost-btn.primary:hover { background:#e0a84a; }
+.qpost-btn:disabled { opacity:0.4;cursor:not-allowed; }
+.continue-status { font-size:13px;color:var(--dim);font-style:italic;display:none;letter-spacing:1px; }
+.continue-status.show { display:block; }
+
+.spin { display:inline-block;width:13px;height:13px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.7s linear infinite;vertical-align:middle;margin-left:6px; }
+@keyframes spin { to { transform:rotate(360deg); } }
+
+.fade-out { animation:fo 0.22s ease forwards; }
+.fade-in  { animation:fi 0.22s ease forwards; }
+@keyframes fo { to   { opacity:0;transform:translateY(5px); } }
+@keyframes fi { from { opacity:0;transform:translateY(5px); } to { opacity:1;transform:none; } }
+</style>
+</head>
+<body>
+
+<!-- ══ MENU ══ -->
+<div id="screen-menu" class="screen active">
+  <div id="menu-bg-lines"></div>
+  <div class="menu-inner">
+    <div class="menu-logo">Conste<span>ll</span>aris</div>
+    <div class="menu-tagline">Interactive Story · English Learning</div>
+    <div class="menu-btns">
+      <button class="menu-btn primary" id="btn-play">Play</button>
+      <button class="menu-btn"         id="btn-settings-menu">Settings</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SAVES ══ -->
+<div id="screen-saves" class="screen">
+  <div class="saves-inner">
+    <div class="saves-header">
+      <div class="saves-title">Stories</div>
+      <div style="display:flex;gap:10px">
+        <button id="btn-new-save">+ New Story</button>
+        <button class="back-btn" id="btn-saves-back">← Back</button>
+      </div>
+    </div>
+    <div id="saves-list">
+      <div class="saves-empty">Loading saves...</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SETTINGS ══ -->
+<div id="screen-settings" class="screen">
+  <div class="settings-inner">
+    <div class="settings-header">
+      <div class="settings-title" id="settings-title-lbl">Settings</div>
+      <button class="back-btn" id="btn-settings-back">← Back</button>
+    </div>
+
+    <div class="settings-section">
+      <div class="settings-label" id="lbl-interface-lang">Interface Language</div>
+      <div class="settings-desc" id="lbl-interface-desc">The language used for menus, buttons, and word definitions.</div>
+      <div class="custom-select">
+        <select id="sel-language">
+          <option value="English">English</option>
+          <option value="Korean">한국어 (Korean)</option>
+          <option value="Japanese">日本語 (Japanese)</option>
+          <option value="Indonesian">Bahasa Indonesia</option>
+          <option value="Chinese">中文 (Chinese)</option>
+          <option value="Spanish">Español (Spanish)</option>
+          <option value="French">Français (French)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <div class="settings-label" id="lbl-grammar-level">Grammar Level</div>
+      <div class="settings-desc" id="lbl-grammar-desc">This affects the difficulty of quiz questions and word definitions. Pick the level that matches your current English ability.</div>
+      <div class="custom-select">
+        <select id="sel-level">
+          <option value="beginner">Beginner (A1–A2)</option>
+          <option value="elementary">Elementary (B1)</option>
+          <option value="intermediate" selected>Intermediate (B2)</option>
+          <option value="upper-intermediate">Upper Intermediate (C1)</option>
+          <option value="advanced">Advanced (C2)</option>
+        </select>
+      </div>
+      <div class="level-preview" id="level-preview">
+        <div class="preview-label">Example at this level</div>
+        <div class="preview-example" id="preview-text"></div>
+        <div class="preview-note"   id="preview-note"></div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center">
+      <button class="settings-save-btn" id="btn-save-settings">Save Settings</button>
+      <span class="settings-saved-msg" id="settings-saved">Saved ✓</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ STORY ══ -->
+<div id="screen-story" class="screen">
+  <div id="scene">
+    <div id="bg"></div>
+    <div id="chars"></div>
+    <div id="topbar">
+      <div id="progress"></div>
+      <button class="top-btn" id="btn-auto">Auto</button>
+      <button class="top-btn" id="btn-logs">Logs</button>
+      <button class="top-btn" id="btn-menu-from-story">Menu</button>
+    </div>
+    <div id="counter"></div>
+    <div id="textbox">
+      <div id="speaker"></div>
+      <div id="text"></div>
+      <span id="caret"></span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ WORD TOOLTIP ══ -->
+<div id="tooltip">
+  <span id="tt-close">×</span>
+  <div id="tt-word"></div>
+  <div id="tt-def"></div>
+  <div id="tt-ctx"></div>
+  <div id="tt-example">
+    <span id="tt-example-label">Example</span>
+    <span id="tt-example-text"></span>
+  </div>
+</div>
+
+<!-- ══ LOGS ══ -->
+<div id="logs">
+  <div id="logs-head">
+    <div id="logs-title">Story Log</div>
+    <div id="logs-x">×</div>
+  </div>
+  <div id="logs-body"></div>
+</div>
+
+<!-- ══ END SCREEN ══ -->
+<div id="end-screen">
+  <div id="end-title">Chapter End</div>
+  <div id="end-sub">What would you like to do?</div>
+  <button class="end-btn primary" id="btn-go-quiz">Take the Quiz</button>
+  <button class="end-btn"         id="btn-replay">Read Again</button>
+  <button class="end-btn"         id="btn-end-menu">Back to Menu</button>
+</div>
+
+<!-- ══ QUIZ ══ -->
+<div id="quiz-screen">
+  <div id="quiz-inner">
+    <div id="quiz-head">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0">
+        <div>
+          <div id="quiz-title">Chapter Quiz</div>
+          <div id="quiz-sub">10 Questions</div>
+        </div>
+        <button class="top-btn" id="btn-quiz-logs" style="margin-top:4px;pointer-events:all">Logs</button>
+      </div>
+    </div>
+    <div id="quiz-loading" style="text-align:center;padding:60px 0;color:var(--dim);font-style:italic;font-size:16px">
+      Generating questions<span class="spin"></span>
+    </div>
+    <div id="quiz-questions"></div>
+    <div id="quiz-actions" style="display:none">
+      <div id="quiz-score-banner">
+        <div id="score-big"></div>
+        <div id="score-msg"></div>
+      </div>
+      <button id="btn-submit-quiz">Submit Answers</button>
+      <div class="quiz-post-btns" id="quiz-post-btns">
+        <button class="qpost-btn primary" id="btn-continue-story">Continue Story</button>
+        <button class="qpost-btn"         id="btn-quiz-replay">Read Again</button>
+        <button class="qpost-btn"         id="btn-quiz-menu">Back to Menu</button>
+      </div>
+      <div class="continue-status" id="continue-status"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════════════════
+// CONFIG
+// ════════════════════════════════════════════════════════
+const API   = "http://localhost:3001"
+const SLIDES_PATH = (sid) => `${API}/slides/${sid}`
+
+const CHAR_ACCENTS  = { C001:"#5a8eff", C002:"#ff5a5a", C003:"#5aff8a", C004:"#ffd85a", C005:"#c05aff" }
+const CHAR_INITIALS = { C001:"I", C002:"II", C003:"III", C004:"IV", C005:"V" }
+
+
+// ═══════════════════════════════════════════════════════
+// TRANSLATIONS — interface language strings
+// ═══════════════════════════════════════════════════════
+const TRANSLATIONS = {
+  "English": {
+    play:"Play", settings:"Settings", stories:"Stories", newStory:"+ New Story", back:"← Back",
+    continueStory:"Continue", readFromStart:"Read from start", deleteStory:"Delete",
+    lastEdited:"Last edited", chapter:"Chapter", noStories:"No stories yet. Press '+ New Story' to begin.",
+    interfaceLang:"Interface Language", interfaceLangDesc:"The language used for menus and buttons.",
+    grammarLevel:"Grammar Level", grammarLevelDesc:"Affects quiz difficulty and word definitions.",
+    saveSettings:"Save Settings", saved:"Saved ✓",
+    auto:"Auto", autoOn:"Auto ON", logs:"Logs", menu:"Menu",
+    chapterEnd:"Chapter End", takeQuiz:"Take the Quiz", readAgain:"Read Again", backToMenu:"Back to Menu",
+    chapterQuiz:"Chapter Quiz", submitAnswers:"Submit Answers", continueStoryBtn:"Continue Story",
+    generating:"Generating next chapter…", done:"Done! Loading new chapter…",
+    generatingCh1:"Generating Chapter 1", mayTakeMoment:"This may take a moment...",
+    correct:"✓ Correct", incorrect:"✗ Incorrect", notAnswered:"Not answered",
+    grading:"Grading", gradingFailed:"Grading failed",
+    lookingUp:"Looking up", example:"Example",
+    storyName:"Story Name", storyLang:"Story Language", createStory:"Create Story", cancel:"Cancel",
+    charGenNote:"⚠ Character generation takes about 10–15 seconds.\nImage generation runs in the background.",
+    multipleChoice:"Multiple Choice", shortAnswer:"Short Answer", paragraph:"Paragraph",
+    write13:"Write 1–3 sentences...", write58:"Write 5–8 sentences with your analysis...",
+    excellent:"Excellent work!", goodEffort:"Good effort — keep reading!", keepPracticing:"Keep practicing — you'll get there!"
+  },
+  "Korean": {
+    play:"플레이", settings:"설정", stories:"스토리", newStory:"+ 새 스토리", back:"← 뒤로",
+    continueStory:"계속하기", readFromStart:"처음부터 읽기", deleteStory:"삭제",
+    lastEdited:"마지막 수정", chapter:"챕터", noStories:"스토리가 없습니다. '+ 새 스토리'를 눌러 시작하세요.",
+    interfaceLang:"인터페이스 언어", interfaceLangDesc:"메뉴와 버튼에 사용되는 언어입니다.",
+    grammarLevel:"문법 수준", grammarLevelDesc:"퀴즈 난이도와 단어 정의에 영향을 줍니다.",
+    saveSettings:"설정 저장", saved:"저장됨 ✓",
+    auto:"자동", autoOn:"자동 켜짐", logs:"기록", menu:"메뉴",
+    chapterEnd:"챕터 종료", takeQuiz:"퀴즈 풀기", readAgain:"다시 읽기", backToMenu:"메뉴로 돌아가기",
+    chapterQuiz:"챕터 퀴즈", submitAnswers:"답안 제출", continueStoryBtn:"스토리 계속하기",
+    generating:"다음 챕터 생성 중…", done:"완료! 새 챕터 불러오는 중…",
+    generatingCh1:"챕터 1 생성 중", mayTakeMoment:"잠시 시간이 걸릴 수 있습니다...",
+    correct:"✓ 정답", incorrect:"✗ 오답", notAnswered:"답하지 않음",
+    grading:"채점 중", gradingFailed:"채점 실패",
+    lookingUp:"검색 중", example:"예문",
+    storyName:"스토리 이름", storyLang:"스토리 언어", createStory:"스토리 만들기", cancel:"취소",
+    charGenNote:"⚠ 캐릭터 생성은 약 10-15초가 걸립니다.\n이미지 생성은 백그라운드에서 실행됩니다.",
+    multipleChoice:"객관식", shortAnswer:"단답형", paragraph:"서술형",
+    write13:"1~3문장으로 작성하세요...", write58:"분석 내용을 5~8문장으로 작성하세요...",
+    excellent:"훌륭합니다!", goodEffort:"좋은 노력이에요 — 계속 읽어보세요!", keepPracticing:"계속 연습하세요 — 잘 될 거예요!"
+  },
+  "Japanese": {
+    play:"プレイ", settings:"設定", stories:"ストーリー", newStory:"+ 新しいストーリー", back:"← 戻る",
+    continueStory:"続ける", readFromStart:"最初から読む", deleteStory:"削除",
+    lastEdited:"最終編集", chapter:"チャプター", noStories:"ストーリーがありません。'+ 新しいストーリー'を押して始めましょう。",
+    interfaceLang:"インターフェース言語", interfaceLangDesc:"メニューとボタンに使用する言語です。",
+    grammarLevel:"文法レベル", grammarLevelDesc:"クイズの難易度と単語の定義に影響します。",
+    saveSettings:"設定を保存", saved:"保存済み ✓",
+    auto:"自動", autoOn:"自動オン", logs:"ログ", menu:"メニュー",
+    chapterEnd:"チャプター終了", takeQuiz:"クイズを受ける", readAgain:"もう一度読む", backToMenu:"メニューに戻る",
+    chapterQuiz:"チャプタークイズ", submitAnswers:"回答を提出", continueStoryBtn:"ストーリーを続ける",
+    generating:"次のチャプターを生成中…", done:"完了！新しいチャプターを読み込んでいます…",
+    generatingCh1:"チャプター1を生成中", mayTakeMoment:"少し時間がかかる場合があります...",
+    correct:"✓ 正解", incorrect:"✗ 不正解", notAnswered:"未回答",
+    grading:"採点中", gradingFailed:"採点失敗",
+    lookingUp:"検索中", example:"例文",
+    storyName:"ストーリー名", storyLang:"ストーリー言語", createStory:"ストーリーを作成", cancel:"キャンセル",
+    charGenNote:"⚠ キャラクター生成には約10〜15秒かかります。\n画像生成はバックグラウンドで実行されます。",
+    multipleChoice:"多肢選択", shortAnswer:"短答", paragraph:"段落",
+    write13:"1〜3文で書いてください...", write58:"分析を5〜8文で書いてください...",
+    excellent:"素晴らしい！", goodEffort:"よく頑張りました — 読み続けましょう！", keepPracticing:"練習を続けましょう — きっとうまくなります！"
+  },
+  "Indonesian": {
+    play:"Main", settings:"Pengaturan", stories:"Cerita", newStory:"+ Cerita Baru", back:"← Kembali",
+    continueStory:"Lanjutkan", readFromStart:"Baca dari awal", deleteStory:"Hapus",
+    lastEdited:"Terakhir diedit", chapter:"Bab", noStories:"Belum ada cerita. Tekan '+ Cerita Baru' untuk mulai.",
+    interfaceLang:"Bahasa Antarmuka", interfaceLangDesc:"Bahasa yang digunakan untuk menu dan tombol.",
+    grammarLevel:"Tingkat Tata Bahasa", grammarLevelDesc:"Mempengaruhi tingkat kesulitan kuis dan definisi kata.",
+    saveSettings:"Simpan Pengaturan", saved:"Tersimpan ✓",
+    auto:"Otomatis", autoOn:"Otomatis Aktif", logs:"Catatan", menu:"Menu",
+    chapterEnd:"Akhir Bab", takeQuiz:"Ikuti Kuis", readAgain:"Baca Lagi", backToMenu:"Kembali ke Menu",
+    chapterQuiz:"Kuis Bab", submitAnswers:"Kirim Jawaban", continueStoryBtn:"Lanjutkan Cerita",
+    generating:"Membuat bab berikutnya…", done:"Selesai! Memuat bab baru…",
+    generatingCh1:"Membuat Bab 1", mayTakeMoment:"Ini mungkin membutuhkan beberapa saat...",
+    correct:"✓ Benar", incorrect:"✗ Salah", notAnswered:"Tidak dijawab",
+    grading:"Menilai", gradingFailed:"Penilaian gagal",
+    lookingUp:"Mencari", example:"Contoh",
+    storyName:"Nama Cerita", storyLang:"Bahasa Cerita", createStory:"Buat Cerita", cancel:"Batal",
+    charGenNote:"⚠ Pembuatan karakter membutuhkan sekitar 10–15 detik.\nPembuatan gambar berjalan di latar belakang.",
+    multipleChoice:"Pilihan Ganda", shortAnswer:"Jawaban Singkat", paragraph:"Paragraf",
+    write13:"Tulis 1–3 kalimat...", write58:"Tulis 5–8 kalimat analisis Anda...",
+    excellent:"Kerja bagus!", goodEffort:"Usaha yang baik — teruslah membaca!", keepPracticing:"Terus berlatih — kamu pasti bisa!"
+  },
+  "Chinese": {
+    play:"开始", settings:"设置", stories:"故事", newStory:"+ 新故事", back:"← 返回",
+    continueStory:"继续", readFromStart:"从头开始阅读", deleteStory:"删除",
+    lastEdited:"最后编辑", chapter:"章节", noStories:"还没有故事，点击'+ 新故事'开始。",
+    interfaceLang:"界面语言", interfaceLangDesc:"用于菜单和按钮的语言。",
+    grammarLevel:"语法级别", grammarLevelDesc:"影响测验难度和词语定义。",
+    saveSettings:"保存设置", saved:"已保存 ✓",
+    auto:"自动", autoOn:"自动已开", logs:"日志", menu:"菜单",
+    chapterEnd:"章节结束", takeQuiz:"参加测验", readAgain:"再次阅读", backToMenu:"返回菜单",
+    chapterQuiz:"章节测验", submitAnswers:"提交答案", continueStoryBtn:"继续故事",
+    generating:"正在生成下一章…", done:"完成！正在加载新章节…",
+    generatingCh1:"正在生成第1章", mayTakeMoment:"这可能需要一点时间...",
+    correct:"✓ 正确", incorrect:"✗ 错误", notAnswered:"未作答",
+    grading:"批改中", gradingFailed:"批改失败",
+    lookingUp:"查询中", example:"例句",
+    storyName:"故事名称", storyLang:"故事语言", createStory:"创建故事", cancel:"取消",
+    charGenNote:"⚠ 角色生成大约需要10-15秒。\n图像生成在后台运行。",
+    multipleChoice:"多选题", shortAnswer:"简答题", paragraph:"段落题",
+    write13:"请用1-3句话回答...", write58:"请用5-8句话进行分析...",
+    excellent:"优秀！", goodEffort:"努力不错 — 继续阅读！", keepPracticing:"继续练习 — 你一定能做到！"
+  },
+  "Spanish": {
+    play:"Jugar", settings:"Configuración", stories:"Historias", newStory:"+ Nueva historia", back:"← Atrás",
+    continueStory:"Continuar", readFromStart:"Leer desde el principio", deleteStory:"Eliminar",
+    lastEdited:"Última edición", chapter:"Capítulo", noStories:"No hay historias. Pulsa '+ Nueva historia' para comenzar.",
+    interfaceLang:"Idioma de interfaz", interfaceLangDesc:"El idioma usado en menús y botones.",
+    grammarLevel:"Nivel gramatical", grammarLevelDesc:"Afecta la dificultad del cuestionario y las definiciones.",
+    saveSettings:"Guardar configuración", saved:"Guardado ✓",
+    auto:"Auto", autoOn:"Auto activado", logs:"Registro", menu:"Menú",
+    chapterEnd:"Fin del capítulo", takeQuiz:"Hacer el cuestionario", readAgain:"Leer de nuevo", backToMenu:"Volver al menú",
+    chapterQuiz:"Cuestionario del capítulo", submitAnswers:"Enviar respuestas", continueStoryBtn:"Continuar historia",
+    generating:"Generando siguiente capítulo…", done:"¡Listo! Cargando nuevo capítulo…",
+    generatingCh1:"Generando capítulo 1", mayTakeMoment:"Esto puede tardar un momento...",
+    correct:"✓ Correcto", incorrect:"✗ Incorrecto", notAnswered:"Sin responder",
+    grading:"Calificando", gradingFailed:"Error al calificar",
+    lookingUp:"Buscando", example:"Ejemplo",
+    storyName:"Nombre de la historia", storyLang:"Idioma de la historia", createStory:"Crear historia", cancel:"Cancelar",
+    charGenNote:"⚠ La generación de personajes tarda unos 10–15 segundos.\nLa generación de imágenes se ejecuta en segundo plano.",
+    multipleChoice:"Opción múltiple", shortAnswer:"Respuesta corta", paragraph:"Párrafo",
+    write13:"Escribe 1–3 oraciones...", write58:"Escribe 5–8 oraciones con tu análisis...",
+    excellent:"¡Excelente trabajo!", goodEffort:"¡Buen esfuerzo — sigue leyendo!", keepPracticing:"¡Sigue practicando — lo conseguirás!"
+  },
+  "French": {
+    play:"Jouer", settings:"Paramètres", stories:"Histoires", newStory:"+ Nouvelle histoire", back:"← Retour",
+    continueStory:"Continuer", readFromStart:"Lire depuis le début", deleteStory:"Supprimer",
+    lastEdited:"Dernière modification", chapter:"Chapitre", noStories:"Aucune histoire. Appuyez sur '+ Nouvelle histoire' pour commencer.",
+    interfaceLang:"Langue de l'interface", interfaceLangDesc:"La langue utilisée pour les menus et boutons.",
+    grammarLevel:"Niveau de grammaire", grammarLevelDesc:"Affecte la difficulté du quiz et les définitions.",
+    saveSettings:"Sauvegarder", saved:"Sauvegardé ✓",
+    auto:"Auto", autoOn:"Auto activé", logs:"Journal", menu:"Menu",
+    chapterEnd:"Fin du chapitre", takeQuiz:"Faire le quiz", readAgain:"Relire", backToMenu:"Retour au menu",
+    chapterQuiz:"Quiz du chapitre", submitAnswers:"Soumettre les réponses", continueStoryBtn:"Continuer l'histoire",
+    generating:"Génération du prochain chapitre…", done:"Terminé ! Chargement du nouveau chapitre…",
+    generatingCh1:"Génération du chapitre 1", mayTakeMoment:"Cela peut prendre un moment...",
+    correct:"✓ Correct", incorrect:"✗ Incorrect", notAnswered:"Sans réponse",
+    grading:"Correction", gradingFailed:"Échec de la correction",
+    lookingUp:"Recherche", example:"Exemple",
+    storyName:"Nom de l'histoire", storyLang:"Langue de l'histoire", createStory:"Créer l'histoire", cancel:"Annuler",
+    charGenNote:"⚠ La génération de personnages prend environ 10–15 secondes.\nLa génération d'images s'exécute en arrière-plan.",
+    multipleChoice:"Choix multiple", shortAnswer:"Réponse courte", paragraph:"Paragraphe",
+    write13:"Écrivez 1–3 phrases...", write58:"Écrivez 5–8 phrases d'analyse...",
+    excellent:"Excellent travail !", goodEffort:"Bon effort — continuez à lire !", keepPracticing:"Continuez à pratiquer — vous y arriverez !"
+  }
+}
+
+// Get translation for current system language
+function t(key) {
+  const lang = appSettings.systemLanguage || "English"
+  return (TRANSLATIONS[lang] || TRANSLATIONS["English"])[key] || key
+}
+
+// Apply translations to all static UI elements
+function applyTranslations() {
+  const setT = (id, key) => { const el = document.getElementById(id); if (el) el.textContent = t(key) }
+
+  // Menu
+  setT("btn-play",          "play")
+  setT("btn-settings-menu", "settings")
+
+  // Settings
+  setT("btn-settings-back",     "back")
+  setT("btn-save-settings",     "saveSettings")
+  setT("lbl-interface-lang",    "interfaceLang")
+  setT("lbl-interface-desc",    "interfaceLangDesc")
+  setT("lbl-grammar-level",     "grammarLevel")
+  setT("lbl-grammar-desc",      "grammarLevelDesc")
+  setT("settings-saved",        "saved")
+
+  // Saves
+  setT("btn-new-save",      "newStory")
+  setT("btn-saves-back",    "back")
+
+  // Story controls
+  setT("btn-auto",              autoPlay ? "autoOn" : "auto")
+  setT("btn-logs",              "logs")
+  setT("btn-menu-from-story",   "menu")
+
+  // End screen
+  setT("end-title",      "chapterEnd")
+  setT("btn-go-quiz",    "takeQuiz")
+  setT("btn-replay",     "readAgain")
+  setT("btn-end-menu",   "backToMenu")
+
+  // Quiz
+  setT("quiz-title",          "chapterQuiz")
+  setT("btn-submit-quiz",     "submitAnswers")
+  setT("btn-continue-story",  "continueStoryBtn")
+  setT("btn-quiz-replay",     "readAgain")
+  setT("btn-quiz-menu",       "backToMenu")
+  setT("btn-quiz-logs",       "logs")
+}
+
+const LEVEL_EXAMPLES = {
+  "beginner":          { text: '"She go to school. He have a dog. I like cat."', note: "Very simple words. Present tense only. Some grammar mistakes are OK." },
+  "elementary":        { text: '"She goes to school every day. He has a small black dog. I like cats a lot."', note: "Simple correct sentences. Common everyday vocabulary." },
+  "intermediate":      { text: '"She has been going to the same school for three years. Despite the rain, she never missed a day."', note: "Present perfect, connectors, slightly complex ideas." },
+  "upper-intermediate":{ text: '"Had she known about the transfer, she would have prepared herself better. The news hit harder than expected."', note: "Conditionals, inference, richer vocabulary." },
+  "advanced":          { text: '"The implications of her unilateral decision were neither immediately apparent nor easily reversible, leaving her colleagues to reconcile their trust with their unease."', note: "Complex clauses, sophisticated vocabulary, nuanced meaning." }
+}
+
+// ════════════════════════════════════════════════════════
+// STATE
+// ════════════════════════════════════════════════════════
+let CHARACTER_CONFIG = {}
+let appSettings = { systemLanguage: "English", grammarLevel: "intermediate" }
+let activeSaveId  = null
+let activeSaveLang = "English"
+const LETTERS = ["A","B","C","D"]
+
+let slides = []
+let idx = 0
+let transitioning = false
+let prevSpeakerId = null
+let autoPlay = false
+let autoTimer = null
+let quizData = null
+let storyFullText = ""
+
+const FALLBACK_SLIDES = [
+  { type:"narrator", text:"Could not load story_slides.json. Make sure api_server.js is running and run_story.js has been run at least once." }
+]
+
+// ════════════════════════════════════════════════════════
+// DOM
+// ════════════════════════════════════════════════════════
+const $ = id => document.getElementById(id)
+
+// ════════════════════════════════════════════════════════
+// SCREEN ROUTING
+// ════════════════════════════════════════════════════════
+function showScreen(id) {
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"))
+  $(id).classList.add("active")
+}
+
+// ════════════════════════════════════════════════════════
+// SETTINGS SCREEN
+// ════════════════════════════════════════════════════════
+function updateLevelPreview(level) {
+  const ex = LEVEL_EXAMPLES[level]
+  if (!ex) { $("level-preview").classList.remove("show"); return }
+  $("preview-text").textContent = ex.text
+  $("preview-note").textContent = ex.note
+  $("level-preview").classList.add("show")
+}
+
+$("sel-level").addEventListener("change", e => updateLevelPreview(e.target.value))
+
+async function loadSettings() {
+  try {
+    const r = await fetch(`${API}/api/settings`)
+    appSettings = await r.json()
+  } catch { /* use defaults */ }
+  $("sel-language").value = appSettings.systemLanguage || "English"
+  $("sel-level").value    = appSettings.grammarLevel || "intermediate"
+  updateLevelPreview($("sel-level").value)
+  applyTranslations()
+}
+
+$("btn-save-settings").onclick = async () => {
+  appSettings.systemLanguage = $("sel-language").value
+  appSettings.grammarLevel   = $("sel-level").value
+  try {
+    await fetch(`${API}/api/settings`, {
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify(appSettings)
+    })
+  } catch {}
+  // Apply language immediately
+  applyTranslations()
+  const msg = $("settings-saved")
+  msg.textContent = t("saved")
+  msg.classList.add("show")
+  setTimeout(() => msg.classList.remove("show"), 2200)
+}
+
+$("btn-settings-menu").onclick = async () => {
+  await loadSettings()
+  showScreen("screen-settings")
+}
+$("btn-settings-back").onclick = () => showScreen("screen-menu")
+
+// ════════════════════════════════════════════════════════
+// SAVES SCREEN
+// ════════════════════════════════════════════════════════
+async function loadSaves() {
+  const list = $("saves-list")
+  list.innerHTML = '<div class="saves-empty">Loading...</div>'
+  try {
+    const r    = await fetch(`${API}/api/saves`)
+    const saves = await r.json()
+
+    if (!saves.length) {
+      list.innerHTML = '<div class="saves-empty">No stories yet. Press "+ New Story" to begin.</div>'
+      return
+    }
+
+    list.innerHTML = ""
+    saves.forEach(save => list.appendChild(buildSaveCard(save)))
+  } catch {
+    list.innerHTML = '<div class="saves-empty">Could not connect to API server.</div>'
+  }
+}
+
+function buildSaveCard(save) {
+  const card = document.createElement("div")
+  card.className = "save-card"
+  card.dataset.id = save.id
+
+  const date = save.lastEdited
+    ? new Date(save.lastEdited).toLocaleDateString("en-GB", { day:"2-digit", month:"short", year:"numeric", hour:"2-digit", minute:"2-digit" })
+    : "Never"
+
+  card.innerHTML = `
+    <div class="save-card-top">
+      <div class="save-name-wrap">
+        <span class="save-name">${save.name}</span>
+        <button class="save-rename-btn" title="Rename">✎</button>
+      </div>
+    </div>
+    <div class="save-meta">Last edited: <span>${date}</span> &nbsp;·&nbsp; Chapter <span>${save.iteration || 1}</span></div>
+    <div class="save-actions">
+      <button class="save-action-btn continue">Continue</button>
+      <button class="save-action-btn">Read from start</button>
+      <button class="save-action-btn delete">Delete</button>
+    </div>
+  `
+
+  // Rename
+  card.querySelector(".save-rename-btn").onclick = (e) => {
+    e.stopPropagation()
+    const nameEl = card.querySelector(".save-name")
+    const input  = document.createElement("input")
+    input.className = "save-name-input"
+    input.value     = save.name
+    nameEl.replaceWith(input)
+    input.focus()
+
+    const commit = async () => {
+      const newName = input.value.trim() || save.name
+      save.name = newName
+      await fetch(`${API}/api/saves/${save.id}/name`, {
+        method:"PUT", headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({ name: newName })
+      })
+      const span = document.createElement("span")
+      span.className = "save-name"
+      span.textContent = newName
+      input.replaceWith(span)
+    }
+
+    input.addEventListener("blur",  commit)
+    input.addEventListener("keydown", e => { if (e.key === "Enter") input.blur() })
+  }
+
+  // Continue
+  card.querySelector(".save-action-btn.continue").onclick = async () => {
+    activeSaveId = save.id
+    await loadCharactersForSave(save.id)
+    await startStory(save.id, false)
+  }
+
+  // Read from start
+  card.querySelectorAll(".save-action-btn")[1].onclick = async () => {
+    activeSaveId = save.id
+    await loadCharactersForSave(save.id)
+    await startStory(save.id, true)
+  }
+
+  // Delete
+  card.querySelector(".save-action-btn.delete").onclick = async () => {
+    if (!confirm(`Delete "${save.name}"?`)) return
+    await fetch(`${API}/api/saves/${save.id}`, { method:"DELETE" })
+    card.remove()
+    const list = $("saves-list")
+    if (!list.children.length) list.innerHTML = '<div class="saves-empty">No stories yet.</div>'
+  }
+
+  return card
+}
+
+$("btn-play").onclick = async () => {
+  await loadSaves()
+  showScreen("screen-saves")
+}
+$("btn-saves-back").onclick = () => showScreen("screen-menu")
+
+$("btn-new-save").onclick = async () => {
+  showNewSaveModal()
+}
+
+function showNewSaveModal() {
+  // Remove old modal if exists
+  const old = document.getElementById('new-save-modal')
+  if (old) old.remove()
+
+  const modal = document.createElement('div')
+  modal.id = 'new-save-modal'
+  modal.style.cssText = `
+    position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.85);
+    display:flex;align-items:center;justify-content:center;
+  `
+  modal.innerHTML = `
+    <div style="background:#0c0c1a;border:1px solid rgba(200,144,58,0.3);padding:36px 40px;width:440px;max-width:95vw;">
+      <div style="font-family:'Cinzel',serif;font-size:14px;letter-spacing:3px;color:#c8903a;text-transform:uppercase;margin-bottom:28px;">New Story</div>
+
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:#6a6258;text-transform:uppercase;margin-bottom:8px;">Story Name</div>
+      <input id="ns-name" type="text" value="Story ${new Date().toLocaleDateString()}"
+        style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);
+               color:#e8dfc8;font-family:'Crimson Pro',serif;font-size:16px;padding:10px 14px;
+               outline:none;margin-bottom:20px;" />
+
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:#6a6258;text-transform:uppercase;margin-bottom:8px;">Story Language</div>
+      <div style="position:relative;margin-bottom:28px;">
+        <select id="ns-lang" style="width:100%;appearance:none;background:rgba(255,255,255,0.04);
+          border:1px solid rgba(255,255,255,0.09);color:#e8dfc8;font-family:'Crimson Pro',serif;
+          font-size:16px;padding:10px 40px 10px 14px;outline:none;">
+          <option value="English">English</option>
+          <option value="Indonesian">Bahasa Indonesia</option>
+          <option value="Chinese">中文 (Chinese)</option>
+          <option value="Cantonese">廣東話 (Cantonese)</option>
+        </select>
+        <span style="position:absolute;right:14px;top:50%;transform:translateY(-50%);color:#c8903a;pointer-events:none;">▾</span>
+      </div>
+
+      <div style="font-size:13px;color:#6a6258;line-height:1.6;margin-bottom:28px;padding:12px 14px;border:1px solid rgba(255,255,255,0.06);">
+        ⚠ Character generation takes about 10–15 seconds.<br>Image generation runs in the background — you can start reading while images load.
+      </div>
+
+      <div style="display:flex;gap:10px;justify-content:flex-end;">
+        <button onclick="document.getElementById('new-save-modal').remove()"
+          style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;
+                 color:#6a6258;background:transparent;border:1px solid rgba(255,255,255,0.09);
+                 padding:10px 22px;cursor:pointer;">Cancel</button>
+        <button id="ns-confirm"
+          style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;
+                 color:#08080f;background:#c8903a;border:none;padding:10px 22px;cursor:pointer;">
+          Create Story
+        </button>
+      </div>
+    </div>
+  `
+  document.body.appendChild(modal)
+
+  document.getElementById('ns-confirm').onclick = async () => {
+    const name     = document.getElementById('ns-name').value.trim() || 'New Story'
+    const language = document.getElementById('ns-lang').value
+    const btn      = document.getElementById('ns-confirm')
+
+    btn.textContent = 'Creating...'
+    btn.disabled    = true
+    modal.querySelector('input').disabled = true
+    modal.querySelector('select').disabled = true
+
+    try {
+      const r    = await fetch(`${API}/api/saves`, {
+        method:"POST", headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({ name, language, grammarLevel: appSettings.grammarLevel })
+      })
+      const save = await r.json()
+
+      if (save.error) throw new Error(save.error)
+
+      modal.remove()
+      activeSaveId = save.id
+
+      // Load characters for this save, then run first iteration
+      await loadCharactersForSave(activeSaveId)
+      await runAndStartStory(activeSaveId)
+
+    } catch (err) {
+      btn.textContent = 'Create Story'
+      btn.disabled    = false
+      alert('Failed to create story: ' + err.message)
+    }
+  }
+}
+
+// ════════════════════════════════════════════════════════
+// CHARACTER RENDERING
+// ════════════════════════════════════════════════════════
+function getCharId(speaker) {
+  if (!speaker) return null
+  const direct = Object.keys(CHARACTER_CONFIG).find(k => k === speaker)
+  if (direct) return direct
+  return Object.keys(CHARACTER_CONFIG).find(k =>
+    CHARACTER_CONFIG[k].displayName.toLowerCase() === speaker.toLowerCase()
+  ) || null
+}
+
+function buildChar(charId, speaking, dimmed) {
+  const cfg = CHARACTER_CONFIG[charId] || { displayName:charId, accentColor:"#888", initial:"?", imagePath:"" }
+  const wrap = document.createElement("div")
+  wrap.className = `char-inner${speaking?" speaking":""}${dimmed?" dimmed":""} char-${charId}`
+
+  if (cfg.imagePath) {
+    const img = document.createElement("img")
+    img.className = "char-img"
+    img.src = cfg.imagePath
+    img.alt = cfg.displayName
+    img.onerror = () => { img.remove(); wrap.appendChild(makeFallback(charId, cfg)) }
+    wrap.appendChild(img)
+  } else {
+    wrap.appendChild(makeFallback(charId, cfg))
+  }
+  return wrap
+}
+
+function makeFallback(charId, cfg) {
+  const fb = document.createElement("div")
+  fb.className = "char-fallback"
+  fb.innerHTML = `<div class="char-fallback-initial">${cfg.initial}</div><div class="char-fallback-bar" style="background:${cfg.accentColor}"></div>`
+  return fb
+}
+
+function renderChars(slide) {
+  const charsEl = $("chars")
+  charsEl.innerHTML = ""
+  const type = slide.type
+  const sid  = getCharId(slide.speaker)
+
+  if (type === "narrator" || !sid) return
+
+  if (prevSpeakerId && prevSpeakerId !== sid) {
+    const wL = document.createElement("div"); wL.className = "char-wrap pos-left"
+    wL.appendChild(buildChar(prevSpeakerId, false, true)); charsEl.appendChild(wL)
+    const wR = document.createElement("div"); wR.className = "char-wrap pos-right"
+    wR.appendChild(buildChar(sid, true, false)); charsEl.appendChild(wR)
+  } else {
+    const wC = document.createElement("div"); wC.className = "char-wrap pos-center"
+    wC.appendChild(buildChar(sid, true, false)); charsEl.appendChild(wC)
+  }
+  prevSpeakerId = sid
+}
+
+// ════════════════════════════════════════════════════════
+// WORD SPANS + TOOLTIP
+// ════════════════════════════════════════════════════════
+function buildWordSpans(text) {
+  const frag = document.createDocumentFragment()
+  text.split(/(\s+)/).forEach(part => {
+    if (/^\s+$/.test(part)) {
+      frag.appendChild(document.createTextNode(part))
+    } else {
+      const span = document.createElement("span")
+      span.className = "w"; span.textContent = part
+      span.addEventListener("click", e => {
+        e.stopPropagation()
+        const clean = part.replace(/[^a-zA-Z''-]/g, "")
+        if (clean.length > 1) showDefinition(clean, text, e)
+      })
+      frag.appendChild(span)
+    }
+  })
+  return frag
+}
+
+const tooltip  = $("tooltip")
+const ttWord   = $("tt-word")
+const ttDef    = $("tt-def")
+const ttCtx    = $("tt-ctx")
+const ttExText = $("tt-example-text")
+const ttExBox  = $("tt-example")
+
+async function showDefinition(word, sentence, event) {
+  const rect = event.target.getBoundingClientRect()
+  const left = Math.min(rect.left, window.innerWidth - 340)
+  const top  = rect.top > 200 ? rect.top - 175 : rect.bottom + 12
+
+  tooltip.style.left = left + "px"
+  tooltip.style.top  = top  + "px"
+  ttWord.textContent = word
+  ttDef.innerHTML    = '<span style="font-style:italic;color:var(--dim)">Looking up<span class="spin"></span></span>'
+  ttCtx.textContent  = ""
+  ttExText.textContent = ""
+  ttExBox.style.display = "none"
+  tooltip.classList.add("show")
+
+  try {
+    const res  = await fetch(`${API}/api/define`, {
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({ word, sentence, grammarLevel: appSettings.grammarLevel, storyLanguage: activeSaveLang })
+    })
+    const data = await res.json()
+    ttDef.textContent  = data.definition || "No definition found."
+    ttCtx.textContent  = data.context    ? `In context: ${data.context}` : ""
+    if (data.example) {
+      ttExText.textContent   = data.example
+      ttExBox.style.display  = "block"
+    }
+  } catch {
+    ttDef.textContent = "Could not connect to API server."
+  }
+}
+
+function closeTooltip() { tooltip.classList.remove("show") }
+$("tt-close").onclick = e => { e.stopPropagation(); closeTooltip() }
+
+// ════════════════════════════════════════════════════════
+// SLIDE DISPLAY
+// ════════════════════════════════════════════════════════
+function showSlide(i) {
+  if (i >= slides.length) { showEnd(); return }
+  const slide = slides[i]
+  storyFullText += slide.text + " "
+
+  const textbox    = $("textbox")
+  const speakerEl  = $("speaker")
+  const textEl     = $("text")
+  const caretEl    = $("caret")
+  const progressEl = $("progress")
+  const counterEl  = $("counter")
+
+  textbox.classList.add("fade-out")
+  caretEl.classList.remove("show")
+
+  setTimeout(() => {
+    textbox.classList.remove("fade-out","narrator","monologue","dialogue")
+
+    if (slide.type === "narrator") {
+      textbox.classList.add("narrator"); speakerEl.textContent = ""
+    } else {
+      textbox.classList.add(slide.type)
+      const charId = getCharId(slide.speaker)
+      const cfg    = CHARACTER_CONFIG[charId] || {}
+      speakerEl.textContent = cfg.displayName || slide.speaker || ""
+      speakerEl.style.color = cfg.accentColor || "var(--accent)"
+    }
+
+    textEl.innerHTML = ""; textEl.appendChild(buildWordSpans(slide.text))
+    renderChars(slide)
+    addLog(slide)
+
+    progressEl.style.width = ((i+1)/slides.length*100)+"%"
+    counterEl.textContent  = `${i+1} / ${slides.length}`
+
+    textbox.classList.add("fade-in")
+    setTimeout(() => textbox.classList.remove("fade-in"), 220)
+    caretEl.classList.add("show")
+    transitioning = false
+  }, 220)
+}
+
+function advance() {
+  if (transitioning) return
+  closeTooltip()
+  if (idx >= slides.length) { showEnd(); return }
+  transitioning = true
+  showSlide(idx); idx++
+}
+
+// ════════════════════════════════════════════════════════
+// LOG
+// ════════════════════════════════════════════════════════
+function addLog(slide) {
+  const logsBody = $("logs-body")
+  const item = document.createElement("div")
+  item.className = `log-item log-${slide.type}`
+  if (slide.type !== "narrator" && slide.speaker) {
+    const charId = getCharId(slide.speaker)
+    const cfg    = CHARACTER_CONFIG[charId] || {}
+    const spk = document.createElement("div"); spk.className = "log-spk"
+    spk.textContent = cfg.displayName || slide.speaker
+    spk.style.color = cfg.accentColor || "var(--accent)"
+    item.appendChild(spk)
+  }
+  const txt = document.createElement("div"); txt.className = "log-txt"; txt.textContent = slide.text
+  item.appendChild(txt); logsBody.appendChild(item); logsBody.scrollTop = logsBody.scrollHeight
+}
+
+// ════════════════════════════════════════════════════════
+// AUTO PLAY
+// ════════════════════════════════════════════════════════
+function toggleAuto() {
+  autoPlay = !autoPlay
+  const btn = $("btn-auto")
+  btn.textContent = autoPlay ? "Auto ON" : "Auto"
+  btn.classList.toggle("active", autoPlay)
+  if (autoPlay) {
+    autoTimer = setInterval(() => {
+      if (!tooltip.classList.contains("show") && !$("logs").classList.contains("open")) advance()
+    }, 3800)
+  } else { clearInterval(autoTimer) }
+}
+
+// ════════════════════════════════════════════════════════
+// END SCREEN
+// ════════════════════════════════════════════════════════
+function showEnd() {
+  clearInterval(autoTimer)
+  $("end-screen").classList.add("show")
+}
+
+$("btn-go-quiz").onclick    = () => { $("end-screen").classList.remove("show"); openQuiz() }
+$("btn-replay").onclick     = () => { $("end-screen").classList.remove("show"); resetStory(); advance() }
+$("btn-end-menu").onclick   = () => { $("end-screen").classList.remove("show"); showScreen("screen-menu") }
+$("btn-menu-from-story").onclick = e => { e.stopPropagation(); showScreen("screen-menu") }
+
+function resetStory() {
+  idx = 0; prevSpeakerId = null; storyFullText = ""
+  $("logs-body").innerHTML = ""; $("chars").innerHTML = ""
+}
+
+// ════════════════════════════════════════════════════════
+// QUIZ
+// ════════════════════════════════════════════════════════
+async function openQuiz() {
+  $("quiz-screen").classList.add("show")
+  if (quizData) { renderQuiz(); return }
+
+  $("quiz-loading").style.display  = "block"
+  $("quiz-questions").innerHTML    = ""
+  $("quiz-actions").style.display  = "none"
+
+  try {
+    const r    = await fetch(`${API}/api/quiz`, {
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({ storyText: storyFullText.trim(), grammarLevel: appSettings.grammarLevel, storyLanguage: activeSaveLang })
+    })
+    const data = await r.json()
+    quizData   = data.questions || []
+  } catch {
+    quizData = []
+    $("quiz-questions").innerHTML = '<p style="color:var(--dim);font-style:italic;text-align:center;padding:40px 0">Could not generate quiz. Check that api_server.js is running.</p>'
+    $("quiz-loading").style.display = "none"
+    return
+  }
+
+  $("quiz-loading").style.display = "none"
+  renderQuiz()
+}
+
+function renderQuiz() {
+  const qEl = $("quiz-questions")
+  qEl.innerHTML = ""; $("quiz-actions").style.display = "flex"
+  $("quiz-score-banner").classList.remove("show")
+  $("quiz-post-btns").classList.remove("show")
+  $("btn-submit-quiz").disabled = false
+  $("btn-submit-quiz").textContent = "Submit Answers"
+  $("continue-status").classList.remove("show")
+
+  quizData.forEach((q, qi) => {
+    const block = document.createElement("div"); block.className = "q-block"; block.dataset.qi = qi; block.dataset.type = q.type
+    const typeLabel = q.type === "mc" ? "Multiple Choice" : q.type === "short" ? "Short Answer" : "Paragraph"
+    block.innerHTML = `<div style="display:flex;align-items:center;margin-bottom:5px"><span class="q-num">Question ${qi+1}</span><span class="q-badge">${typeLabel}</span></div><div class="q-text">${q.question}</div>`
+
+    if (q.type === "mc") {
+      const opts = document.createElement("div"); opts.className = "mc-opts"
+      q.options.forEach((opt, oi) => {
+        const btn = document.createElement("div"); btn.className = "mc-opt"; btn.dataset.oi = oi
+        btn.innerHTML = `<span class="opt-letter">${LETTERS[oi]}</span>${opt}`
+        btn.onclick = () => { opts.querySelectorAll(".mc-opt").forEach(b => b.classList.remove("selected")); btn.classList.add("selected") }
+        opts.appendChild(btn)
+      })
+      block.appendChild(opts)
+    } else {
+      const ta = document.createElement("textarea")
+      ta.className = "q-textarea" + (q.type === "paragraph" ? " para-textarea" : "")
+      ta.placeholder = q.type === "short" ? "Write 1–3 sentences..." : "Write 5–8 sentences with your analysis..."
+      block.appendChild(ta)
+    }
+
+    const fb = document.createElement("div"); fb.className = "q-feedback"
+    fb.innerHTML = '<div class="fb-score"></div><div class="fb-text"></div>'
+    block.appendChild(fb)
+    qEl.appendChild(block)
+  })
+}
+
+$("btn-submit-quiz").onclick = async () => {
+  const btn = $("btn-submit-quiz"); btn.disabled = true; btn.textContent = t("grading")
+  try {
+  const blocks = $("quiz-questions").querySelectorAll(".q-block")
+  let totalScore = 0, maxTotal = 0
+  const promises = []
+
+  blocks.forEach((block, qi) => {
+    const q = quizData[qi]
+    const fb = block.querySelector(".q-feedback")
+    const fbScore = block.querySelector(".fb-score")
+    const fbText  = block.querySelector(".fb-text")
+
+    if (q.type === "mc") {
+      maxTotal++
+      const selected = block.querySelector(".mc-opt.selected")
+      block.querySelectorAll(".mc-opt").forEach((opt, oi) => { if (oi === q.answer) opt.classList.add("correct") })
+      if (selected) {
+        const si = parseInt(selected.dataset.oi)
+        if (si === q.answer) { totalScore++; fbScore.textContent = "✓ Correct"; fbScore.style.color = "#5aff8a"; fbText.textContent = "" }
+        else { selected.classList.add("wrong"); fbScore.textContent = "✗ Incorrect"; fbScore.style.color = "#ff5a5a"; fbText.textContent = `Correct: ${LETTERS[q.answer]}` }
+      } else { fbScore.textContent = "Not answered"; fbScore.style.color = "var(--dim)" }
+      fb.classList.add("show")
+    } else {
+      const ta = block.querySelector("textarea")
+      const answer = ta ? ta.value.trim() : ""
+      const max    = q.type === "paragraph" ? 10 : 5
+      maxTotal    += max
+
+      if (!answer) { fb.classList.add("show"); fbScore.textContent = "Not answered"; fbScore.style.color = "var(--dim)"; return }
+
+      fb.classList.add("show","grading"); fbScore.textContent = "Grading"; fbText.innerHTML = '<span class="spin"></span>'
+
+      promises.push(
+        fetch(`${API}/api/grade`, {
+          method:"POST", headers:{"Content-Type":"application/json"},
+          body: JSON.stringify({ question:q.question, sampleAnswer:q.sampleAnswer, userAnswer:answer, type:q.type, grammarLevel:appSettings.grammarLevel, storyLanguage:activeSaveLang })
+        })
+        .then(r => r.json())
+        .then(data => {
+          fb.classList.remove("grading")
+          if (data.error) throw new Error(data.error)
+          const score = typeof data.score === "number" ? data.score : 0
+          fbScore.textContent = `Score: ${score} / ${max}`
+          fbScore.style.color = score >= max*0.7 ? "#5aff8a" : score >= max*0.4 ? "#ffd85a" : "#ff5a5a"
+          fbText.textContent  = data.feedback || ""
+          totalScore += score
+        })
+        .catch(err => { fb.classList.remove("grading"); fbScore.textContent = "Grading failed"; fbScore.style.color = "#ff5a5a"; fbText.textContent = String(err.message || "") })
+      )
+    }
+  })
+
+  await Promise.all(promises)
+  btn.textContent = "Submitted"
+
+  const pct = Math.round(totalScore / maxTotal * 100)
+  $("score-big").textContent = `${pct}%`
+  $("score-msg").textContent = pct >= 80 ? "Excellent work!" : pct >= 60 ? "Good effort — keep reading!" : "Keep practicing — you'll get there!"
+  $("quiz-score-banner").classList.add("show")
+  $("quiz-post-btns").classList.add("show")
+  $("quiz-screen").scrollTop = $("quiz-screen").scrollHeight
+  } catch(err) {
+    console.error("Submit error:", err)
+    btn.disabled = false
+    btn.textContent = t("submitAnswers")
+    alert("Grading failed: " + err.message)
+  }
+}
+
+// Continue story after quiz
+$("btn-continue-story").onclick = async () => {
+  const btn    = $("btn-continue-story")
+  const status = $("continue-status")
+  btn.disabled = true
+  status.textContent = "Generating next chapter…"; status.classList.add("show")
+
+  try {
+    const r    = await fetch(`${API}/api/continue`, {
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({ saveId: activeSaveId })
+    })
+    const data = await r.json()
+
+    if (data.success) {
+      status.textContent = "Done! Loading new chapter…"
+      await loadCharactersForSave(activeSaveId)
+      try {
+        const sr = await fetch(SLIDES_PATH(activeSaveId))
+        slides   = await sr.json()
+      } catch { slides = FALLBACK_SLIDES }
+
+      quizData = null
+      resetStory()
+      $("quiz-screen").classList.remove("show")
+      showScreen("screen-story")
+      advance()
+    } else {
+      status.textContent = "Failed: " + (data.error || "Unknown error")
+      btn.disabled = false
+    }
+  } catch (err) {
+    status.textContent = "Could not reach API server."
+    btn.disabled = false
+  }
+}
+
+$("btn-quiz-replay").onclick = () => {
+  $("quiz-screen").classList.remove("show")
+  resetStory(); advance()
+}
+$("btn-quiz-menu").onclick = () => {
+  $("quiz-screen").classList.remove("show")
+  showScreen("screen-menu")
+}
+
+$("btn-quiz-logs").onclick = e => {
+  e.stopPropagation()
+  $("logs").classList.toggle("open")
+}
+
+// ════════════════════════════════════════════════════════
+// STORY CLICK + CONTROLS
+// ════════════════════════════════════════════════════════
+$("scene").addEventListener("click", e => {
+  if (tooltip.classList.contains("show")) { closeTooltip(); return }
+  if ($("logs").classList.contains("open")) { $("logs").classList.remove("open"); return }
+  advance()
+})
+$("btn-logs").onclick = e  => { e.stopPropagation(); $("logs").classList.toggle("open") }
+$("logs-x").onclick   = () => $("logs").classList.remove("open")
+$("btn-auto").onclick = e  => { e.stopPropagation(); toggleAuto() }
+
+// ════════════════════════════════════════════════════════
+// START STORY
+// ════════════════════════════════════════════════════════
+async function loadCharactersForSave(saveId) {
+  // Also load save meta to get story language
+  try {
+    const mr = await fetch(`${API}/api/saves/${saveId}`)
+    const md = await mr.json()
+    activeSaveLang = md.language || "English"
+  } catch {}
+  try {
+    const r    = await fetch(`${API}/api/characters/${saveId}`)
+    const data = await r.json()
+    CHARACTER_CONFIG = {}
+    Object.keys(data).forEach(id => {
+      CHARACTER_CONFIG[id] = {
+        displayName: data[id].name,
+        accentColor: CHAR_ACCENTS[id]  || "#888",
+        initial:     CHAR_INITIALS[id] || id,
+        imagePath:   data[id].imagePath
+      }
+    })
+  } catch (e) { console.warn("Could not load characters for save", saveId, e) }
+}
+
+async function runAndStartStory(saveId) {
+  showScreen("screen-story")
+  quizData = null; resetStory()
+
+  const overlay = document.createElement("div")
+  overlay.style.cssText = "position:fixed;inset:0;z-index:900;background:rgba(0,0,0,0.88);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;"
+  overlay.innerHTML = '<div style="font-family:Cinzel,serif;font-size:13px;letter-spacing:3px;color:#c8903a;text-transform:uppercase;">Generating Chapter 1</div><div style="font-size:13px;color:#6a6258;font-style:italic;">This may take a moment...</div><span class="spin"></span>'
+  document.body.appendChild(overlay)
+
+  try {
+    const r    = await fetch(`${API}/api/continue`, { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ saveId }) })
+    const data = await r.json()
+    if (!data.success) throw new Error(data.error || "Generation failed")
+  } catch (err) {
+    overlay.remove(); alert("Failed to generate story: " + err.message); showScreen("screen-saves"); return
+  }
+  overlay.remove()
+
+  try { const r = await fetch(SLIDES_PATH(saveId)); slides = await r.json() }
+  catch { slides = FALLBACK_SLIDES }
+  advance()
+}
+
+async function startStory(saveId, fromStart = false) {
+  activeSaveId = saveId
+  showScreen("screen-story")
+  quizData = null; resetStory()
+  await loadCharactersForSave(saveId)
+  try { const r = await fetch(SLIDES_PATH(saveId)); slides = await r.json() }
+  catch { slides = FALLBACK_SLIDES }
+  if (fromStart) idx = 0
+  advance()
+}
+
+// ════════════════════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════════════════════
+async function init() {
+  await loadSettings()   // already calls applyTranslations inside
+  showScreen("screen-menu")
+}
+
+init()
+</script>
+</body>
+</html>
